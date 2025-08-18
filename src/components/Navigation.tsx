@@ -64,9 +64,11 @@ const Navigation = () => {
 
             {/* Logo */}
             <div className="flex items-center space-x-2">
-              <div className="text-2xl font-black tracking-wider bg-gradient-hero bg-clip-text text-transparent">
-                KENTHA
-              </div>
+              <img 
+                src="/lovable-uploads/1954d7c7-aa99-48fd-8ee8-74c199c9498e.png" 
+                alt="UBN T EDUTAINMENT" 
+                className="h-8 w-auto"
+              />
             </div>
 
             {/* Desktop Navigation */}
@@ -89,7 +91,17 @@ const Navigation = () => {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 ) : (
-                  <Button key={item.title} variant="ghost" size="sm" className="text-xs font-medium tracking-wide hover:text-primary">
+                  <Button 
+                    key={item.title} 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-xs font-medium tracking-wide hover:text-primary"
+                    onClick={() => {
+                      if (item.title === "ARTISTS") {
+                        window.location.href = "/artists";
+                      }
+                    }}
+                  >
                     {item.title}
                   </Button>
                 )
