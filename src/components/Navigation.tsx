@@ -1,0 +1,185 @@
+import { useState } from "react";
+import { Menu, X, ChevronDown, Play, SkipBack, SkipForward, Volume2, Shuffle, Repeat } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const Navigation = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const navItems = [
+    {
+      title: "HOME",
+      items: ["Home", "Home V2", "Home V3", "Home V4 Video BG"]
+    },
+    {
+      title: "MUSIC ALBUM",
+      items: ["Archive covers", "Archive cards", "Featured 3D Album", "Featured Album", "Cover Carousel", "Cards carousel", "Glass cards", "More shortcodes"]
+    },
+    {
+      title: "ARTISTS",
+      items: ["Artists archive", "Artists shortcodes"]
+    },
+    {
+      title: "EVENTS", 
+      items: ["Events grid", "Events list"]
+    },
+    {
+      title: "PODCAST",
+      items: ["Interactive mp3 podcast", "Podcast archive", "Podcast shortcodes"]
+    },
+    {
+      title: "PAGES",
+      items: ["Sample", "Fullscreen header", "Sidebar page"]
+    },
+    {
+      title: "BLOG",
+      items: ["Sidebar", "Cards", "Masonry"]
+    },
+    {
+      title: "BOOKING",
+      items: []
+    }
+  ];
+
+  return (
+    <>
+      {/* Main Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Mobile Menu Button */}
+            <Button 
+              variant="ghost" 
+              size="sm"
+              className="md:hidden"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X /> : <Menu />}
+            </Button>
+
+            {/* Logo */}
+            <div className="flex items-center space-x-2">
+              <div className="text-2xl font-black tracking-wider bg-gradient-hero bg-clip-text text-transparent">
+                KENTHA
+              </div>
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-1">
+              {navItems.map((item) => (
+                item.items.length > 0 ? (
+                  <DropdownMenu key={item.title}>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm" className="text-xs font-medium tracking-wide hover:text-primary">
+                        {item.title}
+                        <ChevronDown className="ml-1 h-3 w-3" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="bg-dark-surface border-border backdrop-blur-xl">
+                      {item.items.map((subItem) => (
+                        <DropdownMenuItem key={subItem} className="text-foreground hover:text-primary hover:bg-muted">
+                          {subItem}
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <Button key={item.title} variant="ghost" size="sm" className="text-xs font-medium tracking-wide hover:text-primary">
+                    {item.title}
+                  </Button>
+                )
+              ))}
+            </div>
+
+            {/* Social Icons */}
+            <div className="flex items-center space-x-2">
+              <Button variant="ghost" size="sm" className="rounded-full w-8 h-8 p-0">
+                <Play className="h-4 w-4" />
+              </Button>
+              <Button variant="ghost" size="sm" className="rounded-full w-8 h-8 p-0">
+                <div className="w-4 h-4 bg-primary rounded-sm flex items-center justify-center text-[8px] font-bold">f</div>
+              </Button>
+              <Button variant="ghost" size="sm" className="rounded-full w-8 h-8 p-0">
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Mobile Menu */}
+          {isOpen && (
+            <div className="md:hidden py-4 border-t border-border animate-slide-in">
+              {navItems.map((item) => (
+                <div key={item.title} className="py-2">
+                  <button className="text-left w-full text-sm font-medium tracking-wide text-foreground hover:text-primary">
+                    {item.title}
+                  </button>
+                  {item.items.length > 0 && (
+                    <div className="pl-4 mt-2 space-y-1">
+                      {item.items.map((subItem) => (
+                        <button key={subItem} className="block text-xs text-muted-foreground hover:text-primary">
+                          {subItem}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </nav>
+
+      {/* Audio Player - Fixed Bottom */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-dark-surface/95 backdrop-blur-xl border-t border-border">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            {/* Play Controls */}
+            <div className="flex items-center space-x-4">
+              <Button variant="ghost" size="sm" className="text-primary">
+                <Play className="h-6 w-6 fill-current" />
+              </Button>
+              <Button variant="ghost" size="sm">
+                <SkipBack className="h-4 w-4" />
+              </Button>
+              <Button variant="ghost" size="sm">
+                <SkipForward className="h-4 w-4" />
+              </Button>
+            </div>
+
+            {/* Current Track Info */}
+            <div className="hidden md:flex items-center space-x-4 flex-1 max-w-md mx-4">
+              <div className="w-12 h-12 bg-gradient-card rounded-lg flex-shrink-0"></div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium truncate">ILLENIUM [ALL YOU NEED]</p>
+                <p className="text-xs text-muted-foreground truncate">GROVER CRIME, J PIERCER</p>
+              </div>
+            </div>
+
+            {/* Additional Controls */}
+            <div className="flex items-center space-x-2">
+              <Button variant="ghost" size="sm">
+                <Volume2 className="h-4 w-4" />
+              </Button>
+              <Button variant="ghost" size="sm">
+                <Shuffle className="h-4 w-4" />
+              </Button>
+              <Button variant="ghost" size="sm">
+                <Repeat className="h-4 w-4" />
+              </Button>
+              <Button variant="ghost" size="sm">
+                <Menu className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Navigation;
