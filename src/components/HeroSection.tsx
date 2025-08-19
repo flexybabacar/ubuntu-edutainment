@@ -39,10 +39,14 @@ const HeroSection = () => {
           <p className="kentha-subtitle animate-slide-in">WELCOME TO THE FUTURE OF</p>
         </div>
 
-        {/* Main Title */}
-        <h1 className="kentha-title mb-4 animate-slide-in" style={{ animationDelay: '0.2s' }}>
-          KENTHA
-        </h1>
+        {/* Main Logo */}
+        <div className="mb-4 animate-slide-in flex justify-center" style={{ animationDelay: '0.2s' }}>
+          <img 
+            src="/lovable-uploads/1954d7c7-aa99-48fd-8ee8-74c199c9498e.png" 
+            alt="UBN T EDUTAINMENT" 
+            className="h-32 md:h-40 lg:h-48 w-auto object-contain animate-pulse-glow"
+          />
+        </div>
 
         {/* Subtitle */}
         <div className="mb-12 animate-slide-in" style={{ animationDelay: '0.4s' }}>
