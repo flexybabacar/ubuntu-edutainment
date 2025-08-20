@@ -1,3 +1,4 @@
+
 import Navigation from "@/components/Navigation";
 
 const About = () => {
@@ -74,6 +75,44 @@ const About = () => {
                 <h3 className="text-xl font-bold text-accent mb-4">SERVICES</h3>
                 <p className="text-muted-foreground">
                   Accompagnement des ONG, OSC, entreprises pour sensibiliser à travers l'art et la culture
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Founder Section */}
+        <section className="py-16 px-4 bg-muted/30">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-12">LA FONDATRICE</h2>
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="w-full md:w-1/3">
+                <div className="relative">
+                  <img
+                    src="/placeholder.svg"
+                    alt="Marie Hélène Ndiaye"
+                    className="w-full h-80 object-cover rounded-lg border-2 border-primary/20"
+                  />
+                  <div className="absolute inset-0 bg-gradient-hero opacity-20 rounded-lg"></div>
+                </div>
+              </div>
+              <div className="w-full md:w-2/3">
+                <h3 className="text-3xl font-bold text-primary mb-4">Marie Hélène Ndiaye</h3>
+                <p className="text-lg text-secondary mb-4">Directrice Artistique & Fondatrice</p>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  Passionnée par l'art engagé et le changement social, Marie Hélène Ndiaye a fondé Ubuntu Edutainment 
+                  avec la vision de placer les arts et la culture au cœur de la participation citoyenne et du 
+                  développement durable.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  Son approche innovante combine l'activisme artistique et l'éducation pour engager les jeunes 
+                  et les femmes dans la recherche de solutions aux défis sociétaux. Elle coordonne toutes les 
+                  productions artistiques et gère les contrats avec les artistes, partenaires et collaborateurs 
+                  impliqués dans le projet.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Grâce à son expertise en "édu-musement", elle promeut les talents émergents tout en véhiculant 
+                  des messages de transformation positive pour la société.
                 </p>
               </div>
             </div>
