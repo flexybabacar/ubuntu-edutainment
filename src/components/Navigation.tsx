@@ -14,15 +14,32 @@ const Navigation = () => {
   const navItems = [
     {
       title: "HOME",
-      items: ["Home", "Home V2", "Home V3", "Home V4 Video BG"]
+      items: [],
+      link: "/"
+    },
+    {
+      title: "À PROPOS",
+      items: [],
+      link: "/about"
+    },
+    {
+      title: "SERVICES",
+      items: [],
+      link: "/services"
+    },
+    {
+      title: "ÉQUIPE",
+      items: [],
+      link: "/team"
+    },
+    {
+      title: "ARTISTS",
+      items: [],
+      link: "/artists"
     },
     {
       title: "MUSIC ALBUM",
       items: ["Archive covers", "Archive cards", "Featured 3D Album", "Featured Album", "Cover Carousel", "Cards carousel", "Glass cards", "More shortcodes"]
-    },
-    {
-      title: "ARTISTS",
-      items: ["Artists archive", "Artists shortcodes"]
     },
     {
       title: "EVENTS", 
@@ -31,10 +48,6 @@ const Navigation = () => {
     {
       title: "PODCAST",
       items: ["Interactive mp3 podcast", "Podcast archive", "Podcast shortcodes"]
-    },
-    {
-      title: "PAGES",
-      items: ["Sample", "Fullscreen header", "Sidebar page"]
     },
     {
       title: "BLOG",
@@ -97,8 +110,8 @@ const Navigation = () => {
                     size="sm" 
                     className="text-xs font-medium tracking-wide hover:text-primary"
                     onClick={() => {
-                      if (item.title === "ARTISTS") {
-                        window.location.href = "/artists";
+                      if (item.link) {
+                        window.location.href = item.link;
                       }
                     }}
                   >
