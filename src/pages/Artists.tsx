@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Play, Users, Music, MapPin, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Artist {
   id: number;
@@ -14,6 +15,7 @@ interface Artist {
 }
 
 const Artists = () => {
+  const navigate = useNavigate();
   const artists: Artist[] = [
     {
       id: 1,
@@ -76,6 +78,10 @@ const Artists = () => {
       albums: 7
     }
   ];
+
+  const handleViewProfile = (artistId: number) => {
+    navigate(`/artist/${artistId}`);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -197,6 +203,7 @@ const Artists = () => {
                           size="sm" 
                           variant="outline"
                           className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                          onClick={() => handleViewProfile(artist.id)}
                         >
                           View Profile
                         </Button>
