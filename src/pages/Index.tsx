@@ -5,6 +5,7 @@ import UbuntuSection from "@/components/UbuntuSection";
 import ServicesSection from "@/components/ServicesSection";
 import FeaturedArtistsSection from "@/components/FeaturedArtistsSection";
 import CallToActionSection from "@/components/CallToActionSection";
+import PartnersSection from "@/components/PartnersSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -17,6 +18,7 @@ const Index = () => {
         <ServicesSection />
         <FeaturedArtistsSection />
         <CallToActionSection />
+        <PartnersSection />
       </main>
       <Footer />
     </div>

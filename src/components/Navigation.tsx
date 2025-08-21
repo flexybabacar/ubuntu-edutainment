@@ -43,12 +43,12 @@ const Navigation = () => {
       link: "/events"
     },
     {
-      title: "RÉSERVATION",
+      title: "CONTACT",
       items: [],
-      link: "/booking"
+      link: "/contact"
     },
     {
-      title: "MUSIC ALBUM",
+      title: "NOS RÉALISATIONS",
       items: ["Archive covers", "Archive cards", "Featured 3D Album", "Featured Album", "Cover Carousel", "Cards carousel", "Glass cards", "More shortcodes"]
     },
     {
