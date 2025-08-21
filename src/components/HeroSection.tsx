@@ -1,8 +1,13 @@
+
 import { Button } from "@/components/ui/button";
-import { Play } from "lucide-react";
+import { Play, ArrowRight } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
+  const scrollToArtists = () => {
+    document.getElementById('artists-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -36,7 +41,7 @@ const HeroSection = () => {
       <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
         {/* Tagline */}
         <div className="mb-8">
-          <p className="kentha-subtitle animate-slide-in">WELCOME TO THE FUTURE OF</p>
+          <p className="kentha-subtitle animate-slide-in">LABEL DE PRODUCTION MUSICALE & AUDIOVISUELLE</p>
         </div>
 
         {/* Main Logo */}
@@ -50,51 +55,27 @@ const HeroSection = () => {
 
         {/* Subtitle */}
         <div className="mb-12 animate-slide-in" style={{ animationDelay: '0.4s' }}>
-          <p className="kentha-subtitle">VISIONARY MUSIC WORDPRESS THEME</p>
+          <p className="kentha-subtitle">ART ENGAGÉ POUR LE CHANGEMENT SOCIAL</p>
         </div>
 
         {/* CTA Button */}
         <div className="mb-16 animate-slide-in" style={{ animationDelay: '0.6s' }}>
           <Button 
             size="lg" 
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full shadow-neon hover:shadow-purple transition-all duration-300 group"
+            onClick={scrollToArtists}
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full shadow-neon hover:shadow-purple transition-all duration-300 group mr-4"
           >
             <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-            PLAY NOW
+            DÉCOUVRIR NOS ARTISTES
           </Button>
-        </div>
-
-        {/* Video Preview Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto animate-slide-in" style={{ animationDelay: '0.8s' }}>
-          {/* Preview Card 1 */}
-          <div className="relative group cursor-pointer">
-            <div className="aspect-video bg-gradient-card rounded-lg border border-border/50 overflow-hidden">
-              <div className="w-full h-full bg-muted flex items-center justify-center">
-                <Play className="h-8 w-8 text-primary group-hover:scale-125 transition-transform" />
-              </div>
-            </div>
-            <div className="absolute inset-0 bg-gradient-hero opacity-0 group-hover:opacity-20 rounded-lg transition-opacity duration-300" />
-          </div>
-
-          {/* Preview Card 2 */}
-          <div className="relative group cursor-pointer">
-            <div className="aspect-video bg-gradient-card rounded-lg border border-border/50 overflow-hidden">
-              <div className="w-full h-full bg-muted flex items-center justify-center">
-                <Play className="h-8 w-8 text-secondary group-hover:scale-125 transition-transform" />
-              </div>
-            </div>
-            <div className="absolute inset-0 bg-gradient-hero opacity-0 group-hover:opacity-20 rounded-lg transition-opacity duration-300" />
-          </div>
-
-          {/* Preview Card 3 */}
-          <div className="relative group cursor-pointer">
-            <div className="aspect-video bg-gradient-card rounded-lg border border-border/50 overflow-hidden">
-              <div className="w-full h-full bg-muted flex items-center justify-center">
-                <Play className="h-8 w-8 text-accent group-hover:scale-125 transition-transform" />
-              </div>
-            </div>
-            <div className="absolute inset-0 bg-gradient-hero opacity-0 group-hover:opacity-20 rounded-lg transition-opacity duration-300" />
-          </div>
+          <Button 
+            size="lg" 
+            variant="outline"
+            className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full transition-all duration-300 group"
+          >
+            <ArrowRight className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            NOS SERVICES
+          </Button>
         </div>
       </div>
 

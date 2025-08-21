@@ -1,15 +1,24 @@
+
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
-import ArtistSection from "@/components/ArtistSection";
+import UbuntuSection from "@/components/UbuntuSection";
+import ServicesSection from "@/components/ServicesSection";
+import FeaturedArtistsSection from "@/components/FeaturedArtistsSection";
+import CallToActionSection from "@/components/CallToActionSection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-500 to-cyan-400">
       <Navigation />
-      <main className="pt-16 pb-20">
+      <main className="pt-16 pb-0">
         <HeroSection />
-        <ArtistSection />
+        <UbuntuSection />
+        <ServicesSection />
+        <FeaturedArtistsSection />
+        <CallToActionSection />
       </main>
+      <Footer />
     </div>
   );
 };
