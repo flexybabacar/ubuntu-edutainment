@@ -38,12 +38,18 @@ const Navigation = () => {
       link: "/artists"
     },
     {
-      title: "MUSIC ALBUM",
-      items: ["Archive covers", "Archive cards", "Featured 3D Album", "Featured Album", "Cover Carousel", "Cards carousel", "Glass cards", "More shortcodes"]
+      title: "ÉVÉNEMENTS",
+      items: [],
+      link: "/events"
     },
     {
-      title: "EVENTS", 
-      items: ["Events grid", "Events list"]
+      title: "RÉSERVATION",
+      items: [],
+      link: "/booking"
+    },
+    {
+      title: "MUSIC ALBUM",
+      items: ["Archive covers", "Archive cards", "Featured 3D Album", "Featured Album", "Cover Carousel", "Cards carousel", "Glass cards", "More shortcodes"]
     },
     {
       title: "PODCAST",
@@ -52,10 +58,6 @@ const Navigation = () => {
     {
       title: "BLOG",
       items: ["Sidebar", "Cards", "Masonry"]
-    },
-    {
-      title: "BOOKING",
-      items: []
     }
   ];
 

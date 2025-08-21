@@ -1,8 +1,8 @@
-
 import { useParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Play, Heart, Share2, Users, Music, Star, MapPin, Calendar, Download, Plus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Artist {
   id: number;
@@ -35,6 +35,7 @@ interface Album {
 
 const ArtistProfile = () => {
   const { artistId } = useParams();
+  const navigate = useNavigate();
 
   // Mock data - in real app, fetch based on artistId
   const artist: Artist = {
@@ -141,11 +142,19 @@ const ArtistProfile = () => {
 
                 {/* Action Buttons */}
                 <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                  <Button size="lg" className="bg-primary hover:bg-primary/90">
+                  <Button 
+                    size="lg" 
+                    className="bg-primary hover:bg-primary/90"
+                    onClick={() => navigate(`/booking?artist=${artist.id}`)}
+                  >
+                    <Calendar className="mr-2 h-5 w-5" />
+                    Réserver cet artiste
+                  </Button>
+                  <Button size="lg" variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground">
                     <Plus className="mr-2 h-5 w-5" />
                     Follow
                   </Button>
-                  <Button size="lg" variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground">
+                  <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground">
                     <Heart className="mr-2 h-5 w-5" />
                     Like
                   </Button>
