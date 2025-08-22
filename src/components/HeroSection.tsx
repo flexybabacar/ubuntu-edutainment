@@ -10,31 +10,31 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Elegant Overlay */}
+      {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroBg})` }}
       />
       
-      {/* Refined Gradient Overlay */}
-      <div className="absolute inset-0 bg-background/60" />
-      <div className="absolute inset-0 elegant-bg opacity-30" />
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-hero opacity-60" />
+      <div className="absolute inset-0 bg-background/40" />
 
-      {/* Subtle Floating Geometric Elements */}
+      {/* Floating Geometric Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Large Triangle */}
-        <div className="absolute top-1/4 left-1/4 w-32 h-32 border border-border/30 triangle-border animate-float" />
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 border-2 border-neon-cyan/30 triangle-border animate-float" />
         
         {/* Medium Diamond */}
-        <div className="absolute top-1/3 right-1/4 w-24 h-24 border border-border/40 diamond-border animate-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/3 right-1/4 w-24 h-24 border border-neon-pink/40 diamond-border animate-float" style={{ animationDelay: '2s' }} />
         
-        {/* Small Geometric Elements */}
-        <div className="absolute bottom-1/3 left-1/6 w-16 h-16 border border-border/50 triangle-border animate-float" style={{ animationDelay: '4s' }} />
-        <div className="absolute top-1/2 right-1/6 w-12 h-12 border border-border/60 triangle-border animate-float" style={{ animationDelay: '1s' }} />
+        {/* Small Triangles */}
+        <div className="absolute bottom-1/3 left-1/6 w-16 h-16 border border-neon-purple/50 triangle-border animate-float" style={{ animationDelay: '4s' }} />
+        <div className="absolute top-1/2 right-1/6 w-12 h-12 border border-neon-cyan/60 triangle-border animate-float" style={{ animationDelay: '1s' }} />
         
-        {/* Subtle Accent Elements */}
-        <div className="absolute top-1/5 right-1/3 w-8 h-8 bg-primary/10 rounded-full animate-subtle-glow" />
-        <div className="absolute bottom-1/4 left-1/3 w-6 h-6 bg-primary/15 rounded-full animate-subtle-glow" style={{ animationDelay: '3s' }} />
+        {/* Floating Circles */}
+        <div className="absolute top-1/5 right-1/3 w-8 h-8 bg-neon-pink/20 rounded-full animate-pulse-glow" />
+        <div className="absolute bottom-1/4 left-1/3 w-6 h-6 bg-neon-cyan/30 rounded-full animate-pulse-glow" style={{ animationDelay: '3s' }} />
       </div>
 
       {/* Main Content */}
@@ -49,7 +49,7 @@ const HeroSection = () => {
           <img 
             src="/lovable-uploads/1954d7c7-aa99-48fd-8ee8-74c199c9498e.png" 
             alt="UBN T EDUTAINMENT" 
-            className="h-32 md:h-40 lg:h-48 w-auto object-contain filter drop-shadow-lg"
+            className="h-32 md:h-40 lg:h-48 w-auto object-contain animate-pulse-glow"
           />
         </div>
 
@@ -58,12 +58,12 @@ const HeroSection = () => {
           <p className="kentha-subtitle">ART ENGAGÉ POUR LE CHANGEMENT SOCIAL</p>
         </div>
 
-        {/* Elegant CTA Buttons */}
-        <div className="mb-16 animate-slide-in flex flex-col sm:flex-row gap-4 justify-center items-center" style={{ animationDelay: '0.6s' }}>
+        {/* CTA Button */}
+        <div className="mb-16 animate-slide-in" style={{ animationDelay: '0.6s' }}>
           <Button 
             size="lg" 
             onClick={scrollToArtists}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-lg glow-accent transition-all duration-300 group"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full shadow-neon hover:shadow-purple transition-all duration-300 group mr-4"
           >
             <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
             DÉCOUVRIR NOS ARTISTES
@@ -71,7 +71,7 @@ const HeroSection = () => {
           <Button 
             size="lg" 
             variant="outline"
-            className="border-primary/50 text-foreground hover:bg-primary/10 hover:border-primary px-8 py-6 text-lg font-semibold tracking-wide rounded-lg transition-all duration-300 group"
+            className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full transition-all duration-300 group"
           >
             <ArrowRight className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             NOS SERVICES

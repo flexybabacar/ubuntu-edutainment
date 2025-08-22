@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Menu, X, ChevronDown, Play, SkipBack, SkipForward, Volume2, Shuffle, Repeat } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,13 +12,41 @@ const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { title: "HOME", items: [], link: "/" },
-    { title: "À PROPOS", items: [], link: "/about" },
-    { title: "SERVICES", items: [], link: "/services" },
-    { title: "ÉQUIPE", items: [], link: "/team" },
-    { title: "ARTISTS", items: [], link: "/artists" },
-    { title: "ÉVÉNEMENTS", items: [], link: "/events" },
-    { title: "CONTACT", items: [], link: "/contact" },
+    {
+      title: "HOME",
+      items: [],
+      link: "/"
+    },
+    {
+      title: "À PROPOS",
+      items: [],
+      link: "/about"
+    },
+    {
+      title: "SERVICES",
+      items: [],
+      link: "/services"
+    },
+    {
+      title: "ÉQUIPE",
+      items: [],
+      link: "/team"
+    },
+    {
+      title: "ARTISTS",
+      items: [],
+      link: "/artists"
+    },
+    {
+      title: "ÉVÉNEMENTS",
+      items: [],
+      link: "/events"
+    },
+    {
+      title: "CONTACT",
+      items: [],
+      link: "/contact"
+    },
     {
       title: "NOS RÉALISATIONS",
       items: ["Archive covers", "Archive cards", "Featured 3D Album", "Featured Album", "Cover Carousel", "Cards carousel", "Glass cards", "More shortcodes"]
@@ -36,18 +63,18 @@ const Navigation = () => {
 
   return (
     <>
-      {/* Elegant Main Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
+      {/* Main Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Mobile Menu Button */}
             <Button 
               variant="ghost" 
               size="sm"
-              className="md:hidden hover:bg-muted"
+              className="md:hidden"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isOpen ? <X /> : <Menu />}
             </Button>
 
             {/* Logo */}
@@ -55,7 +82,7 @@ const Navigation = () => {
               <img 
                 src="/lovable-uploads/1954d7c7-aa99-48fd-8ee8-74c199c9498e.png" 
                 alt="UBN T EDUTAINMENT" 
-                className="h-8 w-auto filter drop-shadow-sm"
+                className="h-8 w-auto"
               />
             </div>
 
@@ -65,12 +92,12 @@ const Navigation = () => {
                 item.items.length > 0 ? (
                   <DropdownMenu key={item.title}>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="sm" className="text-xs font-medium tracking-wide hover:text-primary hover:bg-muted">
+                      <Button variant="ghost" size="sm" className="text-xs font-medium tracking-wide hover:text-primary">
                         {item.title}
                         <ChevronDown className="ml-1 h-3 w-3" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="bg-card border-border backdrop-blur-xl glow-subtle">
+                    <DropdownMenuContent className="bg-dark-surface border-border backdrop-blur-xl">
                       {item.items.map((subItem) => (
                         <DropdownMenuItem key={subItem} className="text-foreground hover:text-primary hover:bg-muted">
                           {subItem}
@@ -83,7 +110,7 @@ const Navigation = () => {
                     key={item.title} 
                     variant="ghost" 
                     size="sm" 
-                    className="text-xs font-medium tracking-wide hover:text-primary hover:bg-muted"
+                    className="text-xs font-medium tracking-wide hover:text-primary"
                     onClick={() => {
                       if (item.link) {
                         window.location.href = item.link;
@@ -96,15 +123,15 @@ const Navigation = () => {
               ))}
             </div>
 
-            {/* Refined Social Icons */}
+            {/* Social Icons */}
             <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="sm" className="rounded-full w-8 h-8 p-0 hover:bg-muted hover:text-primary">
+              <Button variant="ghost" size="sm" className="rounded-full w-8 h-8 p-0">
                 <Play className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="sm" className="rounded-full w-8 h-8 p-0 hover:bg-muted">
-                <div className="w-4 h-4 bg-primary rounded-sm flex items-center justify-center text-[8px] font-bold text-primary-foreground">f</div>
+              <Button variant="ghost" size="sm" className="rounded-full w-8 h-8 p-0">
+                <div className="w-4 h-4 bg-primary rounded-sm flex items-center justify-center text-[8px] font-bold">f</div>
               </Button>
-              <Button variant="ghost" size="sm" className="rounded-full w-8 h-8 p-0 hover:bg-muted hover:text-primary">
+              <Button variant="ghost" size="sm" className="rounded-full w-8 h-8 p-0">
                 <X className="h-4 w-4" />
               </Button>
             </div>
@@ -112,7 +139,7 @@ const Navigation = () => {
 
           {/* Mobile Menu */}
           {isOpen && (
-            <div className="md:hidden py-4 border-t border-border animate-slide-in bg-card/50 backdrop-blur-sm">
+            <div className="md:hidden py-4 border-t border-border animate-slide-in">
               {navItems.map((item) => (
                 <div key={item.title} className="py-2">
                   <button className="text-left w-full text-sm font-medium tracking-wide text-foreground hover:text-primary">
@@ -134,44 +161,44 @@ const Navigation = () => {
         </div>
       </nav>
 
-      {/* Elegant Audio Player */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-card/90 backdrop-blur-xl border-t border-border glow-subtle">
+      {/* Audio Player - Fixed Bottom */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-dark-surface/95 backdrop-blur-xl border-t border-border">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             {/* Play Controls */}
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm" className="text-primary hover:bg-muted">
+              <Button variant="ghost" size="sm" className="text-primary">
                 <Play className="h-6 w-6 fill-current" />
               </Button>
-              <Button variant="ghost" size="sm" className="hover:bg-muted hover:text-primary">
+              <Button variant="ghost" size="sm">
                 <SkipBack className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="sm" className="hover:bg-muted hover:text-primary">
+              <Button variant="ghost" size="sm">
                 <SkipForward className="h-4 w-4" />
               </Button>
             </div>
 
             {/* Current Track Info */}
             <div className="hidden md:flex items-center space-x-4 flex-1 max-w-md mx-4">
-              <div className="w-12 h-12 elegant-border rounded-lg flex-shrink-0"></div>
+              <div className="w-12 h-12 bg-gradient-card rounded-lg flex-shrink-0"></div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium truncate text-foreground">ILLENIUM [ALL YOU NEED]</p>
+                <p className="text-sm font-medium truncate">ILLENIUM [ALL YOU NEED]</p>
                 <p className="text-xs text-muted-foreground truncate">GROVER CRIME, J PIERCER</p>
               </div>
             </div>
 
             {/* Additional Controls */}
             <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="sm" className="hover:bg-muted hover:text-primary">
+              <Button variant="ghost" size="sm">
                 <Volume2 className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="sm" className="hover:bg-muted hover:text-primary">
+              <Button variant="ghost" size="sm">
                 <Shuffle className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="sm" className="hover:bg-muted hover:text-primary">
+              <Button variant="ghost" size="sm">
                 <Repeat className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="sm" className="hover:bg-muted hover:text-primary">
+              <Button variant="ghost" size="sm">
                 <Menu className="h-4 w-4" />
               </Button>
             </div>
