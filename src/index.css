@@ -1,89 +1,128 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Kentha Music Theme Design System - Futuristic Music Platform
+/* Kentha Music Theme Design System - Elegant Neutral Design
 All colors MUST be HSL for proper theming
 */
 
 @layer base {
   :root {
-    /* Base Colors - Dark Theme */
-    --background: 240 10% 5%;
+    /* Base Colors - Dark Theme (Default) */
+    --background: 220 8% 8%;
     --foreground: 0 0% 95%;
 
     /* Card & UI Elements */
-    --card: 240 8% 8%;
+    --card: 220 8% 12%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 240 8% 8%;
+    --popover: 220 8% 12%;
     --popover-foreground: 0 0% 95%;
 
-    /* Primary - Magenta/Pink Accent */
-    --primary: 320 100% 60%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary - Elegant Gold Accent */
+    --primary: 45 100% 68%;
+    --primary-foreground: 220 8% 8%;
 
-    /* Secondary - Cyan Accent */
-    --secondary: 180 100% 50%;
-    --secondary-foreground: 240 10% 5%;
+    /* Secondary - Neutral Gray Blue */
+    --secondary: 220 15% 25%;
+    --secondary-foreground: 0 0% 95%;
 
     /* Muted Elements */
-    --muted: 240 6% 15%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 220 8% 15%;
+    --muted-foreground: 220 8% 65%;
 
-    /* Accent - Purple */
-    --accent: 280 100% 70%;
-    --accent-foreground: 0 0% 100%;
+    /* Accent - Light Gold */
+    --accent: 45 100% 75%;
+    --accent-foreground: 220 8% 8%;
 
     /* Destructive */
-    --destructive: 0 84% 60%;
+    --destructive: 0 65% 55%;
     --destructive-foreground: 0 0% 100%;
 
     /* Borders & Inputs */
-    --border: 240 6% 20%;
-    --input: 240 6% 15%;
-    --ring: 320 100% 60%;
+    --border: 220 8% 20%;
+    --input: 220 8% 15%;
+    --ring: 45 100% 68%;
 
     /* Design System Tokens */
     --radius: 0.75rem;
 
-    /* Custom Kentha Colors */
-    --neon-pink: 320 100% 60%;
-    --neon-cyan: 180 100% 50%;
-    --neon-purple: 280 100% 70%;
-    --dark-bg: 240 10% 5%;
-    --dark-surface: 240 8% 8%;
+    /* Custom Neutral Colors */
+    --neutral-light: 220 8% 85%;
+    --neutral-medium: 220 8% 45%;
+    --neutral-dark: 220 8% 25%;
+    --accent-gold: 45 100% 68%;
+    --accent-gold-light: 45 100% 75%;
     
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(320 100% 60% / 0.8), hsl(280 100% 70% / 0.8), hsl(180 100% 50% / 0.8));
-    --gradient-card: linear-gradient(145deg, hsl(240 8% 8%), hsl(240 6% 12%));
-    --gradient-glow: radial-gradient(circle, hsl(320 100% 60% / 0.3), transparent 70%);
+    /* Subtle Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(220 8% 8%), hsl(220 8% 12%), hsl(220 8% 8%));
+    --gradient-card: linear-gradient(145deg, hsl(220 8% 12%), hsl(220 8% 10%));
+    --gradient-accent: linear-gradient(135deg, hsl(45 100% 68% / 0.1), hsl(45 100% 75% / 0.05));
     
-    /* Shadows & Effects */
-    --shadow-neon: 0 0 20px hsl(320 100% 60% / 0.5);
-    --shadow-cyan: 0 0 15px hsl(180 100% 50% / 0.4);
-    --shadow-purple: 0 0 25px hsl(280 100% 70% / 0.3);
+    /* Refined Shadows */
+    --shadow-subtle: 0 2px 8px hsl(220 8% 0% / 0.1);
+    --shadow-medium: 0 4px 16px hsl(220 8% 0% / 0.15);
+    --shadow-accent: 0 4px 16px hsl(45 100% 68% / 0.1);
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 220 8% 12%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 45 100% 68%;
+    --sidebar-primary-foreground: 220 8% 8%;
+    --sidebar-accent: 220 8% 15%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 220 8% 20%;
+    --sidebar-ring: 45 100% 68%;
   }
 
-  /* Light mode inherits dark theme values for consistency */
+  /* Light Mode */
   .light {
-    /* Keep same values as root for consistent futuristic look */
+    --background: 0 0% 98%;
+    --foreground: 220 8% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 8% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 8% 15%;
+
+    --primary: 45 100% 48%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 220 15% 75%;
+    --secondary-foreground: 220 8% 15%;
+
+    --muted: 220 8% 95%;
+    --muted-foreground: 220 8% 45%;
+
+    --accent: 45 100% 55%;
+    --accent-foreground: 0 0% 98%;
+
+    --border: 220 8% 85%;
+    --input: 220 8% 90%;
+    --ring: 45 100% 48%;
+
+    --neutral-light: 220 8% 15%;
+    --neutral-medium: 220 8% 55%;
+    --neutral-dark: 220 8% 75%;
+    --accent-gold: 45 100% 48%;
+    --accent-gold-light: 45 100% 55%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 98%), hsl(220 8% 96%), hsl(0 0% 98%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 8% 98%));
+
+    --shadow-subtle: 0 2px 8px hsl(220 8% 0% / 0.08);
+    --shadow-medium: 0 4px 16px hsl(220 8% 0% / 0.12);
+    --shadow-accent: 0 4px 16px hsl(45 100% 48% / 0.08);
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 8% 15%;
+    --sidebar-primary: 45 100% 48%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 220 8% 95%;
+    --sidebar-accent-foreground: 220 8% 15%;
+    --sidebar-border: 220 8% 85%;
+    --sidebar-ring: 45 100% 48%;
   }
 }
 
@@ -93,25 +132,21 @@ All colors MUST be HSL for proper theming
   }
 
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
-  /* Kentha Typography */
+  /* Elegant Typography */
   .kentha-title {
-    @apply text-6xl md:text-8xl font-black tracking-wider;
-    background: var(--gradient-hero);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: var(--shadow-neon);
+    @apply text-6xl md:text-8xl font-black tracking-wider text-foreground;
+    text-shadow: 0 2px 4px hsl(220 8% 0% / 0.1);
   }
 
   .kentha-subtitle {
     @apply text-lg md:text-xl font-light tracking-[0.2em] text-muted-foreground;
   }
 
-  /* Geometric Elements */
+  /* Refined Geometric Elements */
   .triangle-border {
     clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
   }
@@ -120,46 +155,47 @@ All colors MUST be HSL for proper theming
     clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
   }
 
-  /* Glow Effects */
-  .glow-pink {
-    box-shadow: var(--shadow-neon);
+  /* Subtle Effects */
+  .glow-subtle {
+    box-shadow: var(--shadow-subtle);
   }
 
-  .glow-cyan {
-    box-shadow: var(--shadow-cyan);
+  .glow-medium {
+    box-shadow: var(--shadow-medium);
   }
 
-  .glow-purple {
-    box-shadow: var(--shadow-purple);
+  .glow-accent {
+    box-shadow: var(--shadow-accent);
   }
 
-  /* Animated Background */
-  .animated-bg {
+  /* Refined Background */
+  .elegant-bg {
     background: var(--gradient-hero);
-    background-size: 200% 200%;
-    animation: gradientShift 8s ease infinite;
   }
 
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Floating Elements */
+  /* Floating Elements - More Subtle */
   .floating {
-    animation: float 6s ease-in-out infinite;
+    animation: float 8s ease-in-out infinite;
   }
 
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+    50% { transform: translateY(-15px); }
   }
 
-  /* Neon Border */
-  .neon-border {
-    border: 2px solid transparent;
-    background: linear-gradient(var(--dark-bg), var(--dark-bg)) padding-box,
-                var(--gradient-hero) border-box;
+  /* Elegant Border */
+  .elegant-border {
+    border: 1px solid hsl(var(--border));
+    background: var(--gradient-card);
+  }
+
+  /* Subtle Animations */
+  @keyframes subtle-glow {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  .animate-subtle-glow {
+    animation: subtle-glow 3s ease-in-out infinite;
   }
 }
