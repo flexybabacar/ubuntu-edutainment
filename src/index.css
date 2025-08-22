@@ -1,132 +1,89 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* UBN T EDUTAINMENT Design System - New Color Palette
+/* Kentha Music Theme Design System - Futuristic Music Platform
 All colors MUST be HSL for proper theming
 */
 
 @layer base {
   :root {
-    /* New Color Palette - Dark Mode */
-    --background: 0 0% 0%;
-    --foreground: 60 100% 50%;
+    /* Base Colors - Dark Theme */
+    --background: 240 10% 5%;
+    --foreground: 0 0% 95%;
 
     /* Card & UI Elements */
-    --card: 0 0% 5%;
-    --card-foreground: 60 100% 50%;
+    --card: 240 8% 8%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 5%;
-    --popover-foreground: 60 100% 50%;
+    --popover: 240 8% 8%;
+    --popover-foreground: 0 0% 95%;
 
-    /* Primary - Yellow Accent */
-    --primary: 60 100% 50%;
-    --primary-foreground: 0 0% 0%;
+    /* Primary - Magenta/Pink Accent */
+    --primary: 320 100% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Moss Green */
-    --secondary: 65 23% 50%;
-    --secondary-foreground: 0 0% 0%;
+    /* Secondary - Cyan Accent */
+    --secondary: 180 100% 50%;
+    --secondary-foreground: 240 10% 5%;
 
     /* Muted Elements */
-    --muted: 0 0% 10%;
-    --muted-foreground: 65 23% 50%;
+    --muted: 240 6% 15%;
+    --muted-foreground: 240 5% 65%;
 
-    /* Accent - Asparagus Green */
-    --accent: 90 33% 50%;
-    --accent-foreground: 0 0% 0%;
+    /* Accent - Purple */
+    --accent: 280 100% 70%;
+    --accent-foreground: 0 0% 100%;
 
     /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     /* Borders & Inputs */
-    --border: 0 0% 15%;
-    --input: 0 0% 10%;
-    --ring: 60 100% 50%;
+    --border: 240 6% 20%;
+    --input: 240 6% 15%;
+    --ring: 320 100% 60%;
 
     /* Design System Tokens */
     --radius: 0.75rem;
 
-    /* Custom UBN Colors */
-    --yellow: 60 100% 50%;
-    --moss-green: 65 23% 50%;
-    --asparagus: 90 33% 50%;
-    --black: 0 0% 0%;
-    --dark-surface: 0 0% 5%;
+    /* Custom Kentha Colors */
+    --neon-pink: 320 100% 60%;
+    --neon-cyan: 180 100% 50%;
+    --neon-purple: 280 100% 70%;
+    --dark-bg: 240 10% 5%;
+    --dark-surface: 240 8% 8%;
     
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(60 100% 50% / 0.9), hsl(65 23% 50% / 0.8), hsl(90 33% 50% / 0.7));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 5%), hsl(0 0% 8%));
-    --gradient-glow: radial-gradient(circle, hsl(60 100% 50% / 0.3), transparent 70%);
+    --gradient-hero: linear-gradient(135deg, hsl(320 100% 60% / 0.8), hsl(280 100% 70% / 0.8), hsl(180 100% 50% / 0.8));
+    --gradient-card: linear-gradient(145deg, hsl(240 8% 8%), hsl(240 6% 12%));
+    --gradient-glow: radial-gradient(circle, hsl(320 100% 60% / 0.3), transparent 70%);
     
     /* Shadows & Effects */
-    --shadow-neon: 0 0 20px hsl(60 100% 50% / 0.5);
-    --shadow-green: 0 0 15px hsl(65 23% 50% / 0.4);
-    --shadow-asparagus: 0 0 25px hsl(90 33% 50% / 0.3);
-
-    --sidebar-background: 0 0% 2%;
-    --sidebar-foreground: 60 100% 50%;
-    --sidebar-primary: 60 100% 50%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 0 0% 8%;
-    --sidebar-accent-foreground: 60 100% 50%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 60 100% 50%;
-  }
-
-  /* Light Mode */
-  .light {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 0%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-
-    --primary: 60 100% 40%;
-    --primary-foreground: 0 0% 0%;
-
-    --secondary: 65 23% 40%;
-    --secondary-foreground: 0 0% 0%;
-
-    --muted: 0 0% 95%;
-    --muted-foreground: 0 0% 45%;
-
-    --accent: 90 33% 40%;
-    --accent-foreground: 0 0% 0%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 0 0% 90%;
-    --input: 0 0% 95%;
-    --ring: 60 100% 40%;
-
-    --yellow: 60 100% 40%;
-    --moss-green: 65 23% 40%;
-    --asparagus: 90 33% 40%;
-    --black: 0 0% 0%;
-    --dark-surface: 0 0% 95%;
-    
-    --gradient-hero: linear-gradient(135deg, hsl(60 100% 40% / 0.9), hsl(65 23% 40% / 0.8), hsl(90 33% 40% / 0.7));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(0 0% 98%));
-    --gradient-glow: radial-gradient(circle, hsl(60 100% 40% / 0.2), transparent 70%);
-    
-    --shadow-neon: 0 0 20px hsl(60 100% 40% / 0.3);
-    --shadow-green: 0 0 15px hsl(65 23% 40% / 0.3);
-    --shadow-asparagus: 0 0 25px hsl(90 33% 40% / 0.2);
+    --shadow-neon: 0 0 20px hsl(320 100% 60% / 0.5);
+    --shadow-cyan: 0 0 15px hsl(180 100% 50% / 0.4);
+    --shadow-purple: 0 0 25px hsl(280 100% 70% / 0.3);
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 0%;
-    --sidebar-primary: 60 100% 40%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 95%;
-    --sidebar-accent-foreground: 0 0% 0%;
-    --sidebar-border: 0 0% 90%;
-    --sidebar-ring: 60 100% 40%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Light mode inherits dark theme values for consistency */
+  .light {
+    /* Keep same values as root for consistent futuristic look */
   }
 }
 
@@ -140,8 +97,8 @@ All colors MUST be HSL for proper theming
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
-  /* UBN Typography */
-  .ubn-title {
+  /* Kentha Typography */
+  .kentha-title {
     @apply text-6xl md:text-8xl font-black tracking-wider;
     background: var(--gradient-hero);
     -webkit-background-clip: text;
@@ -150,7 +107,7 @@ All colors MUST be HSL for proper theming
     text-shadow: var(--shadow-neon);
   }
 
-  .ubn-subtitle {
+  .kentha-subtitle {
     @apply text-lg md:text-xl font-light tracking-[0.2em] text-muted-foreground;
   }
 
@@ -164,16 +121,16 @@ All colors MUST be HSL for proper theming
   }
 
   /* Glow Effects */
-  .glow-yellow {
+  .glow-pink {
     box-shadow: var(--shadow-neon);
   }
 
-  .glow-green {
-    box-shadow: var(--shadow-green);
+  .glow-cyan {
+    box-shadow: var(--shadow-cyan);
   }
 
-  .glow-asparagus {
-    box-shadow: var(--shadow-asparagus);
+  .glow-purple {
+    box-shadow: var(--shadow-purple);
   }
 
   /* Animated Background */
@@ -202,7 +159,7 @@ All colors MUST be HSL for proper theming
   /* Neon Border */
   .neon-border {
     border: 2px solid transparent;
-    background: linear-gradient(var(--background), var(--background)) padding-box,
+    background: linear-gradient(var(--dark-bg), var(--dark-bg)) padding-box,
                 var(--gradient-hero) border-box;
   }
 }

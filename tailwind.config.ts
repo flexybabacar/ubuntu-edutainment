@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -53,11 +52,11 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// UBN Custom Colors
-				'yellow': 'hsl(var(--yellow))',
-				'moss-green': 'hsl(var(--moss-green))',
-				'asparagus': 'hsl(var(--asparagus))',
-				'black': 'hsl(var(--black))',
+				// Kentha Custom Colors
+				'neon-pink': 'hsl(var(--neon-pink))',
+				'neon-cyan': 'hsl(var(--neon-cyan))',
+				'neon-purple': 'hsl(var(--neon-purple))',
+				'dark-bg': 'hsl(var(--dark-bg))',
 				'dark-surface': 'hsl(var(--dark-surface))'
 			},
 			backgroundImage: {
@@ -67,8 +66,8 @@ export default {
 			},
 			boxShadow: {
 				'neon': 'var(--shadow-neon)',
-				'green': 'var(--shadow-green)',
-				'asparagus': 'var(--shadow-asparagus)'
+				'cyan': 'var(--shadow-cyan)',
+				'purple': 'var(--shadow-purple)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

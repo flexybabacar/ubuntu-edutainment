@@ -1,8 +1,6 @@
-
 import { useState } from "react";
 import { Menu, X, ChevronDown, Play, SkipBack, SkipForward, Volume2, Shuffle, Repeat } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import ThemeToggle from "@/components/ThemeToggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -99,9 +97,9 @@ const Navigation = () => {
                         <ChevronDown className="ml-1 h-3 w-3" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="bg-card border-border backdrop-blur-xl">
+                    <DropdownMenuContent className="bg-dark-surface border-border backdrop-blur-xl">
                       {item.items.map((subItem) => (
-                        <DropdownMenuItem key={subItem} className="text-card-foreground hover:text-primary hover:bg-muted">
+                        <DropdownMenuItem key={subItem} className="text-foreground hover:text-primary hover:bg-muted">
                           {subItem}
                         </DropdownMenuItem>
                       ))}
@@ -125,9 +123,8 @@ const Navigation = () => {
               ))}
             </div>
 
-            {/* Social Icons & Theme Toggle */}
+            {/* Social Icons */}
             <div className="flex items-center space-x-2">
-              <ThemeToggle />
               <Button variant="ghost" size="sm" className="rounded-full w-8 h-8 p-0">
                 <Play className="h-4 w-4" />
               </Button>
@@ -165,7 +162,7 @@ const Navigation = () => {
       </nav>
 
       {/* Audio Player - Fixed Bottom */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-card/95 backdrop-blur-xl border-t border-border">
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-dark-surface/95 backdrop-blur-xl border-t border-border">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             {/* Play Controls */}
