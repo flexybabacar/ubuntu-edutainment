@@ -1,3 +1,4 @@
+
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Play, Users, Music, MapPin, Star } from "lucide-react";
@@ -21,7 +22,7 @@ const Artists = () => {
       id: 1,
       name: "KENNY BASS",
       location: "LONDON [IT]",
-      image: "",
+      image: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=600&h=800&fit=crop&crop=face",
       genre: "Electronic",
       followers: "2.5M",
       rating: 4.8,
@@ -31,7 +32,7 @@ const Artists = () => {
       id: 2,
       name: "PAUL RICHARDS",
       location: "MIAMI [USA]",
-      image: "",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=800&fit=crop&crop=face",
       genre: "House",
       followers: "1.8M",
       rating: 4.6,
@@ -41,7 +42,7 @@ const Artists = () => {
       id: 3,
       name: "R. GALVANIZE",
       location: "ROME [FR]",
-      image: "",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face",
       genre: "Techno",
       followers: "3.2M",
       rating: 4.9,
@@ -51,7 +52,7 @@ const Artists = () => {
       id: 4,
       name: "DAVID MOREAU",
       location: "PARIS [FR]",
-      image: "",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=800&fit=crop&crop=face",
       genre: "Deep House",
       followers: "1.2M",
       rating: 4.5,
@@ -59,9 +60,9 @@ const Artists = () => {
     },
     {
       id: 5,
-      name: "ALEX TURNER",
+      name: "ALEX TURNER", 
       location: "BERLIN [DE]",
-      image: "",
+      image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=600&h=800&fit=crop&crop=face",
       genre: "Progressive",
       followers: "2.8M",
       rating: 4.7,
@@ -71,7 +72,7 @@ const Artists = () => {
       id: 6,
       name: "SOPHIA CHEN",
       location: "TOKYO [JP]",
-      image: "",
+      image: "https://images.unsplash.com/photo-1494790108755-2616c669a1ec?w=600&h=800&fit=crop&crop=face",
       genre: "Ambient",
       followers: "900K",
       rating: 4.4,
@@ -89,12 +90,12 @@ const Artists = () => {
       
       <main className="pt-16 pb-20">
         {/* Header Section */}
-        <section className="relative py-32 bg-dark-surface overflow-hidden">
+        <section className="relative py-32 bg-muted/30 overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0">
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_40%,theme(colors.neon-pink/10)_0%,transparent_50%)]" />
-            <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_60%,theme(colors.neon-cyan/10)_0%,transparent_50%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_49%,theme(colors.border/5)_50%,transparent_51%)] bg-[length:20px_20px]" />
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/10 to-transparent" />
+            <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-secondary/10 to-transparent" />
+            <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_49%,hsl(var(--border))_50%,transparent_51%)] bg-[length:20px_20px] opacity-20" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
@@ -107,7 +108,7 @@ const Artists = () => {
 
             {/* Page Title */}
             <div className="text-center">
-              <h1 className="text-6xl md:text-8xl font-black tracking-wider bg-gradient-hero bg-clip-text text-transparent mb-4">
+              <h1 className="text-6xl md:text-8xl font-black tracking-wider text-primary mb-4">
                 ARTISTS
               </h1>
               <div className="w-16 h-1 bg-primary mx-auto rounded-full"></div>
@@ -126,14 +127,18 @@ const Artists = () => {
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {/* Artist Card */}
-                  <div className="relative bg-gradient-card rounded-xl overflow-hidden border border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-cyan group-hover:transform group-hover:-translate-y-2">
+                  <div className="relative bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-lg group-hover:transform group-hover:-translate-y-2">
                     
                     {/* Artist Image */}
-                    <div className="relative h-80 bg-gradient-to-br from-neon-pink/20 to-neon-cyan/20 overflow-hidden">
-                      {/* Placeholder for artist image */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-6xl font-black text-primary/30">♫</div>
-                      </div>
+                    <div className="relative h-80 bg-muted overflow-hidden">
+                      <img 
+                        src={artist.image} 
+                        alt={artist.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        onError={(e) => {
+                          e.currentTarget.src = "/placeholder.svg";
+                        }}
+                      />
                       
                       {/* Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
@@ -211,8 +216,8 @@ const Artists = () => {
                     </div>
 
                     {/* Decorative Elements */}
-                    <div className="absolute top-4 right-4 w-2 h-2 bg-neon-pink/60 rounded-full animate-pulse-glow" />
-                    <div className="absolute bottom-4 left-4 w-3 h-3 bg-neon-cyan/40 triangle-border animate-float" />
+                    <div className="absolute top-4 right-4 w-2 h-2 bg-primary/60 rounded-full animate-pulse" />
+                    <div className="absolute bottom-4 left-4 w-3 h-3 bg-secondary/40 rounded-full animate-pulse" />
                   </div>
                 </div>
               ))}
@@ -223,7 +228,7 @@ const Artists = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="px-8 py-3 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground neon-border group"
+                className="px-8 py-3 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground group"
               >
                 <Users className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 LOAD MORE ARTISTS

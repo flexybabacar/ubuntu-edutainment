@@ -1,3 +1,4 @@
+
 import { useParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
@@ -42,7 +43,7 @@ const ArtistProfile = () => {
     id: parseInt(artistId || "1"),
     name: "KENNY BASS",
     location: "LONDON [IT]",
-    image: "",
+    image: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=600&h=600&fit=crop&crop=face",
     genre: "Electronic",
     followers: "2.5M",
     rating: 4.8,
@@ -60,9 +61,9 @@ const ArtistProfile = () => {
   ];
 
   const albums: Album[] = [
-    { id: 1, title: "Digital Revolution", year: "2024", tracks: 12, image: "" },
-    { id: 2, title: "Neon Nights", year: "2023", tracks: 10, image: "" },
-    { id: 3, title: "Electronic Dreams", year: "2022", tracks: 8, image: "" }
+    { id: 1, title: "Digital Revolution", year: "2024", tracks: 12, image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" },
+    { id: 2, title: "Neon Nights", year: "2023", tracks: 10, image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=400&fit=crop" },
+    { id: 3, title: "Electronic Dreams", year: "2022", tracks: 8, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop" }
   ];
 
   return (
@@ -71,25 +72,32 @@ const ArtistProfile = () => {
       
       <main className="pt-16 pb-20">
         {/* Artist Header */}
-        <section className="relative py-32 bg-dark-surface overflow-hidden">
+        <section className="relative py-32 bg-muted/30 overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0">
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_40%,theme(colors.neon-pink/10)_0%,transparent_50%)]" />
-            <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_60%,theme(colors.neon-cyan/10)_0%,transparent_50%)]" />
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/10 to-transparent" />
+            <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-secondary/10 to-transparent" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
             <div className="flex flex-col lg:flex-row items-center gap-12">
               {/* Artist Image */}
               <div className="relative">
-                <div className="w-80 h-80 rounded-full bg-gradient-to-br from-neon-pink/30 to-neon-cyan/30 flex items-center justify-center relative overflow-hidden border-4 border-primary/20">
-                  <div className="text-8xl font-black text-primary/60">♫</div>
+                <div className="w-80 h-80 rounded-full overflow-hidden relative border-4 border-primary/20">
+                  <img 
+                    src={artist.image} 
+                    alt={artist.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = "/placeholder.svg";
+                    }}
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 </div>
                 
                 {/* Play Button */}
                 <div className="absolute bottom-8 right-8">
-                  <Button size="lg" className="rounded-full w-16 h-16 bg-primary hover:bg-primary/90 shadow-cyan">
+                  <Button size="lg" className="rounded-full w-16 h-16 bg-primary hover:bg-primary/90 shadow-lg">
                     <Play className="h-8 w-8 fill-current" />
                   </Button>
                 </div>
@@ -97,7 +105,7 @@ const ArtistProfile = () => {
 
               {/* Artist Info */}
               <div className="flex-1 text-center lg:text-left">
-                <h1 className="text-6xl md:text-8xl font-black tracking-wider bg-gradient-hero bg-clip-text text-transparent mb-4">
+                <h1 className="text-6xl md:text-8xl font-black tracking-wider text-primary mb-4">
                   {artist.name}
                 </h1>
                 
@@ -181,12 +189,12 @@ const ArtistProfile = () => {
         </section>
 
         {/* Top Tracks */}
-        <section className="py-16 bg-dark-surface">
+        <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold mb-8 text-center">Top Tracks</h2>
             <div className="max-w-4xl mx-auto space-y-4">
               {topTracks.map((track, index) => (
-                <div key={track.id} className="bg-gradient-card rounded-lg p-4 border border-border/50 hover:border-primary/50 transition-all duration-300 group">
+                <div key={track.id} className="bg-card rounded-lg p-4 border border-border hover:border-primary/50 transition-all duration-300 group">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-colors">
@@ -229,12 +237,17 @@ const ArtistProfile = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {albums.map((album) => (
                 <div key={album.id} className="group">
-                  <div className="bg-gradient-card rounded-xl overflow-hidden border border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-cyan group-hover:transform group-hover:-translate-y-2">
+                  <div className="bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-lg group-hover:transform group-hover:-translate-y-2">
                     {/* Album Cover */}
-                    <div className="relative h-64 bg-gradient-to-br from-neon-pink/20 to-neon-cyan/20 overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-6xl font-black text-primary/30">♪</div>
-                      </div>
+                    <div className="relative h-64 bg-muted overflow-hidden">
+                      <img 
+                        src={album.image} 
+                        alt={album.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        onError={(e) => {
+                          e.currentTarget.src = "/placeholder.svg";
+                        }}
+                      />
                       
                       {/* Play Overlay */}
                       <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

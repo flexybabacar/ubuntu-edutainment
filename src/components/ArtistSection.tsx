@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Play, Users, Music, Calendar } from "lucide-react";
 
@@ -19,7 +20,7 @@ const ArtistSection = () => {
       genre: "Electronic",
       followers: "2.5M",
       albums: 8,
-      avatar: "",
+      avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&h=400&fit=crop&crop=face",
       isVerified: true
     },
     {
@@ -28,7 +29,7 @@ const ArtistSection = () => {
       genre: "Future Bass",
       followers: "1.8M",
       albums: 12,
-      avatar: "",
+      avatar: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&h=400&fit=crop&crop=face",
       isVerified: true
     },
     {
@@ -37,7 +38,7 @@ const ArtistSection = () => {
       genre: "Ambient",
       followers: "967K",
       albums: 5,
-      avatar: "",
+      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face",
       isVerified: false
     },
     {
@@ -46,28 +47,28 @@ const ArtistSection = () => {
       genre: "Dubstep",
       followers: "3.2M",
       albums: 15,
-      avatar: "",
+      avatar: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=400&h=400&fit=crop&crop=face",
       isVerified: true
     }
   ];
 
   return (
-    <section className="py-24 bg-dark-surface relative">
+    <section className="py-24 bg-muted/30 relative">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_25%_25%,theme(colors.neon-pink)_0%,transparent_50%)]" />
-        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_75%_75%,theme(colors.neon-cyan)_0%,transparent_50%)]" />
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/10 to-transparent" />
+        <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-secondary/10 to-transparent" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-12 h-0.5 bg-gradient-hero"></div>
-            <h2 className="text-3xl md:text-5xl font-black tracking-wider bg-gradient-hero bg-clip-text text-transparent">
+            <div className="w-12 h-0.5 bg-primary"></div>
+            <h2 className="text-3xl md:text-5xl font-black tracking-wider text-primary">
               FEATURED ARTISTS
             </h2>
-            <div className="w-12 h-0.5 bg-gradient-hero"></div>
+            <div className="w-12 h-0.5 bg-primary"></div>
           </div>
           <p className="text-muted-foreground text-lg tracking-wide">Discover the voices shaping tomorrow's sound</p>
         </div>
@@ -81,15 +82,22 @@ const ArtistSection = () => {
               style={{ animationDelay: `${index * 0.15}s` }}
             >
               {/* Artist Card */}
-              <div className="relative bg-gradient-card rounded-xl p-6 border border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-cyan overflow-hidden group-hover:transform group-hover:-translate-y-2">
+              <div className="relative bg-card rounded-xl p-6 border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-lg overflow-hidden group-hover:transform group-hover:-translate-y-2">
                 
                 {/* Hover Glow */}
-                <div className="absolute inset-0 bg-gradient-hero opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-xl" />
+                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
                 
                 {/* Avatar */}
                 <div className="relative mb-4">
-                  <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-neon-pink/30 to-neon-cyan/30 flex items-center justify-center relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
-                    <div className="text-3xl font-black text-primary/60">♫</div>
+                  <div className="w-24 h-24 mx-auto rounded-full overflow-hidden relative group-hover:scale-110 transition-transform duration-500 border-2 border-muted">
+                    <img 
+                      src={artist.avatar} 
+                      alt={artist.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = "/placeholder.svg";
+                      }}
+                    />
                     
                     {/* Play Button Overlay */}
                     <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -101,8 +109,8 @@ const ArtistSection = () => {
 
                   {/* Verified Badge */}
                   {artist.isVerified && (
-                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-secondary rounded-full flex items-center justify-center">
-                      <div className="w-3 h-3 bg-secondary-foreground rounded-full"></div>
+                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                      <div className="w-3 h-3 bg-primary-foreground rounded-full"></div>
                     </div>
                   )}
                 </div>
@@ -145,8 +153,8 @@ const ArtistSection = () => {
                 </div>
 
                 {/* Decorative Elements */}
-                <div className="absolute top-2 left-2 w-2 h-2 bg-neon-pink/40 rounded-full animate-pulse-glow" />
-                <div className="absolute bottom-2 right-2 w-3 h-3 bg-neon-cyan/30 triangle-border animate-float" />
+                <div className="absolute top-2 left-2 w-2 h-2 bg-primary/40 rounded-full animate-pulse" />
+                <div className="absolute bottom-2 right-2 w-3 h-3 bg-secondary/30 rounded-full animate-pulse" />
               </div>
             </div>
           ))}
@@ -157,7 +165,7 @@ const ArtistSection = () => {
           <Button 
             size="lg" 
             variant="outline" 
-            className="px-8 py-3 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground neon-border group"
+            className="px-8 py-3 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground group"
           >
             <Users className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
             DISCOVER ALL ARTISTS

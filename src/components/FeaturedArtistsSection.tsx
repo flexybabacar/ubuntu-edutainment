@@ -18,37 +18,37 @@ const FeaturedArtistsSection = () => {
       id: 1,
       name: "Amara Kone",
       genre: "Afro-Pop Engagé",
-      image: "/placeholder.svg"
+      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&crop=face"
     },
     {
       id: 2,
       name: "Khalil Senghor",
       genre: "Rap Conscient",
-      image: "/placeholder.svg"
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
     },
     {
       id: 3,
       name: "Fatou Diallo",
       genre: "World Music",
-      image: "/placeholder.svg"
+      image: "https://images.unsplash.com/photo-1494790108755-2616c669a1ec?w=400&h=400&fit=crop&crop=face"
     },
     {
       id: 4,
       name: "Moussa Ba",
       genre: "Electro-Traditionnel",
-      image: "/placeholder.svg"
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face"
     },
     {
       id: 5,
       name: "Aïcha Camara",
       genre: "Folk Moderne",
-      image: "/placeholder.svg"
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face"
     },
     {
       id: 6,
       name: "Ibrahim Fall",
       genre: "Jazz Fusion",
-      image: "/placeholder.svg"
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face"
     }
   ];
 
@@ -56,19 +56,19 @@ const FeaturedArtistsSection = () => {
     <section id="artists-section" className="py-24 bg-background relative">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-1/4 w-64 h-64 bg-gradient-glow opacity-30 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-gradient-hero opacity-20 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-1/4 w-64 h-64 bg-muted/20 opacity-30 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-muted/10 opacity-20 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-12 h-0.5 bg-gradient-hero"></div>
-            <h2 className="text-3xl md:text-5xl font-black tracking-wider bg-gradient-hero bg-clip-text text-transparent">
+            <div className="w-12 h-0.5 bg-primary"></div>
+            <h2 className="text-3xl md:text-5xl font-black tracking-wider text-primary">
               NOS ARTISTES
             </h2>
-            <div className="w-12 h-0.5 bg-gradient-hero"></div>
+            <div className="w-12 h-0.5 bg-primary"></div>
           </div>
           <p className="text-muted-foreground text-lg tracking-wide">Découvrez les voix du changement social</p>
         </div>
@@ -81,10 +81,10 @@ const FeaturedArtistsSection = () => {
               className="group relative"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="relative bg-gradient-card rounded-xl p-6 border border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-neon overflow-hidden group-hover:transform group-hover:-translate-y-2">
+              <div className="relative bg-card rounded-xl p-6 border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-lg overflow-hidden group-hover:transform group-hover:-translate-y-2">
                 
                 {/* Hover Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-hero opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-xl" />
+                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
                 
                 {/* Artist Photo */}
                 <div className="relative mb-6">
@@ -93,6 +93,9 @@ const FeaturedArtistsSection = () => {
                       src={artist.image} 
                       alt={artist.name}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = "/placeholder.svg";
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   </div>
@@ -119,8 +122,8 @@ const FeaturedArtistsSection = () => {
                 </div>
 
                 {/* Floating Elements */}
-                <div className="absolute -top-2 -right-2 w-4 h-4 bg-neon-cyan/30 rounded-full animate-pulse-glow" />
-                <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-neon-pink/40 rounded-full animate-pulse-glow" style={{ animationDelay: '1s' }} />
+                <div className="absolute -top-2 -right-2 w-4 h-4 bg-primary/30 rounded-full animate-pulse" />
+                <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-secondary/40 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
               </div>
             </div>
           ))}
@@ -132,7 +135,7 @@ const FeaturedArtistsSection = () => {
             size="lg" 
             variant="outline" 
             onClick={() => navigate('/artists')}
-            className="px-8 py-3 border-primary text-primary hover:bg-primary hover:text-primary-foreground neon-border group"
+            className="px-8 py-3 border-primary text-primary hover:bg-primary hover:text-primary-foreground group"
           >
             <Users className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
             VOIR TOUS LES ARTISTES
