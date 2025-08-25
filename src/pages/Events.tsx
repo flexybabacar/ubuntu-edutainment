@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Event } from "@/types/booking";
 import EventCard from "@/components/EventCard";
 import EventFilters from "@/components/EventFilters";
+import Footer from "@/components/Footer";
 
 const Events = () => {
   const [selectedFilter, setSelectedFilter] = useState("all");
@@ -132,6 +133,7 @@ const Events = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };

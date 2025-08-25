@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Menu, X, ChevronDown, Play, SkipBack, SkipForward, Volume2, Shuffle, Repeat } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -43,13 +44,14 @@ const Navigation = () => {
       link: "/events"
     },
     {
+      title: "NOS RÉALISATIONS",
+      items: [],
+      link: "/realisations"
+    },
+    {
       title: "CONTACT",
       items: [],
       link: "/contact"
-    },
-    {
-      title: "NOS RÉALISATIONS",
-      items: ["Archive covers", "Archive cards", "Featured 3D Album", "Featured Album", "Cover Carousel", "Cards carousel", "Glass cards", "More shortcodes"]
     },
     {
       title: "PODCAST",

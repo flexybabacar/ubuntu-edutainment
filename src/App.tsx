@@ -11,6 +11,7 @@ import Team from "./pages/Team";
 import Artists from "./pages/Artists";
 import ArtistProfile from "./pages/ArtistProfile";
 import Events from "./pages/Events";
+import Realisations from "./pages/Realisations";
 import Booking from "./pages/Booking";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/artists" element={<Artists />} />
           <Route path="/artist/:artistId" element={<ArtistProfile />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/realisations" element={<Realisations />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
