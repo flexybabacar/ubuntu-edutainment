@@ -1,5 +1,7 @@
+
 import Navigation from "@/components/Navigation";
 import { Card, CardContent } from "@/components/ui/card";
+import Footer from "@/components/Footer";
 
 const Team = () => {
   const teamMembers = [
@@ -113,6 +115,7 @@ const Team = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };

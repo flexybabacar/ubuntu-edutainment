@@ -1,7 +1,9 @@
+
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Music, Video, Users, Mic, Calendar, Target } from "lucide-react";
+import Footer from "@/components/Footer";
 
 const Services = () => {
   const services = [
@@ -191,6 +193,7 @@ const Services = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };
