@@ -1,9 +1,9 @@
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { Play, Heart, Share2, Users, Music, Star, MapPin, Calendar, Download, Plus } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Play, Heart, Share2, Users, Music, Star, MapPin, Calendar, Download, Plus, ArrowLeft } from "lucide-react";
+import Footer from "@/components/Footer";
 
 interface Artist {
   id: number;
@@ -16,6 +16,8 @@ interface Artist {
   albums: number;
   bio: string;
   joinedYear: string;
+  isAvailable: boolean;
+  priceRange: string;
 }
 
 interface Track {
@@ -39,31 +41,79 @@ const ArtistProfile = () => {
   const navigate = useNavigate();
 
   // Mock data - in real app, fetch based on artistId
-  const artist: Artist = {
-    id: parseInt(artistId || "1"),
-    name: "KENNY BASS",
-    location: "LONDON [IT]",
-    image: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=600&h=600&fit=crop&crop=face",
-    genre: "Electronic",
-    followers: "2.5M",
-    rating: 4.8,
-    albums: 12,
-    bio: "Kenny Bass is a pioneering electronic music producer known for his innovative soundscapes and captivating live performances. With over a decade of experience, he has shaped the electronic music scene with his unique blend of deep house and ambient techno.",
-    joinedYear: "2018"
+  const artistsData: Record<string, Artist> = {
+    "1": {
+      id: 1,
+      name: "Amara Kone",
+      location: "Dakar, Sénégal",
+      image: "/lovable-uploads/6499b747-59a7-489a-8391-5a81c0a94c6b.jpg",
+      genre: "Afro-Pop Engagé",
+      followers: "45K",
+      rating: 4.8,
+      albums: 3,
+      bio: "Amara Kone est une artiste sénégalaise engagée qui utilise sa musique pour véhiculer des messages sociaux forts. Son style unique mélange l'afro-pop contemporain avec des sonorités traditionnelles ouest-africaines, créant une expérience musicale authentique et moderne.",
+      joinedYear: "2020",
+      isAvailable: true,
+      priceRange: "500K-1M CFA"
+    },
+    "2": {
+      id: 2,
+      name: "Khalil Senghor",
+      location: "Dakar, Sénégal",
+      image: "/lovable-uploads/6499b747-59a7-489a-8391-5a81c0a94c6b.jpg",
+      genre: "Rap Conscient",
+      followers: "32K",
+      rating: 4.6,
+      albums: 2,
+      bio: "Khalil Senghor est un rappeur conscient qui aborde les réalités sociales africaines à travers ses textes percutants. Ses flows innovants et ses paroles engagées en font une voix importante de la nouvelle génération du hip-hop sénégalais.",
+      joinedYear: "2021",
+      isAvailable: true,
+      priceRange: "300K-800K CFA"
+    },
+    "3": {
+      id: 3,
+      name: "Fatou Diallo",
+      location: "Thiès, Sénégal",
+      image: "/lovable-uploads/6499b747-59a7-489a-8391-5a81c0a94c6b.jpg",
+      genre: "World Music",
+      followers: "28K",
+      rating: 4.7,
+      albums: 4,
+      bio: "Fatou Diallo fusionne les rythmes traditionnels africains avec des influences world music contemporaines. Sa voix puissante et ses compositions originales transportent les auditeurs dans un voyage musical à travers les cultures africaines.",
+      joinedYear: "2019",
+      isAvailable: false,
+      priceRange: "400K-900K CFA"
+    },
+    "4": {
+      id: 4,
+      name: "Moussa Ba",
+      location: "Saint-Louis, Sénégal",
+      image: "/lovable-uploads/6499b747-59a7-489a-8391-5a81c0a94c6b.jpg",
+      genre: "Spoken Word",
+      followers: "18K",
+      rating: 4.5,
+      albums: 1,
+      bio: "Moussa Ba est un artiste de spoken word qui utilise la poésie et la performance pour explorer les thèmes de l'identité, de la diaspora et de l'histoire africaine. Ses performances captivantes allient tradition orale et innovation artistique.",
+      joinedYear: "2022",
+      isAvailable: true,
+      priceRange: "200K-500K CFA"
+    }
   };
 
+  const artist = artistsData[artistId || "1"] || artistsData["1"];
+
   const topTracks: Track[] = [
-    { id: 1, title: "Neon Dreams", duration: "4:32", plays: "2.1M", likes: "45K" },
-    { id: 2, title: "Digital Waves", duration: "3:45", plays: "1.8M", likes: "38K" },
-    { id: 3, title: "Cyber City", duration: "5:12", plays: "1.5M", likes: "32K" },
-    { id: 4, title: "Electric Soul", duration: "4:08", plays: "1.2M", likes: "28K" },
-    { id: 5, title: "Future Bass", duration: "3:56", plays: "980K", likes: "24K" }
+    { id: 1, title: "Révolution Silencieuse", duration: "4:32", plays: "2.1M", likes: "45K" },
+    { id: 2, title: "Voix de l'Afrique", duration: "3:45", plays: "1.8M", likes: "38K" },
+    { id: 3, title: "Ubuntu", duration: "5:12", plays: "1.5M", likes: "32K" },
+    { id: 4, title: "Liberté", duration: "4:08", plays: "1.2M", likes: "28K" },
+    { id: 5, title: "Renaissance", duration: "3:56", plays: "980K", likes: "24K" }
   ];
 
   const albums: Album[] = [
-    { id: 1, title: "Digital Revolution", year: "2024", tracks: 12, image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" },
-    { id: 2, title: "Neon Nights", year: "2023", tracks: 10, image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=400&fit=crop" },
-    { id: 3, title: "Electronic Dreams", year: "2022", tracks: 8, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop" }
+    { id: 1, title: "Héritage Moderne", year: "2024", tracks: 12, image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" },
+    { id: 2, title: "Racines Urbaines", year: "2023", tracks: 10, image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=400&fit=crop" },
+    { id: 3, title: "Échos d'Afrique", year: "2022", tracks: 8, image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop" }
   ];
 
   return (
@@ -71,6 +121,20 @@ const ArtistProfile = () => {
       <Navigation />
       
       <main className="pt-16 pb-20">
+        {/* Back Button */}
+        <section className="py-4 bg-background border-b border-border">
+          <div className="container mx-auto px-4">
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate('/artists')}
+              className="flex items-center gap-2"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Retour aux artistes
+            </Button>
+          </div>
+        </section>
+
         {/* Artist Header */}
         <section className="relative py-32 bg-muted/30 overflow-hidden">
           {/* Background Pattern */}
@@ -101,6 +165,15 @@ const ArtistProfile = () => {
                     <Play className="h-8 w-8 fill-current" />
                   </Button>
                 </div>
+
+                {/* Availability Badge */}
+                <div className={`absolute top-4 left-4 px-4 py-2 rounded-full text-sm font-medium ${
+                  artist.isAvailable 
+                    ? 'bg-green-500/90 text-white' 
+                    : 'bg-red-500/90 text-white'
+                }`}>
+                  {artist.isAvailable ? 'Disponible' : 'Indisponible'}
+                </div>
               </div>
 
               {/* Artist Info */}
@@ -116,11 +189,17 @@ const ArtistProfile = () => {
                   </span>
                   <span className="flex items-center text-muted-foreground">
                     <Calendar className="h-5 w-5 mr-2" />
-                    Joined {artist.joinedYear}
+                    Actif depuis {artist.joinedYear}
                   </span>
                   <span className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
                     {artist.genre}
                   </span>
+                </div>
+
+                {/* Price Range */}
+                <div className="mb-6">
+                  <span className="text-2xl font-bold text-secondary">{artist.priceRange}</span>
+                  <p className="text-sm text-muted-foreground">Tarif par événement</p>
                 </div>
 
                 {/* Stats */}
@@ -144,7 +223,7 @@ const ArtistProfile = () => {
                       <Star className="h-6 w-6 text-accent mr-2" />
                       <span className="text-2xl font-bold">{artist.rating}</span>
                     </div>
-                    <p className="text-muted-foreground">Rating</p>
+                    <p className="text-muted-foreground">Note</p>
                   </div>
                 </div>
 
@@ -154,21 +233,22 @@ const ArtistProfile = () => {
                     size="lg" 
                     className="bg-primary hover:bg-primary/90"
                     onClick={() => navigate(`/booking?artist=${artist.id}`)}
+                    disabled={!artist.isAvailable}
                   >
                     <Calendar className="mr-2 h-5 w-5" />
-                    Réserver cet artiste
+                    {artist.isAvailable ? 'Réserver cet artiste' : 'Indisponible'}
                   </Button>
                   <Button size="lg" variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground">
                     <Plus className="mr-2 h-5 w-5" />
-                    Follow
+                    Suivre
                   </Button>
                   <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground">
                     <Heart className="mr-2 h-5 w-5" />
-                    Like
+                    J'aime
                   </Button>
                   <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground">
                     <Share2 className="mr-2 h-5 w-5" />
-                    Share
+                    Partager
                   </Button>
                 </div>
               </div>
@@ -180,7 +260,7 @@ const ArtistProfile = () => {
         <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold mb-6 text-center">About {artist.name}</h2>
+              <h2 className="text-3xl font-bold mb-6 text-center">À propos de {artist.name}</h2>
               <p className="text-muted-foreground text-lg leading-relaxed text-center">
                 {artist.bio}
               </p>
@@ -191,7 +271,7 @@ const ArtistProfile = () => {
         {/* Top Tracks */}
         <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center">Top Tracks</h2>
+            <h2 className="text-3xl font-bold mb-8 text-center">Morceaux populaires</h2>
             <div className="max-w-4xl mx-auto space-y-4">
               {topTracks.map((track, index) => (
                 <div key={track.id} className="bg-card rounded-lg p-4 border border-border hover:border-primary/50 transition-all duration-300 group">
@@ -208,11 +288,11 @@ const ArtistProfile = () => {
                     <div className="flex items-center gap-6">
                       <div className="text-center">
                         <p className="text-sm font-semibold">{track.plays}</p>
-                        <p className="text-xs text-muted-foreground">Plays</p>
+                        <p className="text-xs text-muted-foreground">Écoutes</p>
                       </div>
                       <div className="text-center">
                         <p className="text-sm font-semibold">{track.likes}</p>
-                        <p className="text-xs text-muted-foreground">Likes</p>
+                        <p className="text-xs text-muted-foreground">J'aime</p>
                       </div>
                       <div className="flex gap-2">
                         <Button size="sm" variant="ghost" className="hover:bg-primary hover:text-primary-foreground">
@@ -264,10 +344,10 @@ const ArtistProfile = () => {
                       </h3>
                       <div className="flex justify-between text-sm text-muted-foreground mb-4">
                         <span>{album.year}</span>
-                        <span>{album.tracks} tracks</span>
+                        <span>{album.tracks} morceaux</span>
                       </div>
                       <Button size="sm" className="w-full">
-                        Listen Now
+                        Écouter maintenant
                       </Button>
                     </div>
                   </div>
@@ -277,6 +357,7 @@ const ArtistProfile = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };

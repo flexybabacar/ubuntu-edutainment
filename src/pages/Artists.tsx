@@ -1,9 +1,11 @@
+
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Search, Users, Star, MapPin, Music } from "lucide-react";
 import { useState } from "react";
 import { Artist } from "@/types/booking";
 import Footer from "@/components/Footer";
+import { useNavigate } from "react-router-dom";
 
 interface ArtistFilterProps {
   onFilter: (filter: string) => void;
@@ -36,6 +38,7 @@ const ArtistFilter: React.FC<ArtistFilterProps> = ({ onFilter, activeFilter }) =
 const Artists = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("all");
+  const navigate = useNavigate();
 
   const artists: Artist[] = [
     {
@@ -96,6 +99,10 @@ const Artists = () => {
     setSelectedFilter(filter);
   };
 
+  const handleArtistClick = (artistId: number) => {
+    navigate(`/artist/${artistId}`);
+  };
+
   const filteredArtists = artists.filter(artist => {
     const searchTerm = searchQuery.toLowerCase();
     const artistName = artist.name.toLowerCase();
@@ -154,11 +161,11 @@ const Artists = () => {
         {/* Search & Filters Section */}
         <section className="py-8 bg-background border-b border-border">
           <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-2 w-full md:w-auto">
+            <div className="flex items-center space-x-2 w-full md:w-auto bg-muted/30 rounded-lg px-4 py-2">
               <Search className="h-5 w-5 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="Rechercher un artiste..."
+                placeholder="Rechercher un artiste, genre ou ville..."
                 className="bg-transparent border-none outline-none text-sm text-foreground w-full"
                 value={searchQuery}
                 onChange={handleSearch}
@@ -172,35 +179,122 @@ const Artists = () => {
           </div>
         </section>
 
+        {/* Results Count */}
+        <section className="py-4 bg-background">
+          <div className="container mx-auto px-4">
+            <p className="text-sm text-muted-foreground">
+              {filteredArtists.length} artiste{filteredArtists.length > 1 ? 's' : ''} trouvé{filteredArtists.length > 1 ? 's' : ''}
+            </p>
+          </div>
+        </section>
+
         {/* Artists Grid */}
         <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredArtists.map((artist) => (
-                <div key={artist.id} className="bg-dark-surface rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                  <img
-                    src={artist.image}
-                    alt={artist.name}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold text-foreground">{artist.name}</h3>
-                    <p className="text-sm text-muted-foreground">{artist.genre}</p>
-                    <div className="flex items-center mt-2 text-muted-foreground">
-                      <Users className="h-4 w-4 mr-1" />
-                      <span>{artist.followers}</span>
-                      <Star className="h-4 w-4 ml-2 mr-1" />
-                      <span>{artist.rating}</span>
-                      <MapPin className="h-4 w-4 ml-2 mr-1" />
-                      <span>{artist.location}</span>
+                <div 
+                  key={artist.id} 
+                  className="bg-dark-surface rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group hover:transform hover:-translate-y-2"
+                  onClick={() => handleArtistClick(artist.id)}
+                >
+                  <div className="relative">
+                    <img
+                      src={artist.image}
+                      alt={artist.name}
+                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    {/* Availability Badge */}
+                    <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium ${
+                      artist.isAvailable 
+                        ? 'bg-green-500/90 text-white' 
+                        : 'bg-red-500/90 text-white'
+                    }`}>
+                      {artist.isAvailable ? 'Disponible' : 'Indisponible'}
                     </div>
-                    <Button variant="secondary" size="sm" className="mt-4">
-                      Voir le profil
-                    </Button>
+                    
+                    {/* Overlay on hover */}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <Button size="lg" className="bg-primary hover:bg-primary/90">
+                        Voir le profil
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors mb-2">
+                      {artist.name}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-4">{artist.genre}</p>
+                    
+                    {/* Stats Row */}
+                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
+                      <div className="flex items-center">
+                        <Users className="h-4 w-4 mr-1" />
+                        <span>{artist.followers}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Star className="h-4 w-4 mr-1 text-yellow-500" />
+                        <span>{artist.rating}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Music className="h-4 w-4 mr-1" />
+                        <span>{artist.albums} albums</span>
+                      </div>
+                    </div>
+                    
+                    {/* Location and Price */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center text-muted-foreground">
+                        <MapPin className="h-4 w-4 mr-1" />
+                        <span className="text-sm">{artist.location}</span>
+                      </div>
+                      <div className="text-sm font-semibold text-secondary">
+                        {artist.priceRange}
+                      </div>
+                    </div>
+                    
+                    {/* Action Buttons */}
+                    <div className="flex gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="flex-1"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleArtistClick(artist.id);
+                        }}
+                      >
+                        Voir le profil
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        className="flex-1"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/booking?artist=${artist.id}`);
+                        }}
+                      >
+                        Réserver
+                      </Button>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* No Results */}
+            {filteredArtists.length === 0 && (
+              <div className="text-center py-16">
+                <div className="mb-4">
+                  <Users className="h-16 w-16 mx-auto text-muted-foreground" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Aucun artiste trouvé</h3>
+                <p className="text-muted-foreground">
+                  Essayez de modifier vos critères de recherche ou vos filtres.
+                </p>
+              </div>
+            )}
           </div>
         </section>
       </main>
