@@ -1,8 +1,7 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { Play, Heart, Share2, Users, Music, Star, MapPin, Calendar, Download, Plus, ArrowLeft } from "lucide-react";
+import { Play, Users, Music, Star, MapPin, Calendar, Download, ArrowLeft, Instagram, Facebook, Twitter } from "lucide-react";
 import Footer from "@/components/Footer";
 
 interface Artist {
@@ -18,6 +17,11 @@ interface Artist {
   joinedYear: string;
   isAvailable: boolean;
   priceRange: string;
+  socialMedia: {
+    instagram: string;
+    facebook: string;
+    twitter: string;
+  };
 }
 
 interface Track {
@@ -54,7 +58,12 @@ const ArtistProfile = () => {
       bio: "Amara Kone est une artiste sénégalaise engagée qui utilise sa musique pour véhiculer des messages sociaux forts. Son style unique mélange l'afro-pop contemporain avec des sonorités traditionnelles ouest-africaines, créant une expérience musicale authentique et moderne.",
       joinedYear: "2020",
       isAvailable: true,
-      priceRange: "500K-1M CFA"
+      priceRange: "500K-1M CFA",
+      socialMedia: {
+        instagram: "https://instagram.com/amarakone",
+        facebook: "https://facebook.com/amarakone",
+        twitter: "https://twitter.com/amarakone"
+      }
     },
     "2": {
       id: 2,
@@ -68,7 +77,12 @@ const ArtistProfile = () => {
       bio: "Khalil Senghor est un rappeur conscient qui aborde les réalités sociales africaines à travers ses textes percutants. Ses flows innovants et ses paroles engagées en font une voix importante de la nouvelle génération du hip-hop sénégalais.",
       joinedYear: "2021",
       isAvailable: true,
-      priceRange: "300K-800K CFA"
+      priceRange: "300K-800K CFA",
+      socialMedia: {
+        instagram: "https://instagram.com/khalilsenghor",
+        facebook: "https://facebook.com/khalilsenghor",
+        twitter: "https://twitter.com/khalilsenghor"
+      }
     },
     "3": {
       id: 3,
@@ -82,7 +96,12 @@ const ArtistProfile = () => {
       bio: "Fatou Diallo fusionne les rythmes traditionnels africains avec des influences world music contemporaines. Sa voix puissante et ses compositions originales transportent les auditeurs dans un voyage musical à travers les cultures africaines.",
       joinedYear: "2019",
       isAvailable: false,
-      priceRange: "400K-900K CFA"
+      priceRange: "400K-900K CFA",
+      socialMedia: {
+        instagram: "https://instagram.com/fatoudiallo",
+        facebook: "https://facebook.com/fatoudiallo",
+        twitter: "https://twitter.com/fatoudiallo"
+      }
     },
     "4": {
       id: 4,
@@ -96,7 +115,12 @@ const ArtistProfile = () => {
       bio: "Moussa Ba est un artiste de spoken word qui utilise la poésie et la performance pour explorer les thèmes de l'identité, de la diaspora et de l'histoire africaine. Ses performances captivantes allient tradition orale et innovation artistique.",
       joinedYear: "2022",
       isAvailable: true,
-      priceRange: "200K-500K CFA"
+      priceRange: "200K-500K CFA",
+      socialMedia: {
+        instagram: "https://instagram.com/moussaba",
+        facebook: "https://facebook.com/moussaba",
+        twitter: "https://twitter.com/moussaba"
+      }
     }
   };
 
@@ -228,7 +252,7 @@ const ArtistProfile = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+                <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-6">
                   <Button 
                     size="lg" 
                     className="bg-primary hover:bg-primary/90"
@@ -238,17 +262,36 @@ const ArtistProfile = () => {
                     <Calendar className="mr-2 h-5 w-5" />
                     {artist.isAvailable ? 'Réserver cet artiste' : 'Indisponible'}
                   </Button>
-                  <Button size="lg" variant="outline" className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground">
-                    <Plus className="mr-2 h-5 w-5" />
-                    Suivre
+                </div>
+
+                {/* Social Media Links */}
+                <div className="flex gap-4 justify-center lg:justify-start">
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white"
+                    onClick={() => window.open(artist.socialMedia.instagram, '_blank')}
+                  >
+                    <Instagram className="mr-2 h-5 w-5" />
+                    Instagram
                   </Button>
-                  <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground">
-                    <Heart className="mr-2 h-5 w-5" />
-                    J'aime
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+                    onClick={() => window.open(artist.socialMedia.facebook, '_blank')}
+                  >
+                    <Facebook className="mr-2 h-5 w-5" />
+                    Facebook
                   </Button>
-                  <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground">
-                    <Share2 className="mr-2 h-5 w-5" />
-                    Partager
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
+                    onClick={() => window.open(artist.socialMedia.twitter, '_blank')}
+                  >
+                    <Twitter className="mr-2 h-5 w-5" />
+                    Twitter
                   </Button>
                 </div>
               </div>
