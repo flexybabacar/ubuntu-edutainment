@@ -1,7 +1,10 @@
 
 import { Card, CardContent } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 const PartnersSection = () => {
+  const navigate = useNavigate();
+  
   const partners = [
     {
       name: "Ministère de la Culture",
@@ -86,7 +89,7 @@ const PartnersSection = () => {
         {/* Animated Partners Slider */}
         <div className="relative mb-16">
           <div className="overflow-hidden">
-            <div className="flex animate-[scroll-left_30s_linear_infinite] hover:pause-animation">
+            <div className="flex animate-[scroll_30s_linear_infinite] hover:animate-none">
               {duplicatedPartners.map((partner, index) => (
                 <div key={index} className="flex-shrink-0 mx-4">
                   <Card className="bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 group hover:scale-105 w-48">
@@ -153,27 +156,15 @@ const PartnersSection = () => {
               Vous partagez nos valeurs et souhaitez collaborer avec nous ? 
               Rejoignez notre réseau de partenaires engagés.
             </p>
-            <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full font-semibold transition-colors">
+            <button 
+              onClick={() => navigate('/contact')}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full font-semibold transition-colors"
+            >
               Nous contacter
             </button>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes scroll-left {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        
-        .pause-animation:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </section>
   );
 };
