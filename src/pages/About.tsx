@@ -90,7 +90,7 @@ const About = () => {
               <div className="w-full md:w-1/3">
                 <div className="relative">
                   <img
-                    src="/placeholder.svg"
+                    src="/lovable-uploads/76668c83-e20d-4ae1-9053-74f4cb65780c.png"
                     alt="Marie Hélène Ndiaye"
                     className="w-full h-80 object-cover rounded-lg border-2 border-primary/20"
                   />
