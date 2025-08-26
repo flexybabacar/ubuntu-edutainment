@@ -42,6 +42,16 @@ const PartnersSection = () => {
       name: "Institut Français",
       logo: "📚",
       category: "Culture"
+    },
+    {
+      name: "Africa Music Fund",
+      logo: "🎼",
+      category: "Finance"
+    },
+    {
+      name: "Dakar Music Festival",
+      logo: "🎊",
+      category: "Événementiel"
     }
   ];
 
@@ -52,13 +62,17 @@ const PartnersSection = () => {
     { name: "Éducation", color: "bg-orange-500/20 text-orange-400" },
     { name: "Événementiel", color: "bg-green-500/20 text-green-400" },
     { name: "Production", color: "bg-pink-500/20 text-pink-400" },
-    { name: "Culture", color: "bg-purple-500/20 text-purple-400" }
+    { name: "Culture", color: "bg-purple-500/20 text-purple-400" },
+    { name: "Finance", color: "bg-blue-500/20 text-blue-400" }
   ];
 
   const getCategoryColor = (category: string) => {
     const categoryInfo = partnerCategories.find(c => c.name === category);
     return categoryInfo?.color || "bg-muted/20 text-muted-foreground";
   };
+
+  // Duplicate partners for seamless loop
+  const duplicatedPartners = [...partners, ...partners];
 
   return (
     <section className="py-24 bg-dark-surface relative overflow-hidden">
@@ -80,26 +94,56 @@ const PartnersSection = () => {
           </p>
         </div>
 
-        {/* Partners Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
-          {partners.map((partner, index) => (
-            <Card 
-              key={index}
-              className="bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 group hover:scale-105"
-            >
-              <CardContent className="p-6 text-center">
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {partner.logo}
+        {/* Scrolling Partners List */}
+        <div className="relative mb-16">
+          {/* Gradient overlays for fade effect */}
+          <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-dark-surface to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-dark-surface to-transparent z-10"></div>
+          
+          <div className="overflow-hidden">
+            <div className="flex animate-scroll-left">
+              {duplicatedPartners.map((partner, index) => (
+                <div 
+                  key={index}
+                  className="flex-shrink-0 mx-4"
+                >
+                  <Card className="w-64 bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 group hover:scale-105">
+                    <CardContent className="p-6 text-center">
+                      <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                        {partner.logo}
+                      </div>
+                      <h3 className="font-semibold text-foreground mb-2 text-sm leading-tight">
+                        {partner.name}
+                      </h3>
+                      <span className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(partner.category)}`}>
+                        {partner.category}
+                      </span>
+                    </CardContent>
+                  </Card>
                 </div>
-                <h3 className="font-semibold text-foreground mb-2 text-sm leading-tight">
-                  {partner.name}
-                </h3>
-                <span className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(partner.category)}`}>
-                  {partner.category}
-                </span>
-              </CardContent>
-            </Card>
-          ))}
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Partnership Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+          <div className="text-center">
+            <div className="text-3xl font-black text-primary mb-2">50+</div>
+            <p className="text-muted-foreground text-sm">Partenaires actifs</p>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-black text-secondary mb-2">15</div>
+            <p className="text-muted-foreground text-sm">Pays représentés</p>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-black text-accent mb-2">100+</div>
+            <p className="text-muted-foreground text-sm">Projets collaboratifs</p>
+          </div>
+          <div className="text-center">
+            <div className="text-3xl font-black text-primary mb-2">5</div>
+            <p className="text-muted-foreground text-sm">Années d'expérience</p>
+          </div>
         </div>
 
         {/* Partnership Values */}
@@ -143,7 +187,10 @@ const PartnersSection = () => {
               Vous partagez nos valeurs et souhaitez collaborer avec nous ? 
               Rejoignez notre réseau de partenaires engagés.
             </p>
-            <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full font-semibold transition-colors">
+            <button 
+              onClick={() => window.location.href = '/contact'}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full font-semibold transition-colors"
+            >
               Nous contacter
             </button>
           </div>

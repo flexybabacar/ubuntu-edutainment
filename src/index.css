@@ -150,6 +150,20 @@ All colors MUST be HSL for proper theming
     50% { transform: translateY(-20px); }
   }
 
+  /* Partners Scrolling Animation */
+  @keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-scroll-left {
+    animation: scroll-left 40s linear infinite;
+  }
+
+  .animate-scroll-left:hover {
+    animation-play-state: paused;
+  }
+
   /* Neon Border */
   .neon-border {
     border: 2px solid transparent;
