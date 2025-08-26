@@ -60,6 +60,9 @@ const PartnersSection = () => {
     return categoryInfo?.color || "bg-muted/20 text-muted-foreground";
   };
 
+  // Duplicate partners for infinite scroll effect
+  const duplicatedPartners = [...partners, ...partners];
+
   return (
     <section className="py-24 bg-dark-surface relative overflow-hidden">
       {/* Background Effects */}
@@ -80,26 +83,33 @@ const PartnersSection = () => {
           </p>
         </div>
 
-        {/* Partners Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
-          {partners.map((partner, index) => (
-            <Card 
-              key={index}
-              className="bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 group hover:scale-105"
-            >
-              <CardContent className="p-6 text-center">
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {partner.logo}
+        {/* Animated Partners Slider */}
+        <div className="relative mb-16">
+          <div className="overflow-hidden">
+            <div className="flex animate-[scroll-left_30s_linear_infinite] hover:pause-animation">
+              {duplicatedPartners.map((partner, index) => (
+                <div key={index} className="flex-shrink-0 mx-4">
+                  <Card className="bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 group hover:scale-105 w-48">
+                    <CardContent className="p-6 text-center">
+                      <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                        {partner.logo}
+                      </div>
+                      <h3 className="font-semibold text-foreground mb-2 text-sm leading-tight">
+                        {partner.name}
+                      </h3>
+                      <span className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(partner.category)}`}>
+                        {partner.category}
+                      </span>
+                    </CardContent>
+                  </Card>
                 </div>
-                <h3 className="font-semibold text-foreground mb-2 text-sm leading-tight">
-                  {partner.name}
-                </h3>
-                <span className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(partner.category)}`}>
-                  {partner.category}
-                </span>
-              </CardContent>
-            </Card>
-          ))}
+              ))}
+            </div>
+          </div>
+          
+          {/* Gradient overlays for smooth edges */}
+          <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-dark-surface to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-dark-surface to-transparent z-10 pointer-events-none" />
         </div>
 
         {/* Partnership Values */}
@@ -149,6 +159,21 @@ const PartnersSection = () => {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes scroll-left {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .pause-animation:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 };
