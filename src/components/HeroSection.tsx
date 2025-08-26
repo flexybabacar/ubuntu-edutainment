@@ -1,22 +1,11 @@
 
 import { Button } from "@/components/ui/button";
 import { Play, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
-  const navigate = useNavigate();
-
   const scrollToArtists = () => {
     document.getElementById('artists-section')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleServicesClick = () => {
-    navigate('/services');
-  };
-
-  const handleContactClick = () => {
-    navigate('/contact');
   };
 
   return (
@@ -82,7 +71,6 @@ const HeroSection = () => {
           <Button 
             size="lg" 
             variant="outline"
-            onClick={handleServicesClick}
             className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full transition-all duration-300 group"
           >
             <ArrowRight className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

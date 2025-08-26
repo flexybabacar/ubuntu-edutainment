@@ -1,89 +1,159 @@
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Color scheme - Dark theme with neon accents */
-  --background: 222 84% 5%;
-  --foreground: 210 40% 95%;
-  --card: 222 84% 8%;
-  --card-foreground: 210 40% 95%;
-  --popover: 222 84% 8%;
-  --popover-foreground: 210 40% 95%;
-  --primary: 263 85% 65%;
-  --primary-foreground: 210 40% 10%;
-  --secondary: 210 40% 15%;
-  --secondary-foreground: 210 40% 95%;
-  --muted: 210 40% 15%;
-  --muted-foreground: 215 20% 65%;
-  --accent: 180 100% 50%;
-  --accent-foreground: 222 84% 5%;
-  --destructive: 0 62% 30%;
-  --destructive-foreground: 210 40% 95%;
-  --border: 210 40% 20%;
-  --input: 210 40% 20%;
-  --ring: 263 85% 65%;
-  --radius: 0.5rem;
-  --neon-purple: 263 85% 65%;
-  --neon-cyan: 180 100% 50%;
-  --neon-pink: 323 100% 65%;
-  --dark-surface: 222 84% 5%;
+/* Kentha Music Theme Design System - Futuristic Music Platform
+All colors MUST be HSL for proper theming
+*/
+
+@layer base {
+  :root {
+    /* Base Colors - Dark Theme */
+    --background: 240 10% 5%;
+    --foreground: 0 0% 95%;
+
+    /* Card & UI Elements */
+    --card: 240 8% 8%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 240 8% 8%;
+    --popover-foreground: 0 0% 95%;
+
+    /* Primary - Magenta/Pink Accent */
+    --primary: 320 100% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Green Color #909561 */
+    --secondary: 72 25% 46%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted Elements */
+    --muted: 240 6% 15%;
+    --muted-foreground: 240 5% 65%;
+
+    /* Accent - Purple */
+    --accent: 280 100% 70%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders & Inputs */
+    --border: 240 6% 20%;
+    --input: 240 6% 15%;
+    --ring: 320 100% 60%;
+
+    /* Design System Tokens */
+    --radius: 0.75rem;
+
+    /* Custom Kentha Colors */
+    --neon-pink: 320 100% 60%;
+    --neon-cyan: 180 100% 50%;
+    --neon-purple: 280 100% 70%;
+    --dark-bg: 240 10% 5%;
+    --dark-surface: 240 8% 8%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(320 100% 60% / 0.8), hsl(280 100% 70% / 0.8), hsl(72 25% 46% / 0.8));
+    --gradient-card: linear-gradient(145deg, hsl(240 8% 8%), hsl(240 6% 12%));
+    --gradient-glow: radial-gradient(circle, hsl(320 100% 60% / 0.3), transparent 70%);
+    
+    /* Shadows & Effects */
+    --shadow-neon: 0 0 20px hsl(320 100% 60% / 0.5);
+    --shadow-cyan: 0 0 15px hsl(72 25% 46% / 0.4);
+    --shadow-purple: 0 0 25px hsl(280 100% 70% / 0.3);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Light mode inherits dark theme values for consistency */
+  .light {
+    /* Keep same values as root for consistent futuristic look */
+  }
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
-    font-family: "Inter", sans-serif;
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
-}
 
-@layer components {
-  .bg-gradient-hero {
-    background: linear-gradient(135deg, hsl(var(--neon-purple)), hsl(var(--neon-cyan)), hsl(var(--neon-pink)));
+  /* Kentha Typography */
+  .kentha-title {
+    @apply text-6xl md:text-8xl font-black tracking-wider;
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: var(--shadow-neon);
   }
-  
-  .bg-gradient-card {
-    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(222, 84%, 10%) 100%);
-  }
-  
-  .bg-dark-surface {
-    background-color: hsl(var(--dark-surface));
-  }
-  
-  .text-neon-glow {
-    text-shadow: 0 0 10px currentColor;
-  }
-}
 
-@layer utilities {
-  .animate-float {
+  .kentha-subtitle {
+    @apply text-lg md:text-xl font-light tracking-[0.2em] text-muted-foreground;
+  }
+
+  /* Geometric Elements */
+  .triangle-border {
+    clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
+  }
+
+  .diamond-border {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+
+  /* Glow Effects */
+  .glow-pink {
+    box-shadow: var(--shadow-neon);
+  }
+
+  .glow-cyan {
+    box-shadow: var(--shadow-cyan);
+  }
+
+  .glow-purple {
+    box-shadow: var(--shadow-purple);
+  }
+
+  /* Animated Background */
+  .animated-bg {
+    background: var(--gradient-hero);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Floating Elements */
+  .floating {
     animation: float 6s ease-in-out infinite;
   }
-  
-  .animate-pulse-slow {
-    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-}
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
   }
-  50% {
-    transform: translateY(-20px);
-  }
-}
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
+  /* Neon Border */
+  .neon-border {
+    border: 2px solid transparent;
+    background: linear-gradient(var(--dark-bg), var(--dark-bg)) padding-box,
+                var(--gradient-hero) border-box;
   }
 }

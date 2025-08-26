@@ -1,10 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
 
 const PartnersSection = () => {
-  const navigate = useNavigate();
-  
   const partners = [
     {
       name: "Ministère de la Culture",
@@ -63,9 +60,6 @@ const PartnersSection = () => {
     return categoryInfo?.color || "bg-muted/20 text-muted-foreground";
   };
 
-  // Duplicate partners for infinite scroll effect
-  const duplicatedPartners = [...partners, ...partners];
-
   return (
     <section className="py-24 bg-dark-surface relative overflow-hidden">
       {/* Background Effects */}
@@ -86,33 +80,26 @@ const PartnersSection = () => {
           </p>
         </div>
 
-        {/* Animated Partners Slider */}
-        <div className="relative mb-16">
-          <div className="overflow-hidden">
-            <div className="flex animate-[scroll_30s_linear_infinite] hover:animate-none">
-              {duplicatedPartners.map((partner, index) => (
-                <div key={index} className="flex-shrink-0 mx-4">
-                  <Card className="bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 group hover:scale-105 w-48">
-                    <CardContent className="p-6 text-center">
-                      <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                        {partner.logo}
-                      </div>
-                      <h3 className="font-semibold text-foreground mb-2 text-sm leading-tight">
-                        {partner.name}
-                      </h3>
-                      <span className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(partner.category)}`}>
-                        {partner.category}
-                      </span>
-                    </CardContent>
-                  </Card>
+        {/* Partners Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+          {partners.map((partner, index) => (
+            <Card 
+              key={index}
+              className="bg-gradient-card border-border/50 hover:border-primary/50 transition-all duration-300 group hover:scale-105"
+            >
+              <CardContent className="p-6 text-center">
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {partner.logo}
                 </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Gradient overlays for smooth edges */}
-          <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-dark-surface to-transparent z-10 pointer-events-none" />
-          <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-dark-surface to-transparent z-10 pointer-events-none" />
+                <h3 className="font-semibold text-foreground mb-2 text-sm leading-tight">
+                  {partner.name}
+                </h3>
+                <span className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(partner.category)}`}>
+                  {partner.category}
+                </span>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
         {/* Partnership Values */}
@@ -156,10 +143,7 @@ const PartnersSection = () => {
               Vous partagez nos valeurs et souhaitez collaborer avec nous ? 
               Rejoignez notre réseau de partenaires engagés.
             </p>
-            <button 
-              onClick={() => navigate('/contact')}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full font-semibold transition-colors"
-            >
+            <button className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 rounded-full font-semibold transition-colors">
               Nous contacter
             </button>
           </div>
