@@ -1,4 +1,3 @@
-
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Search, Users, Star, MapPin, Music } from "lucide-react";
@@ -88,6 +87,54 @@ const Artists = () => {
       albums: 1,
       isAvailable: true,
       priceRange: "200K-500K CFA"
+    },
+    {
+      id: 5,
+      name: "Aïcha Koné",
+      genre: "Reggae Fusion",
+      location: "Kaolack",
+      image: "/lovable-uploads/sister_lb_big_84275.jpg",
+      followers: "38K",
+      rating: 4.6,
+      albums: 3,
+      isAvailable: true,
+      priceRange: "450K-850K CFA"
+    },
+    {
+      id: 6,
+      name: "Omar Pène Jr",
+      genre: "Mbalax Moderne",
+      location: "Dakar",
+      image: "/lovable-uploads/sister_lb_big_84275.jpg",
+      followers: "52K",
+      rating: 4.9,
+      albums: 5,
+      isAvailable: true,
+      priceRange: "600K-1.2M CFA"
+    },
+    {
+      id: 7,
+      name: "Binta Seck",
+      genre: "Neo-Soul",
+      location: "Ziguinchor",
+      image: "/lovable-uploads/sister_lb_big_84275.jpg",
+      followers: "25K",
+      rating: 4.4,
+      albums: 2,
+      isAvailable: false,
+      priceRange: "350K-700K CFA"
+    },
+    {
+      id: 8,
+      name: "Mamadou Dieng",
+      genre: "Hip-Hop Alternatif",
+      location: "Mbour",
+      image: "/lovable-uploads/sister_lb_big_84275.jpg",
+      followers: "41K",
+      rating: 4.7,
+      albums: 4,
+      isAvailable: true,
+      priceRange: "480K-950K CFA"
     }
   ];
 
