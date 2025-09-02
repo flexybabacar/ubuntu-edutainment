@@ -1,93 +1,151 @@
-import { Card, CardContent } from "@/components/ui/card";
+
+import { Button } from "@/components/ui/button";
+import { Handshake, Users, Award, TrendingUp } from "lucide-react";
 
 const PartnersSection = () => {
   const partners = [
-    { name: "Kuumbati", logo: "/lovable-uploads/kuumbati.jpg", category: "Éducation" },
-    { name: "Ministère de la Culture", logo: "/lovable-uploads/mincul.jpeg", category: "Institutionnel" },
-    { name: "Kuumbati", logo: "/lovable-uploads/kuumbati.jpg", category: "Éducation" },
-    { name: "Fondation Ubuntu", logo: "/lovable-uploads/logowhite.png", category: "ONG" },
-    { name: "Géantes Invisibles", logo: "/lovable-uploads/gi.png", category: "ONG" },
-    { name: "Université Cheikh Anta Diop", logo: "/lovable-uploads/logowhite.png", category: "Éducation" },
-    { name: "Fond des Cultures ", logo: "/lovable-uploads/fdcu.jpg", category: "Institutionnel" },
-    { name: "Festival Africolor", logo: "/lovable-uploads/logowhite.png", category: "Événementiel" },
-    { name: "Studio Teranga", logo: "/lovable-uploads/logowhite.png", category: "Production" },
-    { name: "Alliance Française", logo: "/lovable-uploads/logowhite.png", category: "Culture" },
-    { name: "Institut Français", logo: "/lovable-uploads/logowhite.png", category: "Culture" },
-    { name: "Dakar Music Festival", logo: "/lovable-uploads/dmf.png", category: "Événementiel" }
+    {
+      id: 1,
+      name: "FDCU",
+      logo: "/lovable-uploads/fdcu.jpg",
+      type: "Fondation"
+    },
+    {
+      id: 2,
+      name: "Ministère Culture",
+      logo: "/lovable-uploads/mincul.jpeg",
+      type: "Institution"
+    },
+    {
+      id: 3,
+      name: "Kuumbati",
+      logo: "/lovable-uploads/kuumbati.jpg",
+      type: "ONG"
+    },
+    {
+      id: 4,
+      name: "GI Entertainment",
+      logo: "/lovable-uploads/gi.png",
+      type: "Média"
+    }
   ];
 
-  const partnerCategories = [
-    { name: "Institutionnel", color: "bg-primary/20 text-primary" },
-    { name: "ONG", color: "bg-secondary/20 text-secondary" },
-    { name: "Média", color: "bg-accent/20 text-accent" },
-    { name: "Éducation", color: "bg-orange-500/20 text-orange-400" },
-    { name: "Événementiel", color: "bg-green-500/20 text-green-400" },
-    { name: "Production", color: "bg-pink-500/20 text-pink-400" },
-    { name: "Culture", color: "bg-purple-500/20 text-purple-400" },
-    { name: "Finance", color: "bg-blue-500/20 text-blue-400" }
+  const stats = [
+    { icon: Users, value: "50+", label: "Partenaires Actifs" },
+    { icon: Award, value: "25", label: "Prix Remportés" },
+    { icon: TrendingUp, value: "200%", label: "Croissance Annuelle" }
   ];
-
-  const getCategoryColor = (category) => {
-    const categoryInfo = partnerCategories.find(c => c.name === category);
-    return categoryInfo?.color || "bg-muted/20 text-muted-foreground";
-  };
-
-  // Dupliquer les partenaires pour un scroll infini
-  const duplicatedPartners = [...partners, ...partners];
 
   return (
-    <section className="py-24 bg-dark-surface relative overflow-hidden">
+    <section className="py-24 bg-background relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 opacity-30 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-secondary/10 opacity-20 rounded-full blur-3xl" />
+      </div>
+
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-5xl font-black tracking-wider bg-gradient-hero bg-clip-text text-transparent mb-6">
-            NOS PARTENAIRES
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Ubuntu Edutainment collabore avec des institutions, organisations et entreprises 
-            qui partagent notre vision d'un art engagé pour le développement durable.
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <div className="w-12 h-0.5 bg-primary"></div>
+            <h2 className="text-3xl md:text-5xl font-black tracking-wider text-primary">
+              NOS PARTENAIRES
+            </h2>
+            <div className="w-12 h-0.5 bg-primary"></div>
+          </div>
+          <p className="text-muted-foreground text-lg tracking-wide">
+            Ensemble pour transformer la culture africaine
           </p>
         </div>
 
-        {/* Scrolling Partners List */}
-        <div className="relative mb-16 overflow-hidden">
-          <div className="flex animate-scroll-left whitespace-nowrap">
-            {duplicatedPartners.map((partner, index) => (
-              <Card
-                key={index}
-                className="inline-block w-64 mx-4 bg-gradient-card border-border/50 rounded-xl p-4 hover:scale-105 transition-transform duration-300"
-              >
-                <CardContent className="p-6 text-center">
-                  <div className="mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <img 
-                      src={partner.logo} 
-                      alt={partner.name} 
-                      className="h-20 w-auto mx-auto object-contain"
-                    />
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          {stats.map((stat, index) => (
+            <div 
+              key={index}
+              className="text-center p-6 bg-card rounded-xl border border-border hover:border-primary/50 transition-all duration-300"
+            >
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
+                <stat.icon className="h-8 w-8 text-primary" />
+              </div>
+              <div className="text-3xl font-bold text-foreground mb-2">{stat.value}</div>
+              <div className="text-muted-foreground">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Partners Scrolling List */}
+        <div className="relative">
+          <div className="overflow-hidden bg-muted/30 rounded-xl p-8">
+            <div className="partners-scroll flex items-center gap-12 whitespace-nowrap">
+              {/* First set of partners */}
+              {partners.map((partner) => (
+                <div 
+                  key={`first-${partner.id}`}
+                  className="flex-shrink-0 bg-background rounded-lg p-6 border border-border hover:border-primary/50 transition-all duration-300 group"
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="w-16 h-16 bg-muted rounded-lg overflow-hidden flex-shrink-0">
+                      <img 
+                        src={partner.logo} 
+                        alt={partner.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {partner.name}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">{partner.type}</p>
+                    </div>
                   </div>
-                  <h3 className="font-semibold text-foreground mb-2 text-sm leading-tight">
-                    {partner.name}
-                  </h3>
-                  <span className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(partner.category)}`}>
-                    {partner.category}
-                  </span>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+              ))}
+              
+              {/* Duplicate set for seamless scroll */}
+              {partners.map((partner) => (
+                <div 
+                  key={`second-${partner.id}`}
+                  className="flex-shrink-0 bg-background rounded-lg p-6 border border-border hover:border-primary/50 transition-all duration-300 group"
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="w-16 h-16 bg-muted rounded-lg overflow-hidden flex-shrink-0">
+                      <img 
+                        src={partner.logo} 
+                        alt={partner.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {partner.name}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">{partner.type}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center mt-16">
+          <div className="bg-card rounded-xl p-8 border border-border">
+            <Handshake className="h-12 w-12 text-primary mx-auto mb-4" />
+            <h3 className="text-2xl font-bold text-foreground mb-4">
+              Rejoignez Notre Réseau
+            </h3>
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+              Devenez partenaire et contribuez à l'essor de la culture africaine engagée
+            </p>
+            <Button size="lg" className="bg-primary hover:bg-primary/90">
+              Devenir Partenaire
+            </Button>
           </div>
         </div>
       </div>
-
-      {/* Animation CSS */}
-      <style jsx>{`
-        @keyframes scroll-left {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-scroll-left {
-          display: flex;
-          animation: scroll-left 30s linear infinite;
-        }
-      `}</style>
     </section>
   );
 };
