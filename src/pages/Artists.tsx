@@ -49,8 +49,7 @@ const Artists = () => {
       followers: "45K",
       rating: 4.8,
       albums: 3,
-      isAvailable: true,
-      priceRange: "500K-1M CFA"
+      isAvailable: true
     },
     {
       id: 2,
@@ -61,8 +60,7 @@ const Artists = () => {
       followers: "32K",
       rating: 4.6,
       albums: 2,
-      isAvailable: true,
-      priceRange: "300K-800K CFA"
+      isAvailable: true
     },
     {
       id: 3,
@@ -73,8 +71,7 @@ const Artists = () => {
       followers: "28K",
       rating: 4.7,
       albums: 4,
-      isAvailable: false,
-      priceRange: "400K-900K CFA"
+      isAvailable: false
     },
     {
       id: 4,
@@ -85,8 +82,7 @@ const Artists = () => {
       followers: "18K",
       rating: 4.5,
       albums: 1,
-      isAvailable: true,
-      priceRange: "200K-500K CFA"
+      isAvailable: true
     },
     {
       id: 5,
@@ -97,8 +93,7 @@ const Artists = () => {
       followers: "38K",
       rating: 4.6,
       albums: 3,
-      isAvailable: true,
-      priceRange: "450K-850K CFA"
+      isAvailable: true
     },
     {
       id: 6,
@@ -109,8 +104,7 @@ const Artists = () => {
       followers: "52K",
       rating: 4.9,
       albums: 5,
-      isAvailable: true,
-      priceRange: "600K-1.2M CFA"
+      isAvailable: true
     },
     {
       id: 7,
@@ -121,8 +115,7 @@ const Artists = () => {
       followers: "25K",
       rating: 4.4,
       albums: 2,
-      isAvailable: false,
-      priceRange: "350K-700K CFA"
+      isAvailable: false
     },
     {
       id: 8,
@@ -133,8 +126,7 @@ const Artists = () => {
       followers: "41K",
       rating: 4.7,
       albums: 4,
-      isAvailable: true,
-      priceRange: "480K-950K CFA"
+      isAvailable: true
     }
   ];
 
@@ -290,14 +282,11 @@ const Artists = () => {
                       </div>
                     </div>
                     
-                    {/* Location and Price */}
-                    <div className="flex items-center justify-between mb-4">
+                    {/* Location */}
+                    <div className="flex items-center mb-4">
                       <div className="flex items-center text-muted-foreground">
                         <MapPin className="h-4 w-4 mr-1" />
                         <span className="text-sm">{artist.location}</span>
-                      </div>
-                      <div className="text-sm font-semibold text-secondary">
-                        {artist.priceRange}
                       </div>
                     </div>
                     
