@@ -1,4 +1,3 @@
-
 export interface Event {
   id: number;
   title: string;
@@ -23,7 +22,6 @@ export interface Artist {
   rating: number;
   albums: number;
   isAvailable: boolean;
-  priceRange: string;
 }
 
 export interface BookingRequest {

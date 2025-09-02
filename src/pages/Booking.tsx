@@ -27,8 +27,7 @@ const Booking = () => {
     followers: "45K",
     rating: 4.8,
     albums: 3,
-    isAvailable: true,
-    priceRange: "500K-1M CFA"
+    isAvailable: true
   };
 
   const mockEvent: Event = {
@@ -87,7 +86,7 @@ const Booking = () => {
               
               {selectedArtist && (
                 <p className="text-lg text-muted-foreground">
-                  {selectedArtist.genre} • {selectedArtist.location} • {selectedArtist.priceRange}
+                  {selectedArtist.genre} • {selectedArtist.location}
                 </p>
               )}
               

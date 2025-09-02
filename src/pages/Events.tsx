@@ -1,4 +1,3 @@
-
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Users, Clock, Tag, Filter } from "lucide-react";
@@ -19,7 +18,7 @@ const Events = () => {
       time: "20:00",
       location: "Théâtre National, Dakar",
       artists: [
-        { id: 1, name: "Amara Kone", genre: "Afro-Pop Engagé", location: "Dakar", image: "", followers: "45K", rating: 4.8, albums: 3, isAvailable: true, priceRange: "500K-1M CFA" }
+        { id: 1, name: "Amara Kone", genre: "Afro-Pop Engagé", location: "Dakar", image: "", followers: "45K", rating: 4.8, albums: 3, isAvailable: true }
       ],
       price: 15000,
       status: "upcoming",
@@ -34,8 +33,8 @@ const Events = () => {
       time: "14:00",
       location: "Centre Culturel Blaise Senghor, Dakar",
       artists: [
-        { id: 2, name: "Khalil Senghor", genre: "Rap Conscient", location: "Dakar", image: "", followers: "32K", rating: 4.6, albums: 2, isAvailable: true, priceRange: "300K-800K CFA" },
-        { id: 3, name: "Fatou Diallo", genre: "World Music", location: "Thiès", image: "", followers: "28K", rating: 4.7, albums: 4, isAvailable: false, priceRange: "400K-900K CFA" }
+        { id: 2, name: "Khalil Senghor", genre: "Rap Conscient", location: "Dakar", image: "", followers: "32K", rating: 4.6, albums: 2, isAvailable: true },
+        { id: 3, name: "Fatou Diallo", genre: "World Music", location: "Thiès", image: "", followers: "28K", rating: 4.7, albums: 4, isAvailable: false }
       ],
       price: "free",
       status: "upcoming",
@@ -50,7 +49,7 @@ const Events = () => {
       time: "19:30",
       location: "Institut Français, Saint-Louis",
       artists: [
-        { id: 4, name: "Moussa Ba", genre: "Spoken Word", location: "Saint-Louis", image: "", followers: "18K", rating: 4.5, albums: 1, isAvailable: true, priceRange: "200K-500K CFA" }
+        { id: 4, name: "Moussa Ba", genre: "Spoken Word", location: "Saint-Louis", image: "", followers: "18K", rating: 4.5, albums: 1, isAvailable: true }
       ],
       price: 8000,
       status: "past",
