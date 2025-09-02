@@ -16,7 +16,7 @@ interface Artist {
   bio: string;
   joinedYear: string;
   isAvailable: boolean;
-  priceRange: string;
+  // priceRange: string;
   socialMedia: {
     instagram: string;
     facebook: string;
@@ -58,7 +58,7 @@ const ArtistProfile = () => {
       bio: "Sister LB est une artiste sénégalaise engagée qui utilise sa musique pour véhiculer des messages sociaux forts. Son style unique mélange l'afro-pop contemporain avec des sonorités traditionnelles ouest-africaines, créant une expérience musicale authentique et moderne.",
       joinedYear: "2020",
       isAvailable: true,
-      priceRange: "500K-1M CFA",
+      // priceRange: "500K-1M CFA",
       socialMedia: {
         instagram: "https://instagram.com/amarakone",
         facebook: "https://facebook.com/amarakone",
@@ -77,7 +77,7 @@ const ArtistProfile = () => {
       bio: "Khalil Senghor est un rappeur conscient qui aborde les réalités sociales africaines à travers ses textes percutants. Ses flows innovants et ses paroles engagées en font une voix importante de la nouvelle génération du hip-hop sénégalais.",
       joinedYear: "2021",
       isAvailable: true,
-      priceRange: "300K-800K CFA",
+      // priceRange: "300K-800K CFA",
       socialMedia: {
         instagram: "https://instagram.com/khalilsenghor",
         facebook: "https://facebook.com/khalilsenghor",
@@ -96,7 +96,7 @@ const ArtistProfile = () => {
       bio: "Fatou Diallo fusionne les rythmes traditionnels africains avec des influences world music contemporaines. Sa voix puissante et ses compositions originales transportent les auditeurs dans un voyage musical à travers les cultures africaines.",
       joinedYear: "2019",
       isAvailable: false,
-      priceRange: "400K-900K CFA",
+      // priceRange: "400K-900K CFA",
       socialMedia: {
         instagram: "https://instagram.com/fatoudiallo",
         facebook: "https://facebook.com/fatoudiallo",
@@ -115,7 +115,7 @@ const ArtistProfile = () => {
       bio: "Moussa Ba est un artiste de spoken word qui utilise la poésie et la performance pour explorer les thèmes de l'identité, de la diaspora et de l'histoire africaine. Ses performances captivantes allient tradition orale et innovation artistique.",
       joinedYear: "2022",
       isAvailable: true,
-      priceRange: "200K-500K CFA",
+      // priceRange: "200K-500K CFA",
       socialMedia: {
         instagram: "https://instagram.com/moussaba",
         facebook: "https://facebook.com/moussaba",
