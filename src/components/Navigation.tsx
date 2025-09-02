@@ -81,7 +81,7 @@ const Navigation = () => {
           <div className="flex items-center space-x-2">
             <img 
               src="/lovable-uploads/logowhite.png" 
-              alt="UBN T EDUTAINMENT" 
+              alt="UBUNTU EDUTAINMENT" 
               className="h-8 w-auto"
             />
           </div>

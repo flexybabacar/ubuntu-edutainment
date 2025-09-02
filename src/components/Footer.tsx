@@ -31,7 +31,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="mb-6">
               <img 
-                src="/lovable-uploads/1954d7c7-aa99-48fd-8ee8-74c199c9498e.png" 
+                src="/lovable-uploads/logowhite.png" 
                 alt="Ubuntu Edutainment" 
                 className="h-16 w-auto mb-4"
               />
@@ -81,7 +81,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <Phone className="h-4 w-4 text-primary" />
-                <span className="text-sm">+221 77 123 45 67</span>
+                <span className="text-sm">+221 77 151 81 48</span>
               </div>
               <div className="flex items-start gap-3 text-muted-foreground">
                 <MapPin className="h-4 w-4 text-primary mt-0.5" />
@@ -118,7 +118,7 @@ const Footer = () => {
         <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground text-center md:text-left">
-              © 2024 Ubuntu Edutainment. Tous droits réservés. Fondé par Marie Hélène Ndiaye.
+              © 2025 Ubuntu Edutainment. Tous droits réservés. Fondé par Marie Hélène Ndiaye.
             </p>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span>Fait avec</span>

@@ -1,4 +1,3 @@
-
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
@@ -19,24 +18,38 @@ const About = () => {
         </section>
 
         {/* Mission Section */}
-        <section className="py-16 px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 mb-16">
-              <div>
-                <h2 className="text-3xl font-bold text-primary mb-6">NOTRE VISION</h2>
+        <section className="py-20 px-6 bg-black -10">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              
+              {/* Vision */}
+              <div className="bg-card border border-border/50 rounded-2xl p-8 shadow-sm hover:shadow-lg transition duration-300">
+                <h2 className="text-2xl font-semibold text-primary mb-4">🌍 Notre Vision</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Mettre les Arts et la culture au cœur de la participation citoyenne et du changement 
+                  Mettre les Arts et la culture au cœur de la participation citoyenne et du changement
                   transformationnel pour le développement durable.
                 </p>
               </div>
-              <div>
-                <h2 className="text-3xl font-bold text-secondary mb-6">NOTRE MISSION</h2>
+
+              {/* Mission */}
+              <div className="bg-card border border-border/50 rounded-2xl p-8 shadow-sm hover:shadow-lg transition duration-300">
+                <h2 className="text-2xl font-semibold text-secondary mb-4">🎯 Notre Mission</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Promouvoir les jeunes talents à travers les métiers des cultures urbaines en mettant 
-                  l'accent sur les artistes engagés qui traitent des thématiques sociétales visant le 
+                  Promouvoir les jeunes talents à travers les métiers des cultures urbaines en mettant
+                  l'accent sur les artistes engagés qui traitent des thématiques sociétales visant le
                   changement positif.
                 </p>
               </div>
+
+              {/* Théorie du changement */}
+              <div className="bg-card border border-border/50 rounded-2xl p-8 shadow-sm hover:shadow-lg transition duration-300">
+                <h2 className="text-2xl font-semibold text-primary mb-4">🔑 Notre Théorie du Changement</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  En incluant la dimension artistique et culturelle dans l'approche des mouvements et OSCs,
+                  ils sont plus aptes à réaliser leurs objectifs de changement social.
+                </p>
+              </div>
+
             </div>
 
             <div className="bg-card border border-border/50 rounded-lg p-8 mb-16">
@@ -54,7 +67,7 @@ const About = () => {
               <p className="text-muted-foreground leading-relaxed">
                 Ubuntu renvoie à la langue bantoue qui a à l'esprit, la solidarité et la fraternité, 
                 et qui se traduit par la notion panafricaine: "Je suis parce que vous êtes. Et puisque 
-                vous êtes, moi je suis". Edutainment est l'approche pédagogique d'enseignement à travers 
+                vous êtes, moi je suis". <br /> Edutainment est l'approche pédagogique d'enseignement à travers 
                 le divertissement.
               </p>
             </div>
@@ -99,7 +112,7 @@ const About = () => {
               </div>
               <div className="w-full md:w-2/3">
                 <h3 className="text-3xl font-bold text-primary mb-4">Marie Hélène Ndiaye</h3>
-                <p className="text-lg text-secondary mb-4">Directrice Artistique & Fondatrice</p>
+                <p className="text-lg text-secondary mb-4">Fondatrice  & Directrice Artistique </p>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   Passionnée par l'art engagé et le changement social, Marie Hélène Ndiaye a fondé Ubuntu Edutainment 
                   avec la vision de placer les arts et la culture au cœur de la participation citoyenne et du 
@@ -112,7 +125,7 @@ const About = () => {
                   impliqués dans le projet.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  Grâce à son expertise en "édu-musement", elle promeut les talents émergents tout en véhiculant 
+                  Grâce à son expertise en "art engagé", elle promeut les talents émergents tout en véhiculant 
                   des messages de transformation positive pour la société.
                 </p>
               </div>
