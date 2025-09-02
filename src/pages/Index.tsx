@@ -1,4 +1,3 @@
-
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import UbuntuSection from "@/components/UbuntuSection";
@@ -9,6 +8,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Eye, Users, Star, MapPin, Music } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Artist } from "@/types/booking";
 
 const Index = () => {
   const navigate = useNavigate();
