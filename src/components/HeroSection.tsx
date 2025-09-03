@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Play, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom"; // Importer Link pour la navigation
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
@@ -55,7 +56,7 @@ const HeroSection = () => {
 
         {/* Subtitle */}
         <div className="mb-12 animate-slide-in" style={{ animationDelay: '0.4s' }}>
-          <p className="kentha-subtitle">ART ENGAGÉ POUR LE CHANGEMENT SOCIAL</p>
+          <p className="kentha-subtitle">L'ART QUI AGIT, L'ART QUI UNIT</p>
         </div>
 
         {/* CTA Button */}
@@ -68,14 +69,16 @@ const HeroSection = () => {
             <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
             DÉCOUVRIR NOS ARTISTES
           </Button>
-          <Button 
-            size="lg" 
-            variant="outline"
-            className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full transition-all duration-300 group"
-          >
-            <ArrowRight className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            NOS SERVICES
-          </Button>
+          <Link to="/services">
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full transition-all duration-300 group"
+            >
+              <ArrowRight className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              NOS SERVICES
+            </Button>
+          </Link>
         </div>
       </div>
 

@@ -33,20 +33,20 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Téléphone",
-      value: "+221 77 123 45 67",
+      value: "+221 77 151 81 48",
       description: "Lun-Ven 9h-18h"
     },
     {
       icon: MapPin,
       title: "Adresse",
       value: "Dakar, Sénégal",
-      description: "Plateau, Rue 6"
+      description: "Parcelles Assainies U6"
     },
     {
       icon: Clock,
       title: "Horaires",
-      value: "Lun-Ven 9h-18h",
-      description: "Sam 10h-14h"
+      value: "Lun-Ven 9h-20h",
+      description: "Sam & Dim 10h-14h"
     }
   ];
 

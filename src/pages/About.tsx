@@ -26,8 +26,10 @@ const About = () => {
               <div className="bg-card border border-border/50 rounded-2xl p-8 shadow-sm hover:shadow-lg transition duration-300">
                 <h2 className="text-2xl font-semibold text-primary mb-4">🌍 Notre Vision</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Mettre les Arts et la culture au cœur de la participation citoyenne et du changement
-                  transformationnel pour le développement durable.
+                  Placer les arts et la culture au cœur de l'engagement citoyen et du changement transformationnel pour un 
+                  développement durable. Nous aspirons à créer un écosystème où les expressions artistiques et culturelles 
+                  inspirent des actions collectives, favorisent l'inclusion sociale, et catalysent des transformations 
+                  positives pour répondre aux défis environnementaux, sociaux et économiques de notre époque.
                 </p>
               </div>
 
@@ -35,9 +37,10 @@ const About = () => {
               <div className="bg-card border border-border/50 rounded-2xl p-8 shadow-sm hover:shadow-lg transition duration-300">
                 <h2 className="text-2xl font-semibold text-secondary mb-4">🎯 Notre Mission</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Promouvoir les jeunes talents à travers les métiers des cultures urbaines en mettant
-                  l'accent sur les artistes engagés qui traitent des thématiques sociétales visant le
-                  changement positif.
+                  Encourager et promouvoir les jeunes talents évoluant dans les métiers des cultures urbaines, en mettant
+                  en lumière des artistes engagés qui portent des valeurs fortes. Nous valorisons les créations artistiques 
+                  qui abordent des thématiques sociétales pertinentes, inspirent des changements positifs et contribuent à une 
+                  société plus inclusive, équitable et consciente des enjeux contemporains..
                 </p>
               </div>
 
@@ -45,8 +48,10 @@ const About = () => {
               <div className="bg-card border border-border/50 rounded-2xl p-8 shadow-sm hover:shadow-lg transition duration-300">
                 <h2 className="text-2xl font-semibold text-primary mb-4">🔑 Notre Théorie du Changement</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  En incluant la dimension artistique et culturelle dans l'approche des mouvements et OSCs,
-                  ils sont plus aptes à réaliser leurs objectifs de changement social.
+                  Nous croyons que l’art et la culture sont des catalyseurs puissants du changement social.
+                  En les intégrant dans les stratégies des mouvements sociaux et des organisations de la société
+                  civile (OSC), nous contribuons à renforcer leur impact, à éveiller les consciences et à encourager
+                  un engagement citoyen plus inclusif et durable.
                 </p>
               </div>
 
