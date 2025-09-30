@@ -14,7 +14,240 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      artists: {
+        Row: {
+          albums_count: number
+          bio: string | null
+          created_at: string
+          followers: string
+          genre: string
+          id: string
+          image_url: string | null
+          is_available: boolean
+          location: string
+          name: string
+          rating: number
+          updated_at: string
+        }
+        Insert: {
+          albums_count?: number
+          bio?: string | null
+          created_at?: string
+          followers: string
+          genre: string
+          id?: string
+          image_url?: string | null
+          is_available?: boolean
+          location: string
+          name: string
+          rating?: number
+          updated_at?: string
+        }
+        Update: {
+          albums_count?: number
+          bio?: string | null
+          created_at?: string
+          followers?: string
+          genre?: string
+          id?: string
+          image_url?: string | null
+          is_available?: boolean
+          location?: string
+          name?: string
+          rating?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      booking_requests: {
+        Row: {
+          artist_id: string | null
+          budget: number
+          client_email: string
+          client_name: string
+          client_organization: string | null
+          client_phone: string
+          created_at: string
+          duration: number
+          event_date: string
+          event_id: string | null
+          id: string
+          location: string
+          message: string | null
+          service_type: string
+          status: Database["public"]["Enums"]["booking_status"]
+          updated_at: string
+        }
+        Insert: {
+          artist_id?: string | null
+          budget: number
+          client_email: string
+          client_name: string
+          client_organization?: string | null
+          client_phone: string
+          created_at?: string
+          duration: number
+          event_date: string
+          event_id?: string | null
+          id?: string
+          location: string
+          message?: string | null
+          service_type: string
+          status?: Database["public"]["Enums"]["booking_status"]
+          updated_at?: string
+        }
+        Update: {
+          artist_id?: string | null
+          budget?: number
+          client_email?: string
+          client_name?: string
+          client_organization?: string | null
+          client_phone?: string
+          created_at?: string
+          duration?: number
+          event_date?: string
+          event_id?: string | null
+          id?: string
+          location?: string
+          message?: string | null
+          service_type?: string
+          status?: Database["public"]["Enums"]["booking_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "booking_requests_artist_id_fkey"
+            columns: ["artist_id"]
+            isOneToOne: false
+            referencedRelation: "artists"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "booking_requests_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      event_artists: {
+        Row: {
+          artist_id: string
+          created_at: string
+          event_id: string
+          id: string
+        }
+        Insert: {
+          artist_id: string
+          created_at?: string
+          event_id: string
+          id?: string
+        }
+        Update: {
+          artist_id?: string
+          created_at?: string
+          event_id?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_artists_artist_id_fkey"
+            columns: ["artist_id"]
+            isOneToOne: false
+            referencedRelation: "artists"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_artists_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          event_date: string
+          event_time: string
+          id: string
+          image_url: string | null
+          location: string
+          max_capacity: number | null
+          price: number | null
+          status: Database["public"]["Enums"]["event_status"]
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          event_date: string
+          event_time: string
+          id?: string
+          image_url?: string | null
+          location: string
+          max_capacity?: number | null
+          price?: number | null
+          status?: Database["public"]["Enums"]["event_status"]
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          event_date?: string
+          event_time?: string
+          id?: string
+          image_url?: string | null
+          location?: string
+          max_capacity?: number | null
+          price?: number | null
+          status?: Database["public"]["Enums"]["event_status"]
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      services: {
+        Row: {
+          base_price: number
+          created_at: string
+          description: string
+          duration: string
+          id: string
+          is_active: boolean
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          base_price: number
+          created_at?: string
+          description: string
+          duration: string
+          id?: string
+          is_active?: boolean
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          base_price?: number
+          created_at?: string
+          description?: string
+          duration?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +256,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      booking_status: "pending" | "confirmed" | "rejected" | "completed"
+      event_status: "upcoming" | "past" | "sold-out"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +384,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      booking_status: ["pending", "confirmed", "rejected", "completed"],
+      event_status: ["upcoming", "past", "sold-out"],
+    },
   },
 } as const
