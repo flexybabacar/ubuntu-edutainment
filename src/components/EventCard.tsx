@@ -1,8 +1,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Users, Clock, Tag } from "lucide-react";
-import { Event } from "@/types/booking";
 import { useNavigate } from "react-router-dom";
+import { Event } from '@/hooks/useEvents';
 
 interface EventCardProps {
   event: Event;
@@ -23,6 +23,10 @@ const EventCard = ({ event, index }: EventCardProps) => {
       month: 'long', 
       year: 'numeric' 
     });
+  };
+
+  const formatTime = (timeString: string) => {
+    return timeString.slice(0, 5); // Extract HH:MM from HH:MM:SS
   };
 
   const getStatusColor = (status: string) => {
@@ -89,7 +93,7 @@ const EventCard = ({ event, index }: EventCardProps) => {
           <div className="space-y-2">
             <div className="flex items-center text-sm text-muted-foreground">
               <Calendar className="h-4 w-4 mr-2 text-primary" />
-              {formatDate(event.date)} à {event.time}
+              {formatDate(event.event_date)} à {formatTime(event.event_time)}
             </div>
             <div className="flex items-center text-sm text-muted-foreground">
               <MapPin className="h-4 w-4 mr-2 text-secondary" />
@@ -97,14 +101,14 @@ const EventCard = ({ event, index }: EventCardProps) => {
             </div>
             <div className="flex items-center text-sm text-muted-foreground">
               <Users className="h-4 w-4 mr-2 text-accent" />
-              {event.artists.map(artist => artist.name).join(", ")}
+              {event.artists?.map(artist => artist.name).join(", ") || "Artistes à confirmer"}
             </div>
           </div>
 
           {/* Price */}
           <div className="flex items-center justify-between">
             <div className="text-lg font-bold">
-              {event.price === 'free' ? (
+              {event.price === null ? (
                 <span className="text-primary">Gratuit</span>
               ) : (
                 <span>{event.price.toLocaleString()} CFA</span>

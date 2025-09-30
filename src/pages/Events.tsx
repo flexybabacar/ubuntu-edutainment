@@ -2,70 +2,53 @@ import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Users, Clock, Tag, Filter } from "lucide-react";
 import { useState } from "react";
-import { Event } from "@/types/booking";
 import EventCard from "@/components/EventCard";
 import EventFilters from "@/components/EventFilters";
 import Footer from "@/components/Footer";
+import { useEvents, Event } from '@/hooks/useEvents';
 
 const Events = () => {
   const [selectedFilter, setSelectedFilter] = useState("all");
   
-  const events: Event[] = [
-    {
-      id: 1,
-      title: "Concert pour le Climat",
-      date: "2024-09-15",
-      time: "20:00",
-      location: "Théâtre National, Dakar",
-      artists: [
-        { id: 1, name: "Amara Kone", genre: "Afro-Pop Engagé", location: "Dakar", image: "", followers: "45K", rating: 4.8, albums: 3, isAvailable: true }
-      ],
-      price: 15000,
-      status: "upcoming",
-      image: "",
-      description: "Un concert engagé pour sensibiliser au changement climatique",
-      category: "Concert"
-    },
-    {
-      id: 2,
-      title: "Festival Ubuntu Arts",
-      date: "2024-10-20",
-      time: "14:00",
-      location: "Centre Culturel Blaise Senghor, Dakar",
-      artists: [
-        { id: 2, name: "Khalil Senghor", genre: "Rap Conscient", location: "Dakar", image: "", followers: "32K", rating: 4.6, albums: 2, isAvailable: true },
-        { id: 3, name: "Fatou Diallo", genre: "World Music", location: "Thiès", image: "", followers: "28K", rating: 4.7, albums: 4, isAvailable: false }
-      ],
-      price: "free",
-      status: "upcoming",
-      image: "",
-      description: "Festival célébrant l'art engagé et la philosophie Ubuntu",
-      category: "Festival"
-    },
-    {
-      id: 3,
-      title: "Soirée Poésie & Justice",
-      date: "2024-08-10",
-      time: "19:30",
-      location: "Institut Français, Saint-Louis",
-      artists: [
-        { id: 4, name: "Moussa Ba", genre: "Spoken Word", location: "Saint-Louis", image: "", followers: "18K", rating: 4.5, albums: 1, isAvailable: true }
-      ],
-      price: 8000,
-      status: "past",
-      image: "",
-      description: "Une soirée mêlant poésie et engagement social",
-      category: "Soirée"
-    }
-  ];
+  const { data: events = [], isLoading, error } = useEvents();
 
   const filteredEvents = events.filter(event => {
     if (selectedFilter === "all") return true;
     if (selectedFilter === "upcoming") return event.status === "upcoming";
     if (selectedFilter === "past") return event.status === "past";
-    if (selectedFilter === "free") return event.price === "free";
+    if (selectedFilter === "free") return event.price === null;
     return event.category.toLowerCase() === selectedFilter.toLowerCase();
   });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Chargement des événements...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <p className="text-destructive mb-4">Erreur lors du chargement des événements</p>
+            <Button onClick={() => window.location.reload()}>Réessayer</Button>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">

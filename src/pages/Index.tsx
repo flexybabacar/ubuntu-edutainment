@@ -8,79 +8,13 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Eye, Users, Star, MapPin, Music } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { Artist } from "@/types/booking";
+import { useArtists, Artist } from '@/hooks/useArtists';
 
 const Index = () => {
   const navigate = useNavigate();
-
-  const artists: Artist[] = [
-    {
-      id: 1,
-      name: "Sister LB",
-      genre: "Afro-Pop Engagé",
-      location: "Dakar",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "45K",
-      rating: 4.8,
-      albums: 3,
-      isAvailable: true
-    },
-    {
-      id: 2,
-      name: "Khalil Senghor",
-      genre: "Rap Conscient",
-      location: "Dakar",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "32K",
-      rating: 4.6,
-      albums: 2,
-      isAvailable: true
-    },
-    {
-      id: 3,
-      name: "Fatou Diallo",
-      genre: "World Music",
-      location: "Thiès",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "28K",
-      rating: 4.7,
-      albums: 4,
-      isAvailable: false
-    },
-    {
-      id: 4,
-      name: "Moussa Ba",
-      genre: "Spoken Word",
-      location: "Saint-Louis",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "18K",
-      rating: 4.5,
-      albums: 1,
-      isAvailable: true
-    },
-    {
-      id: 5,
-      name: "Aïcha Koné",
-      genre: "Reggae Fusion",
-      location: "Kaolack",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "38K",
-      rating: 4.6,
-      albums: 3,
-      isAvailable: true
-    },
-    {
-      id: 6,
-      name: "Omar Pène Jr",
-      genre: "Mbalax Moderne",
-      location: "Dakar",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "52K",
-      rating: 4.9,
-      albums: 5,
-      isAvailable: true
-    }
-  ];
+  
+  const { data: allArtists = [], isLoading } = useArtists();
+  const artists = allArtists.slice(0, 6); // Show only first 6 artists on homepage
 
   return (
     <div className="min-h-screen bg-background">
@@ -134,7 +68,20 @@ const Index = () => {
           </div>
           {/* Artists Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {artists.map((artist, index) => (
+            {isLoading ? (
+              // Loading skeleton
+              Array.from({ length: 6 }).map((_, index) => (
+                <div key={index} className="bg-card rounded-xl p-6 border border-border">
+                  <div className="aspect-square bg-muted rounded-lg mb-6 animate-pulse"></div>
+                  <div className="space-y-3">
+                    <div className="h-6 bg-muted rounded animate-pulse"></div>
+                    <div className="h-4 bg-muted rounded animate-pulse w-3/4"></div>
+                    <div className="h-4 bg-muted rounded animate-pulse w-1/2"></div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              artists.map((artist, index) => (
               <div 
                 key={artist.id}
                 className="group relative"
@@ -148,8 +95,8 @@ const Index = () => {
                   {/* Artist Photo */}
                   <div className="relative mb-6">
                     <div className="aspect-square bg-muted rounded-lg overflow-hidden relative group-hover:scale-105 transition-transform duration-500">
-                      <img 
-                        src={artist.image} 
+                       <img 
+                        src={artist.image_url || "/placeholder.svg"} 
                         alt={artist.name}
                         className="w-full h-full object-cover"
                         onError={(e) => {
@@ -160,11 +107,11 @@ const Index = () => {
                       
                       {/* Availability Badge */}
                       <div className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium ${
-                        artist.isAvailable 
+                        artist.is_available 
                           ? 'bg-green-500/90 text-white' 
                           : 'bg-red-500/90 text-white'
                       }`}>
-                        {artist.isAvailable ? 'Disponible' : 'Indisponible'}
+                        {artist.is_available ? 'Disponible' : 'Indisponible'}
                       </div>
                     </div>
                   </div>
@@ -194,7 +141,7 @@ const Index = () => {
                       </div>
                       <div className="flex items-center">
                         <Music className="h-3 w-3 mr-1" />
-                        <span>{artist.albums} albums</span>
+                        <span>{artist.albums_count} albums</span>
                       </div>
                     </div>
 
@@ -214,7 +161,8 @@ const Index = () => {
                   <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-secondary/40 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
                 </div>
               </div>
-            ))}
+              ))
+            )}
           </div>
 
           {/* View All Button */}

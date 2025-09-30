@@ -2,9 +2,9 @@ import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Search, Users, Star, MapPin, Music } from "lucide-react";
 import { useState } from "react";
-import { Artist } from "@/types/booking";
 import Footer from "@/components/Footer";
 import { useNavigate } from "react-router-dom";
+import { useArtists, Artist } from '@/hooks/useArtists';
 
 interface ArtistFilterProps {
   onFilter: (filter: string) => void;
@@ -38,97 +38,8 @@ const Artists = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("all");
   const navigate = useNavigate();
-
-  const artists: Artist[] = [
-    {
-      id: 1,
-      name: "Sister LB",
-      genre: "Afro-Pop Engagé",
-      location: "Dakar",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "45K",
-      rating: 4.8,
-      albums: 3,
-      isAvailable: true
-    },
-    {
-      id: 2,
-      name: "Khalil Senghor",
-      genre: "Rap Conscient",
-      location: "Dakar",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "32K",
-      rating: 4.6,
-      albums: 2,
-      isAvailable: true
-    },
-    {
-      id: 3,
-      name: "Fatou Diallo",
-      genre: "World Music",
-      location: "Thiès",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "28K",
-      rating: 4.7,
-      albums: 4,
-      isAvailable: false
-    },
-    {
-      id: 4,
-      name: "Moussa Ba",
-      genre: "Spoken Word",
-      location: "Saint-Louis",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "18K",
-      rating: 4.5,
-      albums: 1,
-      isAvailable: true
-    },
-    {
-      id: 5,
-      name: "Aïcha Koné",
-      genre: "Reggae Fusion",
-      location: "Kaolack",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "38K",
-      rating: 4.6,
-      albums: 3,
-      isAvailable: true
-    },
-    {
-      id: 6,
-      name: "Omar Pène Jr",
-      genre: "Mbalax Moderne",
-      location: "Dakar",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "52K",
-      rating: 4.9,
-      albums: 5,
-      isAvailable: true
-    },
-    {
-      id: 7,
-      name: "Binta Seck",
-      genre: "Neo-Soul",
-      location: "Ziguinchor",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "25K",
-      rating: 4.4,
-      albums: 2,
-      isAvailable: false
-    },
-    {
-      id: 8,
-      name: "Mamadou Dieng",
-      genre: "Hip-Hop Alternatif",
-      location: "Mbour",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      followers: "41K",
-      rating: 4.7,
-      albums: 4,
-      isAvailable: true
-    }
-  ];
+  
+  const { data: artists = [], isLoading, error } = useArtists();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -138,7 +49,7 @@ const Artists = () => {
     setSelectedFilter(filter);
   };
 
-  const handleArtistClick = (artistId: number) => {
+  const handleArtistClick = (artistId: string) => {
     navigate(`/artist/${artistId}`);
   };
 
@@ -155,15 +66,45 @@ const Artists = () => {
     if (selectedFilter === "all") {
       return matchesSearch;
     } else if (selectedFilter === "upcoming") {
-      return artist.isAvailable && matchesSearch;
+      return artist.is_available && matchesSearch;
     } else if (selectedFilter === "popular") {
       return artist.rating >= 4.5 && matchesSearch;
     } else if (selectedFilter === "new") {
-      return artist.albums <= 2 && matchesSearch;
+      return artist.albums_count <= 2 && matchesSearch;
     }
 
     return matchesSearch;
   });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Chargement des artistes...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <p className="text-destructive mb-4">Erreur lors du chargement des artistes</p>
+            <Button onClick={() => window.location.reload()}>Réessayer</Button>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -238,18 +179,18 @@ const Artists = () => {
                   onClick={() => handleArtistClick(artist.id)}
                 >
                   <div className="relative">
-                    <img
-                      src={artist.image}
+                     <img
+                      src={artist.image_url || "/placeholder-artist.jpg"}
                       alt={artist.name}
                       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     {/* Availability Badge */}
                     <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium ${
-                      artist.isAvailable 
+                      artist.is_available 
                         ? 'bg-green-500/90 text-white' 
                         : 'bg-red-500/90 text-white'
                     }`}>
-                      {artist.isAvailable ? 'Disponible' : 'Indisponible'}
+                      {artist.is_available ? 'Disponible' : 'Indisponible'}
                     </div>
                     
                     {/* Overlay on hover */}
@@ -278,7 +219,7 @@ const Artists = () => {
                       </div>
                       <div className="flex items-center">
                         <Music className="h-4 w-4 mr-1" />
-                        <span>{artist.albums} albums</span>
+                        <span>{artist.albums_count} albums</span>
                       </div>
                     </div>
                     
