@@ -220,11 +220,6 @@ const ArtistProfile = () => {
                   </span>
                 </div>
 
-                {/* Price Range */}
-                <div className="mb-6">
-                  <span className="text-2xl font-bold text-secondary">{artist.priceRange}</span>
-                  <p className="text-sm text-muted-foreground">Tarif par événement</p>
-                </div>
 
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-8 mb-8 max-w-md mx-auto lg:mx-0">
