@@ -10,9 +10,23 @@ import { CalendarIcon, Check } from "lucide-react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { cn } from "@/lib/utils";
-import { Artist, Event, BookingRequest, ClientInfo } from "@/types/booking";
 import ServiceSelector from "@/components/ServiceSelector";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
+import type { Artist } from '@/hooks/useArtists';
+import type { Event } from '@/hooks/useEvents';
+
+const bookingSchema = z.object({
+  client_name: z.string().trim().min(2, "Le nom doit contenir au moins 2 caractères").max(100, "Le nom ne peut pas dépasser 100 caractères"),
+  client_email: z.string().trim().email("Email invalide").max(255, "L'email ne peut pas dépasser 255 caractères"),
+  client_phone: z.string().trim().min(8, "Numéro de téléphone invalide").max(20, "Le numéro ne peut pas dépasser 20 caractères"),
+  client_organization: z.string().trim().max(200, "Le nom de l'organisation ne peut pas dépasser 200 caractères").optional(),
+  location: z.string().trim().min(3, "Le lieu doit contenir au moins 3 caractères").max(200, "Le lieu ne peut pas dépasser 200 caractères"),
+  message: z.string().trim().max(2000, "Le message ne peut pas dépasser 2000 caractères").optional(),
+  budget: z.number().min(0, "Le budget doit être positif").max(1000000000, "Budget trop élevé"),
+  duration: z.number().min(1, "La durée doit être d'au moins 1 heure").max(24, "La durée ne peut pas dépasser 24 heures"),
+});
 
 interface BookingFormProps {
   currentStep: number;
@@ -25,13 +39,15 @@ const BookingForm = ({ currentStep, onStepChange, selectedArtist, selectedEvent 
   const { toast } = useToast();
   const [date, setDate] = useState<Date>();
   const [selectedService, setSelectedService] = useState("");
-  const [bookingData, setBookingData] = useState<Partial<BookingRequest>>({
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [bookingData, setBookingData] = useState({
     duration: 2,
     budget: 0,
-    message: ""
+    message: "",
+    location: ""
   });
   
-  const [clientInfo, setClientInfo] = useState<ClientInfo>({
+  const [clientInfo, setClientInfo] = useState({
     name: "",
     email: "",
     phone: "",
@@ -50,16 +66,67 @@ const BookingForm = ({ currentStep, onStepChange, selectedArtist, selectedEvent 
     }
   };
 
-  const handleSubmit = () => {
-    // Simuler l'envoi du formulaire
-    toast({
-      title: "Demande envoyée !",
-      description: "Nous vous contacterons dans les 24h pour confirmer votre réservation.",
-    });
+  const handleSubmit = async () => {
+    if (!date || !selectedService) return;
     
-    setTimeout(() => {
+    setIsSubmitting(true);
+    
+    try {
+      // Validate data
+      const validatedData = bookingSchema.parse({
+        client_name: clientInfo.name,
+        client_email: clientInfo.email,
+        client_phone: clientInfo.phone,
+        client_organization: clientInfo.organization || undefined,
+        location: bookingData.location,
+        message: bookingData.message || undefined,
+        budget: bookingData.budget,
+        duration: bookingData.duration,
+      });
+
+      // Insert booking request into database
+      const { error } = await supabase
+        .from('booking_requests')
+        .insert({
+          artist_id: selectedArtist?.id || null,
+          event_id: selectedEvent?.id || null,
+          service_type: selectedService,
+          event_date: format(date, 'yyyy-MM-dd'),
+          duration: validatedData.duration,
+          location: validatedData.location,
+          budget: validatedData.budget,
+          message: validatedData.message,
+          client_name: validatedData.client_name,
+          client_email: validatedData.client_email,
+          client_phone: validatedData.client_phone,
+          client_organization: validatedData.client_organization,
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Demande envoyée !",
+        description: "Nous vous contacterons dans les 24h pour confirmer votre réservation.",
+      });
+      
       onStepChange(4);
-    }, 1000);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: "Erreur de validation",
+          description: error.errors[0].message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Erreur",
+          description: "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const renderStepContent = () => {
@@ -248,9 +315,9 @@ const BookingForm = ({ currentStep, onStepChange, selectedArtist, selectedEvent 
               </Button>
               <Button 
                 onClick={handleSubmit}
-                disabled={!clientInfo.name || !clientInfo.email || !clientInfo.phone}
+                disabled={!clientInfo.name || !clientInfo.email || !clientInfo.phone || isSubmitting}
               >
-                Envoyer la demande
+                {isSubmitting ? "Envoi en cours..." : "Envoyer la demande"}
               </Button>
             </div>
           </div>

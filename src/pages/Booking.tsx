@@ -1,11 +1,12 @@
 
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Check, Calendar, User, CreditCard } from "lucide-react";
-import { useState, useEffect } from "react";
+import { ArrowLeft, Check, Calendar, User } from "lucide-react";
+import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import BookingForm from "@/components/BookingForm";
-import { Artist, Event } from "@/types/booking";
+import { useArtist } from '@/hooks/useArtists';
+import { useEvent } from '@/hooks/useEvents';
 
 const Booking = () => {
   const [searchParams] = useSearchParams();
@@ -14,44 +15,11 @@ const Booking = () => {
   const eventId = searchParams.get('event');
 
   const [currentStep, setCurrentStep] = useState(1);
-  const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
-  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  
+  const { data: selectedArtist, isLoading: artistLoading } = useArtist(artistId || '');
+  const { data: selectedEvent, isLoading: eventLoading } = useEvent(eventId || '');
 
-  // Mock data - remplacer par des appels API
-  const mockArtist: Artist = {
-    id: 1,
-    name: "Amara Kone",
-    genre: "Afro-Pop Engagé",
-    location: "Dakar",
-    image: "",
-    followers: "45K",
-    rating: 4.8,
-    albums: 3,
-    isAvailable: true
-  };
-
-  const mockEvent: Event = {
-    id: 1,
-    title: "Concert pour le Climat",
-    date: "2024-09-15",
-    time: "20:00",
-    location: "Théâtre National, Dakar",
-    artists: [mockArtist],
-    price: 15000,
-    status: "upcoming",
-    image: "",
-    description: "Un concert engagé pour sensibiliser au changement climatique",
-    category: "Concert"
-  };
-
-  useEffect(() => {
-    if (artistId) {
-      setSelectedArtist(mockArtist);
-    }
-    if (eventId) {
-      setSelectedEvent(mockEvent);
-    }
-  }, [artistId, eventId]);
+  const isLoading = artistLoading || eventLoading;
 
   const steps = [
     { id: 1, title: "Service", icon: User },
@@ -59,6 +27,20 @@ const Booking = () => {
     { id: 3, title: "Contact", icon: User },
     { id: 4, title: "Confirmation", icon: Check }
   ];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Chargement...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -92,7 +74,7 @@ const Booking = () => {
               
               {selectedEvent && (
                 <p className="text-lg text-muted-foreground">
-                  {new Date(selectedEvent.date).toLocaleDateString('fr-FR')} • {selectedEvent.location}
+                  {new Date(selectedEvent.event_date).toLocaleDateString('fr-FR')} • {selectedEvent.location}
                 </p>
               )}
             </div>
