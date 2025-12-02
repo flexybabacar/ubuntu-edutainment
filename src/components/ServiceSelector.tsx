@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Music, Video, Users, Calendar, Briefcase, Megaphone } from "lucide-react";
-import { Service } from "@/types/booking";
+import { useServices } from '@/hooks/useServices';
 
 interface ServiceSelectorProps {
   selectedService: string;
@@ -10,73 +10,41 @@ interface ServiceSelectorProps {
 }
 
 const ServiceSelector = ({ selectedService, onServiceSelect, artistType }: ServiceSelectorProps) => {
-  const services: Service[] = [
-    {
-      id: "concert",
-      name: "Concert / Performance Live",
-      description: "Performance live pour votre événement",
-      basePrice: 500000,
-      duration: "2-4 heures"
-    },
-    {
-      id: "studio",
-      name: "Session Studio",
-      description: "Enregistrement en studio professionnel",
-      basePrice: 200000,
-      duration: "Journée complète"
-    },
-    {
-      id: "collaboration",
-      name: "Collaboration Artistique",
-      description: "Création d'une œuvre collaborative",
-      basePrice: 300000,
-      duration: "Selon projet"
-    },
-    {
-      id: "workshop",
-      name: "Atelier / Formation",
-      description: "Atelier artistique ou formation",
-      basePrice: 150000,
-      duration: "2-3 heures"
-    },
-    {
-      id: "event",
-      name: "Animation Événementielle",
-      description: "Animation pour votre événement corporate",
-      basePrice: 400000,
-      duration: "Selon événement"
-    },
-    {
-      id: "campaign",
-      name: "Campagne Sociale",
-      description: "Création pour campagne d'engagement social",
-      basePrice: 600000,
-      duration: "Projet complet"
-    }
-  ];
+  const { data: services = [], isLoading } = useServices();
+  
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="p-6 rounded-lg border-2 border-border animate-pulse">
+            <div className="h-16 bg-muted rounded"></div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
-  const getServiceIcon = (serviceId: string) => {
-    switch (serviceId) {
-      case "concert": return Music;
-      case "studio": return Video;
-      case "collaboration": return Users;
-      case "workshop": return Calendar;
-      case "event": return Briefcase;
-      case "campaign": return Megaphone;
-      default: return Music;
-    }
+  const getServiceIcon = (serviceName: string) => {
+    const name = serviceName.toLowerCase();
+    if (name.includes("concert") || name.includes("performance")) return Music;
+    if (name.includes("studio") || name.includes("enregistrement")) return Video;
+    if (name.includes("collaboration")) return Users;
+    if (name.includes("atelier") || name.includes("formation")) return Calendar;
+    if (name.includes("événement") || name.includes("corporate")) return Briefcase;
+    if (name.includes("campagne") || name.includes("social")) return Megaphone;
+    return Music;
   };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {services.map((service) => {
-        const Icon = getServiceIcon(service.id);
-        const isSelected = selectedService === service.id;
+      {services.filter(service => service.is_active).map((service) => {
+        const Icon = getServiceIcon(service.name);
+        const isSelected = selectedService === service.name;
         
         return (
           <button
             key={service.id}
-            onClick={() => onServiceSelect(service.id)}
+            onClick={() => onServiceSelect(service.name)}
             className={`relative p-6 rounded-lg border-2 transition-all duration-300 text-left hover:shadow-lg ${
               isSelected 
                 ? "border-primary bg-primary/5 shadow-lg" 
@@ -98,7 +66,7 @@ const ServiceSelector = ({ selectedService, onServiceSelect, artistType }: Servi
                 
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-medium text-primary">
-                    À partir de {service.basePrice.toLocaleString()} CFA
+                    À partir de {Number(service.base_price).toLocaleString()} CFA
                   </span>
                   <span className="text-xs text-muted-foreground">
                     {service.duration}
