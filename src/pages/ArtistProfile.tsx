@@ -3,26 +3,7 @@ import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Play, Users, Music, Star, MapPin, Calendar, Download, ArrowLeft, Instagram, Facebook, Twitter } from "lucide-react";
 import Footer from "@/components/Footer";
-
-interface Artist {
-  id: number;
-  name: string;
-  location: string;
-  image: string;
-  genre: string;
-  followers: string;
-  rating: number;
-  albums: number;
-  bio: string;
-  joinedYear: string;
-  isAvailable: boolean;
-  // priceRange: string;
-  socialMedia: {
-    instagram: string;
-    facebook: string;
-    twitter: string;
-  };
-}
+import { useArtist } from '@/hooks/useArtists';
 
 interface Track {
   id: number;
@@ -43,88 +24,38 @@ interface Album {
 const ArtistProfile = () => {
   const { artistId } = useParams();
   const navigate = useNavigate();
+  
+  const { data: artist, isLoading, error } = useArtist(artistId || '');
 
-  // Mock data - in real app, fetch based on artistId
-  const artistsData: Record<string, Artist> = {
-    "1": {
-      id: 1,
-      name: "Sister LB",
-      location: "Dakar, Sénégal",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      genre: "Afro-Pop Engagé",
-      followers: "45K",
-      rating: 4.8,
-      albums: 3,
-      bio: "Sister LB est une artiste sénégalaise engagée qui utilise sa musique pour véhiculer des messages sociaux forts. Son style unique mélange l'afro-pop contemporain avec des sonorités traditionnelles ouest-africaines, créant une expérience musicale authentique et moderne.",
-      joinedYear: "2020",
-      isAvailable: true,
-      // priceRange: "500K-1M CFA",
-      socialMedia: {
-        instagram: "https://instagram.com/amarakone",
-        facebook: "https://facebook.com/amarakone",
-        twitter: "https://twitter.com/amarakone"
-      }
-    },
-    "2": {
-      id: 2,
-      name: "Khalil Senghor",
-      location: "Dakar, Sénégal",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      genre: "Rap Conscient",
-      followers: "32K",
-      rating: 4.6,
-      albums: 2,
-      bio: "Khalil Senghor est un rappeur conscient qui aborde les réalités sociales africaines à travers ses textes percutants. Ses flows innovants et ses paroles engagées en font une voix importante de la nouvelle génération du hip-hop sénégalais.",
-      joinedYear: "2021",
-      isAvailable: true,
-      // priceRange: "300K-800K CFA",
-      socialMedia: {
-        instagram: "https://instagram.com/khalilsenghor",
-        facebook: "https://facebook.com/khalilsenghor",
-        twitter: "https://twitter.com/khalilsenghor"
-      }
-    },
-    "3": {
-      id: 3,
-      name: "Fatou Diallo",
-      location: "Thiès, Sénégal",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      genre: "World Music",
-      followers: "28K",
-      rating: 4.7,
-      albums: 4,
-      bio: "Fatou Diallo fusionne les rythmes traditionnels africains avec des influences world music contemporaines. Sa voix puissante et ses compositions originales transportent les auditeurs dans un voyage musical à travers les cultures africaines.",
-      joinedYear: "2019",
-      isAvailable: false,
-      // priceRange: "400K-900K CFA",
-      socialMedia: {
-        instagram: "https://instagram.com/fatoudiallo",
-        facebook: "https://facebook.com/fatoudiallo",
-        twitter: "https://twitter.com/fatoudiallo"
-      }
-    },
-    "4": {
-      id: 4,
-      name: "Moussa Ba",
-      location: "Saint-Louis, Sénégal",
-      image: "/lovable-uploads/sister_lb_big_84275.jpg",
-      genre: "Spoken Word",
-      followers: "18K",
-      rating: 4.5,
-      albums: 1,
-      bio: "Moussa Ba est un artiste de spoken word qui utilise la poésie et la performance pour explorer les thèmes de l'identité, de la diaspora et de l'histoire africaine. Ses performances captivantes allient tradition orale et innovation artistique.",
-      joinedYear: "2022",
-      isAvailable: true,
-      // priceRange: "200K-500K CFA",
-      socialMedia: {
-        instagram: "https://instagram.com/moussaba",
-        facebook: "https://facebook.com/moussaba",
-        twitter: "https://twitter.com/moussaba"
-      }
-    }
-  };
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto mb-4"></div>
+            <p className="text-muted-foreground">Chargement du profil...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
-  const artist = artistsData[artistId || "1"] || artistsData["1"];
+  if (error || !artist) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="flex items-center justify-center h-96">
+          <div className="text-center">
+            <p className="text-destructive mb-4">Artiste non trouvé</p>
+            <Button onClick={() => navigate('/artists')}>Retour aux artistes</Button>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   const topTracks: Track[] = [
     { id: 1, title: "Révolution Silencieuse", duration: "4:32", plays: "2.1M", likes: "45K" },
@@ -173,7 +104,7 @@ const ArtistProfile = () => {
               <div className="relative">
                 <div className="w-80 h-80 rounded-full overflow-hidden relative border-4 border-primary/20">
                   <img 
-                    src={artist.image} 
+                    src={artist.image_url || "/placeholder.svg"} 
                     alt={artist.name}
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -192,11 +123,11 @@ const ArtistProfile = () => {
 
                 {/* Availability Badge */}
                 <div className={`absolute top-4 left-4 px-4 py-2 rounded-full text-sm font-medium ${
-                  artist.isAvailable 
+                  artist.is_available 
                     ? 'bg-green-500/90 text-white' 
                     : 'bg-red-500/90 text-white'
                 }`}>
-                  {artist.isAvailable ? 'Disponible' : 'Indisponible'}
+                  {artist.is_available ? 'Disponible' : 'Indisponible'}
                 </div>
               </div>
 
@@ -213,7 +144,7 @@ const ArtistProfile = () => {
                   </span>
                   <span className="flex items-center text-muted-foreground">
                     <Calendar className="h-5 w-5 mr-2" />
-                    Actif depuis {artist.joinedYear}
+                    Actif depuis {new Date(artist.created_at).getFullYear()}
                   </span>
                   <span className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
                     {artist.genre}
@@ -233,7 +164,7 @@ const ArtistProfile = () => {
                   <div className="text-center">
                     <div className="flex items-center justify-center mb-2">
                       <Music className="h-6 w-6 text-secondary mr-2" />
-                      <span className="text-2xl font-bold">{artist.albums}</span>
+                      <span className="text-2xl font-bold">{artist.albums_count}</span>
                     </div>
                     <p className="text-muted-foreground">Albums</p>
                   </div>
@@ -252,43 +183,13 @@ const ArtistProfile = () => {
                     size="lg" 
                     className="bg-primary hover:bg-primary/90"
                     onClick={() => navigate(`/booking?artist=${artist.id}`)}
-                    disabled={!artist.isAvailable}
+                    disabled={!artist.is_available}
                   >
                     <Calendar className="mr-2 h-5 w-5" />
-                    {artist.isAvailable ? 'Réserver cet artiste' : 'Indisponible'}
+                    {artist.is_available ? 'Réserver cet artiste' : 'Indisponible'}
                   </Button>
                 </div>
 
-                {/* Social Media Links */}
-                <div className="flex gap-4 justify-center lg:justify-start">
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white"
-                    onClick={() => window.open(artist.socialMedia.instagram, '_blank')}
-                  >
-                    <Instagram className="mr-2 h-5 w-5" />
-                    Instagram
-                  </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
-                    onClick={() => window.open(artist.socialMedia.facebook, '_blank')}
-                  >
-                    <Facebook className="mr-2 h-5 w-5" />
-                    Facebook
-                  </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white"
-                    onClick={() => window.open(artist.socialMedia.twitter, '_blank')}
-                  >
-                    <Twitter className="mr-2 h-5 w-5" />
-                    Twitter
-                  </Button>
-                </div>
               </div>
             </div>
           </div>
@@ -300,7 +201,7 @@ const ArtistProfile = () => {
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-bold mb-6 text-center">À propos de {artist.name}</h2>
               <p className="text-muted-foreground text-lg leading-relaxed text-center">
-                {artist.bio}
+                {artist.bio || "Aucune biographie disponible pour le moment."}
               </p>
             </div>
           </div>
