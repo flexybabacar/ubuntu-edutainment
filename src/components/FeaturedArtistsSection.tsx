@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Eye, Users } from "lucide-react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface Artist {
   id: number;
@@ -111,11 +111,13 @@ const FeaturedArtistsSection = () => {
                   </div>
 
                   {/* View Profile Button */}
-                  <Button asChild size="sm" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group">
-                    <Link to={`/artist/${artist.id}`}>
-                      <Eye className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
-                      Voir le Profil
-                    </Link>
+                  <Button 
+                    size="sm" 
+                    onClick={() => navigate(`/artist/${artist.id}`)}
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group"
+                  >
+                    <Eye className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
+                    Voir le Profil
                   </Button>
                 </div>
 
