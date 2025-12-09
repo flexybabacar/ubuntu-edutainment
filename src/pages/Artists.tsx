@@ -49,7 +49,7 @@ const Artists = () => {
     setSelectedFilter(filter);
   };
 
-  const handleArtistClick = (artistId: string) => {
+  const handleArtistClick = (artistId: string | number) => {
     navigate(`/artist/${artistId}`);
   };
 
@@ -195,7 +195,7 @@ const Artists = () => {
                     
                     {/* Overlay on hover */}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <Button size="lg" className="bg-primary hover:bg-primary/90">
+                      <Button size="lg" className="bg-primary hover:bg-primary/90" onClick={(e) => { e.stopPropagation(); handleArtistClick(artist.id); }}>
                         Voir le profil
                       </Button>
                     </div>
