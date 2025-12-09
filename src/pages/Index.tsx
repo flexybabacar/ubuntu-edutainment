@@ -149,9 +149,9 @@ const Index = () => {
                     <Button 
                       size="sm" 
                       onClick={() => navigate(`/artist/${artist.id}`)}
-                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group-inner"
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group"
                     >
-                      <Eye className="h-4 w-4 mr-2 group-inner-hover:scale-110 transition-transform" />
+                      <Eye className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
                       Voir le Profil
                     </Button>
                   </div>
