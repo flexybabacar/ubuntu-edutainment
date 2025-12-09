@@ -54,12 +54,9 @@ const Navigation = () => {
       link: "/contact"
     },
     {
-      title: "PODCAST",
-      items: ["Interactive mp3 podcast", "Podcast archive", "Podcast shortcodes"]
-    },
-    {
       title: "BLOG",
-      items: ["Sidebar", "Cards", "Masonry"]
+      items: [],
+      link: "/blog"
     }
   ];
 
