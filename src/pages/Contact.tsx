@@ -261,7 +261,7 @@ const Contact = () => {
                     <p className="text-muted-foreground leading-relaxed">
                       Notre approche collaborative s'inspire de la philosophie Ubuntu. 
                       Nous croyons que la réussite de chacun contribue à l'épanouissement de tous. 
-                      C'est dans cet esprit que nous accompagnons nos artistes et partenaires.
+                      C'est dans cet esprit que nous accompagnons nos artistes et partenaires
                     </p>
                   </div>
                 </div>
