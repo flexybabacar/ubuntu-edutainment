@@ -2,55 +2,14 @@
 import { Button } from "@/components/ui/button";
 import { Eye, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
-interface Artist {
-  id: number;
-  name: string;
-  genre: string;
-  image: string;
-}
+import { useArtists } from "@/hooks/useArtists";
 
 const FeaturedArtistsSection = () => {
   const navigate = useNavigate();
-
-  const artists: Artist[] = [
-    {
-      id: 1,
-      name: "Amara Kone",
-      genre: "Afro-Pop Engagé",
-      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&crop=face"
-    },
-    {
-      id: 2,
-      name: "Khalil Senghor",
-      genre: "Rap Conscient",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
-    },
-    {
-      id: 3,
-      name: "Fatou Diallo",
-      genre: "World Music",
-      image: "https://images.unsplash.com/photo-1494790108755-2616c669a1ec?w=400&h=400&fit=crop&crop=face"
-    },
-    {
-      id: 4,
-      name: "Moussa Ba",
-      genre: "Electro-Traditionnel",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face"
-    },
-    {
-      id: 5,
-      name: "Aïcha Camara",
-      genre: "Folk Moderne",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face"
-    },
-    {
-      id: 6,
-      name: "Ibrahim Fall",
-      genre: "Jazz Fusion",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face"
-    }
-  ];
+  const { data: artists = [], isLoading } = useArtists();
+  
+  // Limiter à 6 artistes pour la section featured
+  const featuredArtists = artists.slice(0, 6);
 
   return (
     <section id="artists-section" className="py-24 bg-background relative">
@@ -75,7 +34,7 @@ const FeaturedArtistsSection = () => {
 
         {/* Artists Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {artists.map((artist, index) => (
+          {featuredArtists.map((artist, index) => (
             <div 
               key={artist.id}
               className="group relative"
@@ -90,7 +49,7 @@ const FeaturedArtistsSection = () => {
                 <div className="relative mb-6">
                   <div className="aspect-square bg-muted rounded-lg overflow-hidden relative group-hover:scale-105 transition-transform duration-500">
                     <img 
-                      src={artist.image} 
+                      src={artist.image_url || "/placeholder.svg"} 
                       alt={artist.name}
                       className="w-full h-full object-cover"
                       onError={(e) => {
