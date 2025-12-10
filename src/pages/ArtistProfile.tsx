@@ -22,7 +22,7 @@ interface Album {
 }
 
 const ArtistProfile = () => {
-  const { artistId } = useParams();
+  const { artistId } = useParams<{ artistId: string }>();
   const navigate = useNavigate();
   
   const { data: artist, isLoading, error } = useArtist(artistId || '');
