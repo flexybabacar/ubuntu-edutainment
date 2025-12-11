@@ -156,7 +156,7 @@ const mockArtistsData: { [key: string]: Artist } = {
 };
 
 const ArtistProfile = () => {
-  const { artistId } = useParams();
+  const { artistId } = useParams<{ artistId: string }>();
   const navigate = useNavigate();
   
   console.log("ID reçu dans la page profil :", artistId);
