@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Play, Users, Music, Calendar } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Artist {
   id: number;
@@ -13,6 +14,7 @@ interface Artist {
 }
 
 const ArtistSection = () => {
+  const navigate = useNavigate();
   const artists: Artist[] = [
     {
       id: 1,
@@ -143,13 +145,25 @@ const ArtistSection = () => {
                     </div>
                   </div>
 
-                  {/* Follow Button */}
-                  <Button 
-                    size="sm" 
-                    className="w-full bg-transparent border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-                  >
-                    Follow
-                  </Button>
+                  {/* Buttons */}
+                  <div className="space-y-2">
+                    <Button 
+                      size="sm" 
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300"
+                      onClick={() => {
+                        console.log("Artiste cliqué :", artist);
+                        navigate(`/artist/${artist.id}`);
+                      }}
+                    >
+                      Voir le Profil
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      className="w-full bg-transparent border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                    >
+                      Follow
+                    </Button>
+                  </div>
                 </div>
 
                 {/* Decorative Elements */}

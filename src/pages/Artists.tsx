@@ -1,45 +1,117 @@
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { Search, Users, Star, MapPin, Music } from "lucide-react";
+import { Search, Users, Star, MapPin, Music, Eye } from "lucide-react";
 import { useState } from "react";
 import Footer from "@/components/Footer";
 import { useNavigate } from "react-router-dom";
-import { useArtists, Artist } from '@/hooks/useArtists';
-
-interface ArtistFilterProps {
-  onFilter: (filter: string) => void;
-  activeFilter: string;
-}
-
-const ArtistFilter: React.FC<ArtistFilterProps> = ({ onFilter, activeFilter }) => {
-  const filters = [
-    { id: 'all', label: 'Tous' },
-    { id: 'upcoming', label: 'À Venir' },
-    { id: 'popular', label: 'Populaires' },
-    { id: 'new', label: 'Nouveaux' },
-  ];
-
-  return (
-    <div className="flex space-x-2">
-      {filters.map(filter => (
-        <Button
-          key={filter.id}
-          variant={activeFilter === filter.id ? "default" : "outline"}
-          onClick={() => onFilter(filter.id)}
-        >
-          {filter.label}
-        </Button>
-      ))}
-    </div>
-  );
-};
 
 const Artists = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("all");
   const navigate = useNavigate();
-  
-  const { data: artists = [], isLoading, error } = useArtists();
+
+  // Mock data - same as in Index.tsx
+  const mockArtists = [
+    {
+      id: "1",
+      name: "Youssou N'Dour",
+      genre: "Mbalax / World",
+      location: "Sénégal",
+      followers: "2.5M",
+      rating: 4.9,
+      albums_count: 28,
+      is_available: true,
+      image_url: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=500&fit=crop"
+    },
+    {
+      id: "2",
+      name: "Fela Kuti Legacy",
+      genre: "Afrobeat",
+      location: "Nigeria",
+      followers: "3.1M",
+      rating: 4.8,
+      albums_count: 45,
+      is_available: true,
+      image_url: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&h=500&fit=crop"
+    },
+    {
+      id: "3",
+      name: "Miriam Makeba Tribute",
+      genre: "Jazz / Soul",
+      location: "Afrique du Sud",
+      followers: "1.8M",
+      rating: 4.7,
+      albums_count: 22,
+      is_available: true,
+      image_url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=500&fit=crop"
+    },
+    {
+      id: "4",
+      name: "Hugh Masekela Spirit",
+      genre: "Jazz / Fusion",
+      location: "Namibie",
+      followers: "2.2M",
+      rating: 4.8,
+      albums_count: 35,
+      is_available: false,
+      image_url: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=500&fit=crop"
+    },
+    {
+      id: "5",
+      name: "Angelique Kidjo",
+      genre: "Afropop / World",
+      location: "Bénin",
+      followers: "2.8M",
+      rating: 4.9,
+      albums_count: 32,
+      is_available: true,
+      image_url: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&h=500&fit=crop"
+    },
+    {
+      id: "6",
+      name: "Cécile McLorin Salvant",
+      genre: "Jazz / Contemporary",
+      location: "Martinique",
+      followers: "1.5M",
+      rating: 4.8,
+      albums_count: 18,
+      is_available: true,
+      image_url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=500&fit=crop"
+    },
+    {
+      id: "7",
+      name: "Ali Farka Touré Spirit",
+      genre: "Blues Africain",
+      location: "Mali",
+      followers: "2.1M",
+      rating: 4.9,
+      albums_count: 40,
+      is_available: true,
+      image_url: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=500&h=500&fit=crop"
+    },
+    {
+      id: "8",
+      name: "Oumou Sangaré",
+      genre: "Traditionnelle / Moderne",
+      location: "Mali",
+      followers: "1.9M",
+      rating: 4.8,
+      albums_count: 12,
+      is_available: true,
+      image_url: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&h=500&fit=crop"
+    },
+    {
+      id: "9",
+      name: "Rokia Traoré",
+      genre: "World / Jazz Fusion",
+      location: "Mali",
+      followers: "1.6M",
+      rating: 4.7,
+      albums_count: 15,
+      is_available: true,
+      image_url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=500&fit=crop"
+    }
+  ];
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -49,11 +121,7 @@ const Artists = () => {
     setSelectedFilter(filter);
   };
 
-  const handleArtistClick = (artistId: string | number) => {
-    navigate(`/artist/${artistId}`);
-  };
-
-  const filteredArtists = artists.filter(artist => {
+  const filteredArtists = mockArtists.filter(artist => {
     const searchTerm = searchQuery.toLowerCase();
     const artistName = artist.name.toLowerCase();
     const artistGenre = artist.genre.toLowerCase();
@@ -70,92 +138,118 @@ const Artists = () => {
     } else if (selectedFilter === "popular") {
       return artist.rating >= 4.5 && matchesSearch;
     } else if (selectedFilter === "new") {
-      return artist.albums_count <= 2 && matchesSearch;
+      return artist.albums_count <= 20 && matchesSearch;
     }
 
     return matchesSearch;
   });
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Navigation />
-        <div className="flex items-center justify-center h-96">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-muted-foreground">Chargement des artistes...</p>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Navigation />
-        <div className="flex items-center justify-center h-96">
-          <div className="text-center">
-            <p className="text-destructive mb-4">Erreur lors du chargement des artistes</p>
-            <Button onClick={() => window.location.reload()}>Réessayer</Button>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
       
-      <main className="pt-16 pb-20">
-        {/* Header Section */}
-        <section className="relative py-32 bg-dark-surface overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_40%,theme(colors.neon-pink/10)_0%,transparent_50%)]" />
-            <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_60%,theme(colors.neon-cyan/10)_0%,transparent_50%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_49%,theme(colors.border/5)_50%,transparent_51%)] bg-[length:20px_20px]" />
+      <main className="pb-20">
+        {/* Hero Header Section */}
+        <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-16">
+          {/* Animated Gradient Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/10" />
+          
+          {/* Floating Geometric Elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Large gradient blobs */}
+            <div className="absolute -top-1/2 -left-1/4 w-96 h-96 bg-gradient-to-br from-primary/30 to-transparent rounded-full blur-3xl opacity-40 animate-pulse" />
+            <div className="absolute -bottom-1/2 -right-1/4 w-96 h-96 bg-gradient-to-tl from-secondary/30 to-transparent rounded-full blur-3xl opacity-40 animate-pulse" style={{ animationDelay: '2s' }} />
+            
+            {/* Animated lines pattern */}
+            <div className="absolute inset-0 opacity-[0.03]" style={{
+              backgroundImage: 'repeating-linear-gradient(45deg, #fff 0px, #fff 1px, transparent 1px, transparent 35px)',
+              animation: 'slideBackground 20s linear infinite'
+            }} />
           </div>
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-8">
-              <p className="text-sm text-muted-foreground tracking-widest">
-                HOME / <span className="text-primary">ARTISTES</span>
+          <div className="container mx-auto px-4 relative z-10 text-center py-20">
+            {/* Breadcrumb */}
+            <div className="mb-8 animate-fade-in">
+              <p className="text-sm text-muted-foreground tracking-widest uppercase">
+                HOME / <span className="text-primary font-semibold">ARTISTES</span>
               </p>
             </div>
 
-            <div className="text-center">
-              <h1 className="text-6xl md:text-8xl font-black tracking-wider bg-gradient-hero bg-clip-text text-transparent mb-4">
-                ARTISTES
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Découvrez les artistes engagés qui façonnent le paysage culturel africain
-              </p>
-              <div className="w-16 h-1 bg-primary mx-auto rounded-full mt-6"></div>
+            {/* Main Title */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-wider mb-6 animate-slide-in bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
+              TOUS LES ARTISTES
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              Découvrez les artistes engagés qui façonnent le paysage culturel africain et transforment la société par la musique
+            </p>
+
+            {/* Decorative Line */}
+            <div className="flex items-center justify-center gap-4 mb-12 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="w-12 h-1 bg-gradient-to-r from-transparent to-primary rounded-full"></div>
+              <div className="w-3 h-3 bg-primary rounded-full"></div>
+              <div className="w-12 h-1 bg-gradient-to-l from-transparent to-primary rounded-full"></div>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-5xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="p-6 rounded-lg bg-primary/5 border border-primary/10 backdrop-blur-sm hover:bg-primary/10 transition-all duration-300">
+                <div className="text-2xl md:text-3xl font-black text-primary">50+</div>
+                <div className="text-xs md:text-sm text-muted-foreground mt-2">Artistes</div>
+              </div>
+              <div className="p-6 rounded-lg bg-secondary/5 border border-secondary/10 backdrop-blur-sm hover:bg-secondary/10 transition-all duration-300">
+                <div className="text-2xl md:text-3xl font-black text-secondary">200+</div>
+                <div className="text-xs md:text-sm text-muted-foreground mt-2">Événements</div>
+              </div>
+              <div className="p-6 rounded-lg bg-accent/5 border border-accent/10 backdrop-blur-sm hover:bg-accent/10 transition-all duration-300">
+                <div className="text-2xl md:text-3xl font-black text-accent">15</div>
+                <div className="text-xs md:text-sm text-muted-foreground mt-2">Pays</div>
+              </div>
+              <div className="p-6 rounded-lg bg-primary/5 border border-primary/10 backdrop-blur-sm hover:bg-primary/10 transition-all duration-300">
+                <div className="text-2xl md:text-3xl font-black text-primary">1M+</div>
+                <div className="text-xs md:text-sm text-muted-foreground mt-2">Auditeurs</div>
+              </div>
             </div>
           </div>
+
+          {/* Bottom gradient fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
         </section>
 
         {/* Search & Filters Section */}
-        <section className="py-8 bg-background border-b border-border">
-          <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-2 w-full md:w-auto bg-muted/30 rounded-lg px-4 py-2">
-              <Search className="h-5 w-5 text-muted-foreground" />
-              <input
-                type="text"
-                placeholder="Rechercher un artiste, genre ou ville..."
-                className="bg-transparent border-none outline-none text-sm text-foreground w-full"
-                value={searchQuery}
-                onChange={handleSearch}
-              />
-            </div>
+        <section className="py-8 bg-background border-b border-border sticky top-16 z-40">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="w-full md:w-1/2 flex items-center space-x-2 bg-muted/30 rounded-lg px-4 py-2 border border-border">
+                <Search className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+                <input
+                  type="text"
+                  placeholder="Rechercher un artiste, genre ou ville..."
+                  className="bg-transparent border-none outline-none text-sm text-foreground w-full placeholder-muted-foreground"
+                  value={searchQuery}
+                  onChange={handleSearch}
+                />
+              </div>
 
-            <ArtistFilter
-              onFilter={handleFilterChange}
-              activeFilter={selectedFilter}
-            />
+              <div className="flex space-x-2 flex-wrap justify-center md:justify-end">
+                {[
+                  { id: 'all', label: 'Tous' },
+                  { id: 'upcoming', label: 'Disponibles' },
+                  { id: 'popular', label: 'Populaires' },
+                  { id: 'new', label: 'Récents' },
+                ].map(filter => (
+                  <Button
+                    key={filter.id}
+                    variant={selectedFilter === filter.id ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handleFilterChange(filter.id)}
+                  >
+                    {filter.label}
+                  </Button>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -171,97 +265,116 @@ const Artists = () => {
         {/* Artists Grid */}
         <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredArtists.map((artist) => (
-                <div 
-                  key={artist.id} 
-                  className="bg-dark-surface rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group hover:transform hover:-translate-y-2"
-                  onClick={() => handleArtistClick(artist.id)}
-                >
-                  <div className="relative">
-                     <img
-                      src={artist.image_url || "/placeholder-artist.jpg"}
-                      alt={artist.name}
-                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    {/* Availability Badge */}
-                    <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium ${
-                      artist.is_available 
-                        ? 'bg-green-500/90 text-white' 
-                        : 'bg-red-500/90 text-white'
-                    }`}>
-                      {artist.is_available ? 'Disponible' : 'Indisponible'}
-                    </div>
-                    
-                    {/* Overlay on hover */}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <Button size="lg" className="bg-primary hover:bg-primary/90" onClick={(e) => { e.stopPropagation(); handleArtistClick(artist.id); }}>
-                        Voir le profil
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors mb-2">
-                      {artist.name}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mb-4">{artist.genre}</p>
-                    
-                    {/* Stats Row */}
-                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
-                      <div className="flex items-center">
-                        <Users className="h-4 w-4 mr-1" />
-                        <span>{artist.followers}</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Star className="h-4 w-4 mr-1 text-yellow-500" />
-                        <span>{artist.rating}</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Music className="h-4 w-4 mr-1" />
-                        <span>{artist.albums_count} albums</span>
-                      </div>
-                    </div>
-                    
-                    {/* Location */}
-                    <div className="flex items-center mb-4">
-                      <div className="flex items-center text-muted-foreground">
-                        <MapPin className="h-4 w-4 mr-1" />
-                        <span className="text-sm">{artist.location}</span>
-                      </div>
-                    </div>
-                    
-                    {/* Action Buttons */}
-                    <div className="flex gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="flex-1"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleArtistClick(artist.id);
-                        }}
-                      >
-                        Voir le profil
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        className="flex-1"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          navigate(`/booking?artist=${artist.id}`);
-                        }}
-                      >
-                        Réserver
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {filteredArtists.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredArtists.map((artist, index) => (
+                  <div 
+                    key={artist.id}
+                    className="group relative animate-fade-in"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="relative bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-2xl group-hover:transform group-hover:-translate-y-2 h-full flex flex-col">
+                      
+                      {/* Hover Glow Effect */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl pointer-events-none" />
+                      
+                      {/* Artist Photo */}
+                      <div className="relative overflow-hidden flex-shrink-0">
+                        <div className="aspect-square bg-muted overflow-hidden relative group-hover:scale-110 transition-transform duration-500">
+                          <img 
+                            src={artist.image_url} 
+                            alt={artist.name}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                          
+                          {/* Availability Badge */}
+                          <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${
+                            artist.is_available 
+                              ? 'bg-green-500/90 text-white' 
+                              : 'bg-red-500/90 text-white'
+                          }`}>
+                            {artist.is_available ? '✓ Disponible' : '✗ Indisponible'}
+                          </div>
 
-            {/* No Results */}
-            {filteredArtists.length === 0 && (
+                          {/* Play Overlay */}
+                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <button className="w-14 h-14 rounded-full bg-primary/90 hover:bg-primary flex items-center justify-center transform group-hover:scale-110 transition-all">
+                              <svg className="w-6 h-6 text-white fill-current ml-1" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Artist Info */}
+                      <div className="p-6 flex-grow flex flex-col justify-between">
+                        <div className="space-y-3 mb-4">
+                          <div className="text-center">
+                            <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors mb-1 line-clamp-2">
+                              {artist.name}
+                            </h3>
+                            <p className="text-muted-foreground text-sm font-medium">{artist.genre}</p>
+                            <div className="flex items-center justify-center text-muted-foreground mt-2">
+                              <MapPin className="h-3.5 w-3.5 mr-1 flex-shrink-0" />
+                              <span className="text-xs">{artist.location}</span>
+                            </div>
+                          </div>
+
+                          {/* Stats */}
+                          <div className="grid grid-cols-3 gap-2 pt-3 border-t border-border">
+                            <div className="text-center">
+                              <Users className="h-4 w-4 mx-auto mb-1 text-primary" />
+                              <div className="font-semibold text-xs">{artist.followers}</div>
+                              <div className="text-muted-foreground text-xs">Followers</div>
+                            </div>
+                            <div className="text-center">
+                              <Star className="h-4 w-4 mx-auto mb-1 text-yellow-500" />
+                              <div className="font-semibold text-xs">{artist.rating}</div>
+                              <div className="text-muted-foreground text-xs">Rating</div>
+                            </div>
+                            <div className="text-center">
+                              <Music className="h-4 w-4 mx-auto mb-1 text-accent" />
+                              <div className="font-semibold text-xs">{artist.albums_count}</div>
+                              <div className="text-muted-foreground text-xs">Albums</div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Buttons */}
+                        <div className="space-y-2">
+                          <Button 
+                            size="sm" 
+                            onClick={() => {
+                              console.log('Profile clicked for artist:', artist.id, artist.name);
+                              navigate(`/artist/${artist.id}`);
+                            }}
+                            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium group/btn"
+                          >
+                            <Eye className="h-4 w-4 mr-2 group-hover/btn:scale-110 transition-transform" />
+                            Voir le Profil
+                          </Button>
+                          <Button 
+                            size="sm" 
+                            variant="outline"
+                            className="w-full border-primary/30 text-foreground hover:bg-primary/10 font-medium"
+                            onClick={() => navigate(`/booking?artist=${artist.id}`)}
+                          >
+                            Réserver
+                          </Button>
+                        </div>
+                      </div>
+
+                      {/* Floating Elements */}
+                      <div className="absolute -top-2 -right-2 w-4 h-4 bg-primary/40 rounded-full animate-pulse" />
+                      <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-secondary/40 rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
               <div className="text-center py-16">
                 <div className="mb-4">
                   <Users className="h-16 w-16 mx-auto text-muted-foreground" />
