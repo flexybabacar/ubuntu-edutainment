@@ -136,16 +136,24 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-border animate-slide-in">
+          <div className="md:hidden py-4 border-t border-border animate-slide-in max-h-[80vh] overflow-y-auto">
             {navItems.map((item) => (
-              <div key={item.title} className="py-2">
-                <button className="text-left w-full text-sm font-medium tracking-wide text-foreground hover:text-primary">
+              <div key={item.title} className="py-3 border-b border-border/30 last:border-b-0">
+                <button 
+                  className="text-left w-full text-base font-semibold tracking-wide text-foreground hover:text-primary transition-colors px-2 py-1"
+                  onClick={() => {
+                    if (item.link) {
+                      window.location.href = item.link;
+                      setIsOpen(false);
+                    }
+                  }}
+                >
                   {item.title}
                 </button>
                 {item.items.length > 0 && (
-                  <div className="pl-4 mt-2 space-y-1">
+                  <div className="pl-4 mt-2 space-y-2">
                     {item.items.map((subItem) => (
-                      <button key={subItem} className="block text-xs text-muted-foreground hover:text-primary">
+                      <button key={subItem} className="block text-sm text-muted-foreground hover:text-primary transition-colors py-1">
                         {subItem}
                       </button>
                     ))}
