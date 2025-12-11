@@ -59,21 +59,21 @@ const HeroSection = () => {
           <p className="kentha-subtitle">L'ART QUI AGIT, L'ART QUI UNIT</p>
         </div>
 
-        {/* CTA Button */}
-        <div className="mb-16 animate-slide-in" style={{ animationDelay: '0.6s' }}>
+        {/* CTA Buttons */}
+        <div className="mb-16 animate-slide-in flex flex-col sm:flex-row items-center justify-center gap-4" style={{ animationDelay: '0.6s' }}>
           <Button 
             size="lg" 
             onClick={scrollToArtists}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full shadow-neon hover:shadow-purple transition-all duration-300 group mr-4"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-semibold tracking-wide rounded-full shadow-neon hover:shadow-purple transition-all duration-300 group w-full sm:w-auto"
           >
             <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
             DÉCOUVRIR NOS ARTISTES
           </Button>
-          <Link to="/services">
+          <Link to="/services" className="w-full sm:w-auto">
             <Button 
               size="lg" 
               variant="outline"
-              className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full transition-all duration-300 group"
+              className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-semibold tracking-wide rounded-full transition-all duration-300 group w-full"
             >
               <ArrowRight className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               NOS SERVICES
