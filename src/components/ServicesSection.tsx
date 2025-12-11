@@ -1,10 +1,11 @@
-
 import { Button } from "@/components/ui/button";
 import { Music, Video, Users, Calendar, Building, Megaphone, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const ServicesSection = () => {
   const navigate = useNavigate();
+  const { ref: sectionRef, isVisible } = useScrollAnimation({ threshold: 0.1 });
 
   const services = [
     {
@@ -46,7 +47,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-dark-surface relative">
+    <section ref={sectionRef} className="py-24 bg-dark-surface relative">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_25%_25%,theme(colors.neon-pink)_0%,transparent_50%)]" />
@@ -55,7 +56,7 @@ const ServicesSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="inline-flex items-center gap-2 mb-4">
             <div className="w-12 h-0.5 bg-gradient-hero"></div>
             <h2 className="text-3xl md:text-5xl font-black tracking-wider bg-gradient-hero bg-clip-text text-transparent">
@@ -73,8 +74,8 @@ const ServicesSection = () => {
             return (
               <div 
                 key={service.title}
-                className="group relative"
-                style={{ animationDelay: `${index * 0.15}s` }}
+                className={`group relative transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="relative bg-gradient-card rounded-xl p-6 border border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-cyan overflow-hidden group-hover:transform group-hover:-translate-y-2 h-full">
                   
@@ -108,7 +109,7 @@ const ServicesSection = () => {
         </div>
 
         {/* CTA Button */}
-        <div className="text-center">
+        <div className={`text-center transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <Button 
             size="lg" 
             variant="outline" 
