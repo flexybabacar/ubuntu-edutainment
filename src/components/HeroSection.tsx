@@ -1,22 +1,36 @@
 
 import { Button } from "@/components/ui/button";
 import { Play, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom"; // Importer Link pour la navigation
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const scrollToArtists = () => {
     document.getElementById('artists-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Image with Parallax */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBg})` }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat will-change-transform"
+        style={{ 
+          backgroundImage: `url(${heroBg})`,
+          transform: `translateY(${scrollY * 0.4}px) scale(1.1)`,
+        }}
       />
-      
+
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-hero opacity-60" />
       <div className="absolute inset-0 bg-background/40" />
