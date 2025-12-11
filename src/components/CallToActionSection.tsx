@@ -1,10 +1,12 @@
-
 import { Button } from "@/components/ui/button";
-import { Mic, Handshake, ArrowRight } from "lucide-react";
+import { Mic, Handshake } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const CallToActionSection = () => {
+  const { ref: sectionRef, isVisible } = useScrollAnimation({ threshold: 0.1 });
+
   return (
-    <section className="py-24 bg-dark-surface relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 bg-dark-surface relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-1/4 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_50%,theme(colors.neon-pink)_0%,transparent_60%)]" />
@@ -22,7 +24,7 @@ const CallToActionSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Title */}
-          <div className="mb-8">
+          <div className={`mb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <h2 className="text-4xl md:text-6xl font-black tracking-wider bg-gradient-hero bg-clip-text text-transparent mb-4">
               REJOIGNEZ LE MOUVEMENT
             </h2>
@@ -33,7 +35,7 @@ const CallToActionSection = () => {
           </div>
 
           {/* Mission Statement */}
-          <div className="mb-12 p-8 bg-gradient-card rounded-xl border border-border/50 relative overflow-hidden">
+          <div className={`mb-12 p-8 bg-gradient-card rounded-xl border border-border/50 relative overflow-hidden transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95'}`}>
             <div className="absolute inset-0 bg-gradient-hero opacity-5 rounded-xl" />
             <div className="relative">
               <p className="text-lg text-foreground leading-relaxed italic">
@@ -45,7 +47,7 @@ const CallToActionSection = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <div className={`flex flex-col sm:flex-row gap-6 justify-center items-center transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full shadow-neon hover:shadow-purple transition-all duration-300 group"
@@ -66,18 +68,20 @@ const CallToActionSection = () => {
 
           {/* Additional Info */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-primary mb-2">50+</div>
-              <div className="text-muted-foreground">Artistes Accompagnés</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-secondary mb-2">100+</div>
-              <div className="text-muted-foreground">Projets Réalisés</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-accent mb-2">10+</div>
-              <div className="text-muted-foreground">Années d'Engagement</div>
-            </div>
+            {[
+              { value: "50+", label: "Artistes Accompagnés", color: "text-primary" },
+              { value: "100+", label: "Projets Réalisés", color: "text-secondary" },
+              { value: "10+", label: "Années d'Engagement", color: "text-accent" }
+            ].map((stat, index) => (
+              <div 
+                key={stat.label}
+                className={`text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                style={{ transitionDelay: `${400 + index * 100}ms` }}
+              >
+                <div className={`text-2xl font-bold ${stat.color} mb-2`}>{stat.value}</div>
+                <div className="text-muted-foreground">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

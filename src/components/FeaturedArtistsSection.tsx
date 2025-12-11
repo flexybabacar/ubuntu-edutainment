@@ -2,16 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Eye, Users, Star, MapPin, Music, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useArtists } from "@/hooks/useArtists";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const FeaturedArtistsSection = () => {
   const navigate = useNavigate();
   const { data: artists = [], isLoading } = useArtists();
+  const { ref: sectionRef, isVisible } = useScrollAnimation({ threshold: 0.05 });
   
   // Limiter à 6 artistes pour la section featured
   const featuredArtists = artists.slice(0, 6);
 
   return (
-    <section id="artists-section" className="py-16 md:py-24 bg-background relative overflow-hidden">
+    <section ref={sectionRef} id="artists-section" className="py-16 md:py-24 bg-background relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-1/4 w-64 h-64 bg-primary/10 opacity-40 rounded-full blur-3xl" />
@@ -20,7 +22,7 @@ const FeaturedArtistsSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-10 md:mb-16">
+        <div className={`text-center mb-10 md:mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="inline-flex items-center gap-2 mb-4 flex-wrap justify-center">
             <div className="w-8 md:w-12 h-0.5 bg-primary"></div>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-black tracking-wider text-primary">
@@ -34,22 +36,21 @@ const FeaturedArtistsSection = () => {
           
           {/* Statistics - Mobile optimized */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto mt-8 md:mt-12">
-            <div className="text-center p-3 rounded-lg bg-card/50">
-              <div className="text-2xl md:text-3xl font-bold text-primary mb-1">50+</div>
-              <div className="text-xs md:text-sm text-muted-foreground">Artistes Engagés</div>
-            </div>
-            <div className="text-center p-3 rounded-lg bg-card/50">
-              <div className="text-2xl md:text-3xl font-bold text-secondary mb-1">200+</div>
-              <div className="text-xs md:text-sm text-muted-foreground">Événements</div>
-            </div>
-            <div className="text-center p-3 rounded-lg bg-card/50">
-              <div className="text-2xl md:text-3xl font-bold text-accent mb-1">15</div>
-              <div className="text-xs md:text-sm text-muted-foreground">Pays</div>
-            </div>
-            <div className="text-center p-3 rounded-lg bg-card/50">
-              <div className="text-2xl md:text-3xl font-bold text-primary mb-1">1M+</div>
-              <div className="text-xs md:text-sm text-muted-foreground">Personnes Touchées</div>
-            </div>
+            {[
+              { value: "50+", label: "Artistes Engagés", color: "text-primary" },
+              { value: "200+", label: "Événements", color: "text-secondary" },
+              { value: "15", label: "Pays", color: "text-accent" },
+              { value: "1M+", label: "Personnes Touchées", color: "text-primary" }
+            ].map((stat, index) => (
+              <div 
+                key={stat.label}
+                className={`text-center p-3 rounded-lg bg-card/50 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95'}`}
+                style={{ transitionDelay: `${100 + index * 100}ms` }}
+              >
+                <div className={`text-2xl md:text-3xl font-bold ${stat.color} mb-1`}>{stat.value}</div>
+                <div className="text-xs md:text-sm text-muted-foreground">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -67,8 +68,8 @@ const FeaturedArtistsSection = () => {
             {featuredArtists.map((artist, index) => (
               <div 
                 key={artist.id}
-                className="group relative animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className={`group relative transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+                style={{ transitionDelay: `${300 + index * 100}ms` }}
               >
                 <div className="relative bg-card rounded-xl overflow-hidden border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-2xl group-hover:transform group-hover:-translate-y-2 h-full flex flex-col">
                   
@@ -181,7 +182,7 @@ const FeaturedArtistsSection = () => {
         )}
 
         {/* View All Button */}
-        <div className="text-center pt-4 md:pt-8">
+        <div className={`text-center pt-4 md:pt-8 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <Button 
             size="lg" 
             onClick={() => navigate('/artists')}

@@ -1,8 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Handshake, Users, Award, TrendingUp } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const PartnersSection = () => {
+  const { ref: sectionRef, isVisible } = useScrollAnimation({ threshold: 0.1 });
+
   const partners = [
     {
       id: 1,
@@ -37,7 +39,7 @@ const PartnersSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 bg-background relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 opacity-30 rounded-full blur-3xl" />
@@ -46,7 +48,7 @@ const PartnersSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="inline-flex items-center gap-2 mb-4">
             <div className="w-12 h-0.5 bg-primary"></div>
             <h2 className="text-3xl md:text-5xl font-black tracking-wider text-primary">
@@ -64,7 +66,8 @@ const PartnersSection = () => {
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className="text-center p-6 bg-card rounded-xl border border-border hover:border-primary/50 transition-all duration-300"
+              className={`text-center p-6 bg-card rounded-xl border border-border hover:border-primary/50 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-95'}`}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
                 <stat.icon className="h-8 w-8 text-primary" />
@@ -76,7 +79,7 @@ const PartnersSection = () => {
         </div>
 
         {/* Partners Scrolling List */}
-        <div className="relative">
+        <div className={`relative transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="overflow-hidden bg-muted/30 rounded-xl p-8">
             <div className="partners-scroll flex items-center gap-12 whitespace-nowrap">
               {/* First set of partners */}
@@ -131,7 +134,7 @@ const PartnersSection = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center mt-16">
+        <div className={`text-center mt-16 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="bg-card rounded-xl p-8 border border-border">
             <Handshake className="h-12 w-12 text-primary mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-foreground mb-4">
