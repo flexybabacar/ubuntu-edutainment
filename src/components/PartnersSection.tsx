@@ -78,53 +78,38 @@ const PartnersSection = () => {
           ))}
         </div>
 
-        {/* Partners Scrolling List */}
+        {/* Partners Infinite Scroll */}
         <div className={`relative transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="overflow-hidden bg-muted/30 rounded-xl p-8">
-            <div className="partners-scroll flex items-center gap-12 whitespace-nowrap">
-              {/* First set of partners */}
-              {partners.map((partner) => (
+          {/* Gradient masks for smooth fade effect */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          
+          <div className="overflow-hidden py-8">
+            <div className="animate-scroll-partners flex items-center gap-8">
+              {/* Triple the partners for seamless infinite scroll */}
+              {[...partners, ...partners, ...partners].map((partner, index) => (
                 <div 
-                  key={`first-${partner.id}`}
-                  className="flex-shrink-0 bg-background rounded-lg p-6 border border-border hover:border-primary/50 transition-all duration-300 group"
+                  key={`partner-${index}`}
+                  className="flex-shrink-0 group cursor-pointer"
                 >
-                  <div className="flex items-center space-x-4">
-                    <div className="w-16 h-16 bg-muted rounded-lg overflow-hidden flex-shrink-0">
-                      <img 
-                        src={partner.logo} 
-                        alt={partner.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                        {partner.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">{partner.type}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-              
-              {/* Duplicate set for seamless scroll */}
-              {partners.map((partner) => (
-                <div 
-                  key={`second-${partner.id}`}
-                  className="flex-shrink-0 bg-background rounded-lg p-6 border border-border hover:border-primary/50 transition-all duration-300 group"
-                >
-                  <div className="flex items-center space-x-4">
-                    <div className="w-16 h-16 bg-muted rounded-lg overflow-hidden flex-shrink-0">
-                      <img 
-                        src={partner.logo} 
-                        alt={partner.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                        {partner.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">{partner.type}</p>
+                  <div className="relative bg-card/80 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-2">
+                    <div className="flex items-center gap-4">
+                      <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-muted flex-shrink-0">
+                        <img 
+                          src={partner.logo} 
+                          alt={partner.name}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-300" />
+                      </div>
+                      <div className="min-w-[120px]">
+                        <h3 className="font-bold text-foreground group-hover:text-primary transition-colors duration-300 text-lg">
+                          {partner.name}
+                        </h3>
+                        <span className="inline-block mt-1 px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                          {partner.type}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
