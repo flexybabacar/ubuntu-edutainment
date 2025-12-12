@@ -151,6 +151,19 @@ All colors MUST be HSL for proper theming
   }
 
   /* Partners Scrolling Animation */
+  @keyframes scroll-partners {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.33%); }
+  }
+
+  .animate-scroll-partners {
+    animation: scroll-partners 25s linear infinite;
+  }
+
+  .animate-scroll-partners:hover {
+    animation-play-state: paused;
+  }
+
   @keyframes scroll-left {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
