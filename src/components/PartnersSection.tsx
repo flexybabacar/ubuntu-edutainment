@@ -10,11 +10,11 @@ const PartnersSection = () => {
       id: 1,
       name: "FDCU",
       logo: "/lovable-uploads/fdcu.jpg",
-      type: "Fondation"
+      type: "Institution"
     },
     {
       id: 2,
-      name: "Ministère Culture",
+      name: "Ministère de la Culture",
       logo: "/lovable-uploads/mincul.jpeg",
       type: "Institution"
     },
@@ -26,15 +26,15 @@ const PartnersSection = () => {
     },
     {
       id: 4,
-      name: "GI Entertainment",
+      name: "Géantes Invisibles",
       logo: "/lovable-uploads/gi.png",
-      type: "Média"
+      type: "ONG"
     }
   ];
 
   const stats = [
-    { icon: Users, value: "50+", label: "Partenaires Actifs" },
-    { icon: Award, value: "25", label: "Prix Remportés" },
+    { icon: Users, value: "20+", label: "Partenaires Actifs" },
+    { icon: Award, value: "15", label: "Prix Remportés" },
     { icon: TrendingUp, value: "200%", label: "Croissance Annuelle" }
   ];
 
