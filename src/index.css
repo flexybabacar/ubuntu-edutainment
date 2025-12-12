@@ -156,11 +156,24 @@ All colors MUST be HSL for proper theming
     100% { transform: translateX(-33.33%); }
   }
 
+  @keyframes scroll-partners-mobile {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.33%); }
+  }
+
   .animate-scroll-partners {
     animation: scroll-partners 25s linear infinite;
   }
 
   .animate-scroll-partners:hover {
+    animation-play-state: paused;
+  }
+
+  .animate-scroll-partners-mobile {
+    animation: scroll-partners-mobile 15s linear infinite;
+  }
+
+  .animate-scroll-partners-mobile:hover {
     animation-play-state: paused;
   }
 
