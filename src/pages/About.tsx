@@ -138,6 +138,45 @@ const About = () => {
           </div>
         </section>
 
+        {/* Artistic Director Section */}
+        <section className="py-16 px-4 bg-card">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-12">LA DIRECTRICE ARTISTIQUE</h2>
+            <div className="flex flex-col md:flex-row-reverse items-center gap-8">
+              <div className="w-full md:w-1/3">
+                <div className="relative">
+                  <img
+                    src="/lovable-uploads/coumba.jpg"
+                    alt="Mme Coumba Touré"
+                    className="w-full h-80 object-cover rounded-lg border-2 border-secondary/20"
+                  />
+                  <div className="absolute inset-0 bg-gradient-hero opacity-20 rounded-lg"></div>
+                </div>
+              </div>
+              <div className="w-full md:w-2/3">
+                <h3 className="text-3xl font-bold text-secondary mb-4">Mme Coumba Touré</h3>
+                <p className="text-lg text-primary mb-4">Écrivain • Conteuse • Féministe • Activiste des Droits Humains</p>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  Figure emblématique de l'engagement féminin en Afrique, Mme Coumba Touré est une voix puissante 
+                  pour les droits humains et l'égalité des genres. Écrivain et conteuse de renom, elle utilise 
+                  la force des mots et des récits pour éveiller les consciences et inspirer le changement social.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  En tant qu'entrepreneure sociale et culturelle, elle a fondé et coordonne <span className="text-primary font-semibold">Africans Rising</span>, 
+                  un mouvement panafricain qui rassemble des milliers de citoyens engagés à travers le continent. 
+                  Elle est également l'initiatrice des <span className="text-secondary font-semibold">"Géantes Invisibles"</span>, une initiative qui met en lumière 
+                  les contributions souvent méconnues des femmes africaines dans tous les domaines de la société.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Son expertise en storytelling et son engagement indéfectible pour la justice sociale font d'elle 
+                  une directrice artistique visionnaire, guidant Ubuntu Edutainment vers des créations artistiques 
+                  qui portent des messages de transformation et d'espoir pour les générations futures.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Values Section */}
         <section className="py-16 px-4 bg-muted/50">
           <div className="max-w-6xl mx-auto">
