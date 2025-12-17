@@ -117,7 +117,7 @@ const About = () => {
               </div>
               <div className="w-full md:w-2/3">
                 <h3 className="text-3xl font-bold text-primary mb-4">Marie Hélène Ndiaye</h3>
-                <p className="text-lg text-primary mb-4">Historienne • Gestionnaire de Projet • Consultante en Art Engagé • Entrepreneure Culturelle</p>
+                <p className="text-lg text-primary mb-4">Historienne • Gestionnaire de Projet • Consultante en Art Engagé</p>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   Passionnée par l'art engagé et le changement social, Marie Hélène Ndiaye a fondé Ubuntu Edutainment 
                   avec la vision de placer les arts et la culture au cœur de la participation citoyenne et du 
