@@ -1,8 +1,11 @@
-
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import blogYouthMusic from "@/assets/blog-youth-music.jpg";
+import blogWomenMusic from "@/assets/blog-women-music.jpg";
+import blogUbuntuAnniversary from "@/assets/blog-ubuntu-anniversary.jpg";
+import blogEventOrganization from "@/assets/blog-event-organization.jpg";
 
 const blogPosts = [
   {
@@ -11,7 +14,7 @@ const blogPosts = [
     excerpt: "Comment les artistes utilisent leur art pour sensibiliser les jeunes aux enjeux sociaux et politiques du continent.",
     author: "Marie Hélène Ndiaye",
     date: "2024-01-15",
-    image: "/lovable-uploads/sister_lb_big_84275.jpg",
+    image: blogYouthMusic,
     category: "Culture"
   },
   {
@@ -20,7 +23,7 @@ const blogPosts = [
     excerpt: "Un regard sur les défis et les succès des femmes artistes dans un milieu encore dominé par les hommes.",
     author: "Ubuntu Team",
     date: "2024-01-10",
-    image: "/lovable-uploads/kuumbati.jpg",
+    image: blogWomenMusic,
     category: "Artistes"
   },
   {
@@ -29,7 +32,7 @@ const blogPosts = [
     excerpt: "Retour sur cinq années de promotion des talents émergents et de création d'événements culturels impactants.",
     author: "Marie Hélène Ndiaye",
     date: "2024-01-05",
-    image: "/lovable-uploads/gi.png",
+    image: blogUbuntuAnniversary,
     category: "Actualités"
   },
   {
@@ -38,7 +41,7 @@ const blogPosts = [
     excerpt: "Les étapes clés pour créer un événement qui marque les esprits et rassemble les communautés.",
     author: "Ubuntu Team",
     date: "2023-12-28",
-    image: "/lovable-uploads/fdcu.jpg",
+    image: blogEventOrganization,
     category: "Conseils"
   }
 ];
