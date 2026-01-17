@@ -215,6 +215,42 @@ export type Database = {
         }
         Relationships: []
       }
+      job_applications: {
+        Row: {
+          cover_letter: string | null
+          created_at: string
+          cv_url: string | null
+          email: string
+          full_name: string
+          id: string
+          phone: string | null
+          portfolio_url: string | null
+          position: string
+        }
+        Insert: {
+          cover_letter?: string | null
+          created_at?: string
+          cv_url?: string | null
+          email: string
+          full_name: string
+          id?: string
+          phone?: string | null
+          portfolio_url?: string | null
+          position: string
+        }
+        Update: {
+          cover_letter?: string | null
+          created_at?: string
+          cv_url?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string | null
+          portfolio_url?: string | null
+          position?: string
+        }
+        Relationships: []
+      }
       services: {
         Row: {
           base_price: number
