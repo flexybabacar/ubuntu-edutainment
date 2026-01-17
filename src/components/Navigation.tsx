@@ -57,6 +57,11 @@ const Navigation = () => {
       title: "BLOG",
       items: [],
       link: "/blog"
+    },
+    {
+      title: "CARRIÈRES",
+      items: [],
+      link: "/careers"
     }
   ];
 
