@@ -44,15 +44,15 @@ const mockArtistsData: Artist[] = [
   },
   {
     id: "3",
-    name: "Miriam Makeba Tribute",
+    name: "Sister LB",
     genre: "Jazz / Soul",
-    location: "Afrique du Sud",
+    location: "Sénégal",
     followers: "1.8M",
     rating: 4.7,
     albums_count: 22,
     is_available: true,
-    image_url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=500&fit=crop",
-    bio: "Miriam Makeba, icône de la musique sud-africaine.",
+    image_url: "/lovable-uploads/sister_lb_big_84275.jpg",
+    bio: "Sister LB, icône de la musique sénégalaise.",
     created_at: "2012-05-10"
   },
   {

@@ -6,6 +6,7 @@ import blogYouthMusic from "@/assets/blog-youth-music.jpg";
 import blogWomenMusic from "@/assets/blog-women-music.jpg";
 import blogUbuntuAnniversary from "@/assets/blog-ubuntu-anniversary.jpg";
 import blogEventOrganization from "@/assets/blog-event-organization.jpg";
+import blogUbuntuCoumba from "@/assets/blog-ubuntu-coumba.jpg";
 
 const blogPosts = [
   {
@@ -28,11 +29,11 @@ const blogPosts = [
   },
   {
     id: 3,
-    title: "Ubuntu Edutainment : 5 ans d'engagement artistique",
-    excerpt: "Retour sur cinq années de promotion des talents émergents et de création d'événements culturels impactants.",
-    author: "Marie Hélène Ndiaye",
-    date: "2024-01-05",
-    image: blogUbuntuAnniversary,
+    title: "Les Géantes Invisibles : Une initiative de Coumba Touré",
+    excerpt: "Que l’attention soit enfin prêtée à ces Humaines qui savent presque tout dompter.\nQue lumière soit faite sur ces Géantes d’un genre à part, restées trop longtemps invisibles à nos yeux. À ces femmes. Simplement.",
+    author: "Kuumbati",
+    date: "2025-01-05",
+    image: blogUbuntuCoumba,
     category: "Actualités"
   },
   {
