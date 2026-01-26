@@ -1,7 +1,7 @@
 import { Megaphone, Sparkles } from "lucide-react";
 
 const AnnouncementBanner = () => {
-  const announcement = "🎉 WEBINAIRE suivi du LANCEMENT OFFICIEL de Ubuntu Edutainment — Rejoignez-nous pour cet événement exclusif ! 🎶";
+  const announcement = "🎉 WEBINAIRE suivi du LANCEMENT OFFICIEL de Ubuntu Edutainment 02 Février 2026 — Rejoignez-nous pour cet événement exclusif ! 🎶";
   
   return (
     <div className="fixed top-0 left-0 right-0 z-[60] h-11 bg-gradient-to-r from-primary via-accent to-secondary overflow-hidden">
