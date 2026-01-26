@@ -14,7 +14,7 @@ const Index = () => {
       {/* Announcement Banner */}
       <AnnouncementBanner />
       
-      <Navigation />
+      <Navigation topOffset={44} />
       
       {/* Hero Section */}
       <HeroSection />
