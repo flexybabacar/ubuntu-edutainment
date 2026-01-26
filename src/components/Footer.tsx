@@ -114,6 +114,24 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Partner Badge - FDCU */}
+        <div className="border-t border-border pt-8 mb-8">
+          <div className="flex flex-col items-center gap-3">
+            <p className="text-sm text-muted-foreground">Soutenu par</p>
+            <div className="flex items-center gap-4 bg-card/50 border border-border/50 rounded-xl px-6 py-3">
+              <img 
+                src="/lovable-uploads/fdcu.jpg" 
+                alt="FDCU - Fonds de Développement des Cultures Urbaines" 
+                className="h-12 w-12 rounded-lg object-cover"
+              />
+              <div className="text-left">
+                <p className="text-sm font-semibold text-foreground">FDCU</p>
+                <p className="text-xs text-muted-foreground">Fonds de Développement des Cultures Urbaines</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Bottom Bar */}
         <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
