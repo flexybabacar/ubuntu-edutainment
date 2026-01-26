@@ -59,10 +59,10 @@ const Careers = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 relative overflow-hidden">
+      <section className="pt-20 sm:pt-32 pb-12 sm:pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-        <div className="absolute top-10 sm:top-20 left-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-40 sm:w-64 h-40 sm:h-64 bg-accent/10 rounded-full blur-3xl" />
+        <div className="absolute top-10 sm:top-20 left-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-32 sm:w-64 h-32 sm:h-64 bg-accent/10 rounded-full blur-3xl" />
         
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <motion.div
@@ -75,29 +75,36 @@ const Careers = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 bg-primary/10 border border-primary/20 text-primary rounded-full text-xs sm:text-sm font-medium mb-6 sm:mb-8"
+              className="inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-2.5 bg-primary/10 border border-primary/20 text-primary rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-8"
             >
               <Sparkles className="w-3 sm:w-4 h-3 sm:h-4" />
               Appel à Candidature
             </motion.span>
-            <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
+            <h1 className="text-xl sm:text-4xl md:text-6xl font-bold text-foreground mb-3 sm:mb-6 leading-tight px-2">
               Rejoignez l'aventure{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
                 Ubuntu Edutainment
               </span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto px-2">
+            <p className="text-sm sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto px-4">
               Studio dédié à la culture, l'éducation et la création artistique, nous ouvrons nos portes 
               pour accueillir de nouveaux talents passionnés.
             </p>
+            
+            {/* Date limite - Plus visible */}
             <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6 sm:mt-8 px-4 sm:px-6 py-3 bg-accent/10 border border-accent/20 rounded-full w-fit mx-auto text-sm sm:text-base"
+              className="mt-6 sm:mt-8"
             >
-              <Calendar className="w-4 sm:w-5 h-4 sm:h-5 text-accent flex-shrink-0" />
-              <span className="font-semibold text-accent text-center">Date limite : 02 février 2026</span>
+              <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-accent/20 to-primary/20 border-2 border-accent/40 rounded-2xl sm:rounded-full">
+                <Calendar className="w-5 sm:w-6 h-5 sm:h-6 text-accent" />
+                <div className="text-center sm:text-left">
+                  <span className="block sm:inline text-xs sm:text-sm text-muted-foreground">Date limite de candidature</span>
+                  <span className="block sm:inline sm:ml-2 text-base sm:text-lg font-bold text-accent">02 février 2026</span>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -263,18 +270,21 @@ const Careers = () => {
                 </p>
                 <div className="flex justify-center mb-6">
                   <Button
-                    size="sm"
+                    size="lg"
                     asChild
-                    className="px-4 sm:px-8 py-4 sm:py-6 text-xs sm:text-lg bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity w-full max-w-md sm:w-auto sm:max-w-none"
+                    className="px-6 sm:px-8 py-5 sm:py-6 text-sm sm:text-lg bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity"
                   >
-                    <a href="mailto:contact@ubuntu-edutainment.com" className="flex items-center justify-center gap-2">
-                      <Mail className="w-3.5 sm:w-5 h-3.5 sm:h-5" />
+                    <a href="mailto:contact@ubuntu-edutainment.com" className="flex items-center justify-center gap-2 sm:gap-3">
+                      <Mail className="w-4 sm:w-5 h-4 sm:h-5" />
                       <span className="hidden sm:inline">contact@ubuntu-edutainment.com</span>
-                      <span className="sm:hidden text-xs">Email</span>
-                      <ArrowRight className="w-3.5 sm:w-5 h-3.5 sm:h-5" />
+                      <span className="sm:hidden">Envoyer ma candidature</span>
+                      <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5" />
                     </a>
                   </Button>
                 </div>
+                <p className="text-xs text-muted-foreground sm:hidden mb-4">
+                  contact@ubuntu-edutainment.com
+                </p>
                 <p className="text-xs sm:text-sm text-muted-foreground px-4">
                   N'oubliez pas de mentionner le poste souhaité dans l'objet de votre email
                 </p>
