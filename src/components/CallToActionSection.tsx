@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Mic, Handshake } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useNavigate } from "react-router-dom";
 
 const CallToActionSection = () => {
   const { ref: sectionRef, isVisible } = useScrollAnimation({ threshold: 0.1 });
+  const navigate = useNavigate();
 
   return (
     <section ref={sectionRef} className="py-24 bg-dark-surface relative overflow-hidden">
@@ -51,6 +53,7 @@ const CallToActionSection = () => {
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full shadow-neon hover:shadow-purple transition-all duration-300 group"
+              onClick={() => navigate('/booking?type=artist')}
             >
               <Mic className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               DEVENIR ARTISTE
@@ -60,6 +63,7 @@ const CallToActionSection = () => {
               size="lg" 
               variant="outline"
               className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full neon-border transition-all duration-300 group"
+              onClick={() => navigate('/contact?subject=collaboration')}
             >
               <Handshake className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               COLLABORER AVEC NOUS
