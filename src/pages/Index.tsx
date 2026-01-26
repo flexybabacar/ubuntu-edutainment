@@ -6,10 +6,14 @@ import CallToActionSection from "@/components/CallToActionSection";
 import PartnersSection from "@/components/PartnersSection";
 import Footer from "@/components/Footer";
 import FeaturedArtistsSection from "@/components/FeaturedArtistsSection";
+import AnnouncementBanner from "@/components/AnnouncementBanner";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      {/* Announcement Banner */}
+      <AnnouncementBanner />
+      
       <Navigation />
       
       {/* Hero Section */}
