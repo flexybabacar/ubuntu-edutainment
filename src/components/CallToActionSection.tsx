@@ -53,7 +53,7 @@ const CallToActionSection = () => {
             <Button 
               size="lg" 
               className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-semibold tracking-wide rounded-full shadow-neon hover:shadow-purple transition-all duration-300 group"
-              onClick={() => navigate('/booking?type=artist')}
+              onClick={() => navigate('/contact?subject=devenir-artiste')}
             >
               <Mic className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               DEVENIR ARTISTE
