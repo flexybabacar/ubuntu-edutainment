@@ -10,22 +10,17 @@ const PartnersSection = () => {
       id: 1,
       name: "FDCU",
       logo: "/lovable-uploads/fdcu.jpg",
-      type: "Institution"
+      type: "Institution",
+      description: "Fonds de Développement des Cultures Urbaines"
     },
     {
       id: 2,
-      name: "Ministère de la Culture",
-      logo: "/lovable-uploads/mincul.jpeg",
-      type: "Institution"
-    },
-    {
-      id: 3,
       name: "Kuumbati",
       logo: "/lovable-uploads/kuumbati.jpg",
       type: "ONG"
     },
     {
-      id: 4,
+      id: 3,
       name: "Géantes Invisibles",
       logo: "/lovable-uploads/gi.png",
       type: "ONG"
@@ -59,6 +54,13 @@ const PartnersSection = () => {
           <p className="text-muted-foreground text-lg tracking-wide">
             Ensemble pour transformer la culture africaine
           </p>
+          {/* FDCU Highlight */}
+          <div className="mt-8 inline-flex items-center gap-3 bg-primary/10 border border-primary/30 rounded-full px-6 py-3">
+            <Award className="h-5 w-5 text-primary" />
+            <span className="text-foreground font-medium">
+              Soutenu par le <span className="text-primary font-bold">Fonds de Développement des Cultures Urbaines (FDCU)</span>
+            </span>
+          </div>
         </div>
 
         {/* Stats Grid */}
