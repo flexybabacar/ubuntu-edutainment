@@ -131,6 +131,39 @@ export type Database = {
           },
         ]
       }
+      contact_submissions: {
+        Row: {
+          contact_type: string
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          status: string
+          subject: string
+        }
+        Insert: {
+          contact_type?: string
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          status?: string
+          subject: string
+        }
+        Update: {
+          contact_type?: string
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          status?: string
+          subject?: string
+        }
+        Relationships: []
+      }
       event_artists: {
         Row: {
           artist_id: string
