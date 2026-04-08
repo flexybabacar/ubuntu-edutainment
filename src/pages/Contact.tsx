@@ -5,10 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Users, Mic, Calendar } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, MessageCircle, Users, Mic, Calendar, Loader2 } from "lucide-react";
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,10 +21,48 @@ const Contact = () => {
     type: 'general'
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Ici on peut ajouter la logique d'envoi du formulaire
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.from('contact_submissions').insert({
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        contact_type: formData.type,
+      });
+
+      if (error) throw error;
+
+      // Notify via edge function
+      await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          contact_type: formData.type,
+        },
+      });
+
+      toast({
+        title: "Message envoyé ✅",
+        description: "Merci ! Nous vous répondrons dans les plus brefs délais.",
+      });
+
+      setFormData({ name: '', email: '', subject: '', message: '', type: 'general' });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue. Veuillez réessayer.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -207,10 +249,20 @@ const Contact = () => {
                       <Button
                         type="submit"
                         size="lg"
+                        disabled={isSubmitting}
                         className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
                       >
-                        <Send className="mr-2 h-5 w-5" />
-                        Envoyer le message
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            Envoi en cours...
+                          </>
+                        ) : (
+                          <>
+                            <Send className="mr-2 h-5 w-5" />
+                            Envoyer le message
+                          </>
+                        )}
                       </Button>
                     </form>
                   </CardContent>
